@@ -193,6 +193,13 @@ h1 {
     h1 {
         font-size: x-large;
     }
+    .display-area {
+        padding: 10px 0px 10px 10px;
+    }
+    .card-gallery {
+        margin: 0;
+        flex-direction: column;
+    }
     .card {
         display: none;
     }
