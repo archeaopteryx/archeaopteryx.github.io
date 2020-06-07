@@ -110,8 +110,9 @@ h1 {
 }
 
 .card-content {
-    margin: 20px;
-    height: 90%;
+    padding: 20px;
+    width: 270px;
+    height: 342px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
