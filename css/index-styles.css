@@ -86,6 +86,13 @@ h1 {
     display: none;
 }
 
+.tablet-card {
+    display: none;
+}
+.tablet-summary {
+    align-self: flex-end;
+}
+
 .display-area {
     border-top: 1px solid saddlebrown;
     padding: 25px;
@@ -175,6 +182,46 @@ h1 {
         height: auto;
         margin: 5px;
     }
+    .desktop-card {
+        display: none;
+    }
+    .tablet-card {
+        display: block;
+    }
+
+    .card {
+        position: relative;
+    }
+
+    .tablet-img img {
+        padding-top: 10px;
+        max-height: 240px;
+    }
+
+    .tablet-img p {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+    }
+
+    .card-text a {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+    }
+
+    .tablet-card:hover .tablet-img {
+        display: none;
+    }
+
+    .tablet-card:active .tablet-img {
+        display:none;
+    }
+
+    .tablet-card:hover:active .card-text{
+        display: block;
+    }
+
 
 }
 
