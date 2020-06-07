@@ -169,14 +169,12 @@ h1 {
     .tagline {
         display: none;
     }
-    .title{
-        font-size: xx-large;
-    }
     .archea-container img {
-        width: 75px;
+        width: 100px;
         height: auto;
         margin: 5px;
     }
+
 }
 
 @media only screen and (max-width: 500px) {

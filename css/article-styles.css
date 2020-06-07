@@ -160,6 +160,10 @@ code samp {
     font-family: "Lucida Console", Monaco, monospace;
 }
 
+pre {
+    overflow: auto;
+}
+
 .terminal-box {
     font-size: 1.3em;
     background-color: hsl(222, 11%, 18%);
@@ -215,8 +219,13 @@ footer {
     .sidebar {
         display: none;
     }
-    .upper-bar {
+    .tagline {
         display: none;
+    }
+    .archea-container img {
+        width: 100px;
+        height: auto;
+        margin: 5px;
     }
 }
 
