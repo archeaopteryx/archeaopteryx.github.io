@@ -86,13 +86,6 @@ h1 {
     display: none;
 }
 
-.tablet-card {
-    display: none;
-}
-.tablet-summary {
-    align-self: flex-end;
-}
-
 .display-area {
     border-top: 1px solid saddlebrown;
     padding: 25px;
@@ -107,6 +100,7 @@ h1 {
 }
 
 .card {
+    position: relative;
     width: 270px;
     height: 380px;
     border: 1px solid grey;
@@ -116,22 +110,34 @@ h1 {
     box-shadow: 0 10px 10px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
+.desktop-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    align-self: flex-start;
+}
 .card-content {
     padding: 20px;
     width: 270px;
     height: 342px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
 }
 
-.card-content:hover .card-text{
-    display: block;
+.read-more {
+    display: none;
 }
 
-.card-content:hover .card-image {
+.card:hover .card-image {
     display: none;
+}
+
+.card:hover .card-text{
+    display: block;
 }
 
 .card-title h2 {
@@ -149,10 +155,20 @@ h1 {
     display: none;
     margin-top: 30px;
 }
+.prompt {
+    margin-top: 20px;
+}
+
+a.tablet-link {
+    display: none;
+}
 
 .card-image img {
     max-width: 100%;
     max-height: 100%;
+}
+.card-image p {
+    display: none;
 }
 
 .thumbnail-link {
@@ -182,46 +198,56 @@ h1 {
         height: auto;
         margin: 5px;
     }
-    .desktop-card {
-        display: none;
+    .thumbnail-link {
+        pointer-events: none;
     }
-    .tablet-card {
-        display: block;
-    }
-
     .card {
         position: relative;
     }
+    .card-image {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 
-    .tablet-img img {
+    .card-image img {
         padding-top: 10px;
         max-height: 240px;
     }
-
-    .tablet-img p {
+    .card-image p {
+        display: block;
         position: absolute;
         bottom: 5px;
         right: 5px;
     }
-
-    .card-text a {
+    .read-more {
+        display: block;
         position: absolute;
         bottom: 5px;
         right: 5px;
     }
-
-    .tablet-card:hover .tablet-img {
+    .prompt {
+        display: none;
+    }
+    .desktop-card:hover .card-image {
         display: none;
     }
 
-    .tablet-card:active .tablet-img {
+    .desktop-card:active .card-image {
         display:none;
     }
 
-    .tablet-card:hover:active .card-text{
+    .desktop-card:hover:active .card-text{
         display: block;
     }
-
+    .card:hover a.tablet-link {
+        display: block;
+        margin: 5px 0px 10px 20px;
+    }
+    .card:active a.tablet-link {
+        display: block;
+        margin: 5px 0px 10px 10px;
+    }
 
 }
 
