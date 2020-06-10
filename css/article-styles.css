@@ -154,6 +154,16 @@ p:last-of-type {
 .end-subsection {
     margin-bottom: 2em;
 }
+
+.centered-img {
+    display: block;
+    margin: 15px auto 10px auto;
+    max-width: 100%;
+    height: auto;
+}
+figcaption {
+    color: grey;
+}
 /* Start rulesfor code samples */
 
 code samp {
