@@ -55,219 +55,225 @@
     <main id="main" tabindex="-1">
 
     <article>
-        <h1 id="intro">EfaPi II: The Cron Job</h1>
+        <section>
+            <h1 id="intro">EfaPi II: The Cron Job</h1>
 
-        <p>After the adventures of <a href="efaPi-part-i.html">Part I</a>, I felt ready to embark on a quintessential linux-user activity: writing bash scripts to run as a cron job.</p>
+            <p>After the adventures of <a href="efaPi-part-i.html">Part I</a>, I felt ready to embark on a quintessential linux-user activity: writing bash scripts to run as a cron job.</p>
 
-        <p>The goal was to automate local backups of the electronic log book of my rowing club. The software behind the log book is <a href="efa.nmichael.de">efa</a> (<u>e</u>lektronischer <u>Fa</u>hrtbuch) from N. Michael, which we will be running on a raspberry pi.</p>
+            <p>The goal was to automate local backups of the electronic log book of my rowing club. The software behind the log book is <a href="efa.nmichael.de">efa</a> (<u>e</u>lektronischer <u>Fa</u>hrtbuch) from N. Michael, which we will be running on a raspberry pi.</p>
 
-        <p class="end-subsection">It should be noted that there is a version of efa that does everything covered in this project out-of-box. This task was undertaken out of interest rather than necessity. Anyone wanting a similar setup should check out efaLive.</p>
+            <p class="end-subsection">It should be noted that there is a version of efa that does everything covered in this project out-of-box. This task was undertaken out of interest rather than necessity. Anyone wanting a similar setup should check out efaLive.</p>
 
-        <h2 id="basics">The basics</h2>
+        </section>
+        <section>
+            <h2 id="basics">The basics</h2>
 
-        <p>Tasks in Linux can be scheduled using the cron utility. A scheduled task, also called a cron job, can be a command or shell script. Since there is no built-in command for what I wanted to do, a script was in order.</p>
+            <p>Tasks in Linux can be scheduled using the cron utility. A scheduled task, also called a cron job, can be a command or shell script. Since there is no built-in command for what I wanted to do, a script was in order.</p>
 
-        <p>Any language with a command line interface can be used to write shell scripts. This gives quite some freedom in the choice of language, and a natural choice for me would have been python. But I wanted an excuse to learn the basics of bash.</p>
+            <p>Any language with a command line interface can be used to write shell scripts. This gives quite some freedom in the choice of language, and a natural choice for me would have been python. But I wanted an excuse to learn the basics of bash.</p>
 
-        <p>There are a few basic points to get started. The first line of each script should look familiar to anyone familiar with python:</p>
+            <p>There are a few basic points to get started. The first line of each script should look familiar to anyone familiar with python:</p>
 
-        <div class="code-box blue-text">
-            <pre><code>
-  #!/bin/bash
-            </code></pre>
-        </div>
+            <div class="code-box blue-text">
+                <pre><code>
+      #!/bin/bash
+                </code></pre>
+            </div>
 
-        <p> this is the 'shebang' that tells the program loader that this script should be run by the interpreter located at /bin/bash. The bash scripts will also need to be executable.</p>
+            <p> this is the 'shebang' that tells the program loader that this script should be run by the interpreter located at /bin/bash. The bash scripts will also need to be executable.</p>
 
-        <p class="end-subsection">Finally, some care should be taken to avoid name collisions with existing commands. The <code>which</code> command is useful here. If the name is already taken, <code>which</code> returns the path to the existing script. </p>
+            <p class="end-subsection">Finally, some care should be taken to avoid name collisions with existing commands. The <code>which</code> command is useful here. If the name is already taken, <code>which</code> returns the path to the existing script. </p>
 
-        <h3 id="hello">Hello, Bash!</h3>
+            <h3 id="hello">Hello, Bash!</h3>
 
-        <p>Following tradition:</p>
+            <p>Following tradition:</p>
 
-        <div class="terminal-box">
-            <pre><code>
-  $ touch helloBash.sh
-  $ chmod u+x helloBash.sh
-            </code></pre>
-        </div>
+            <div class="terminal-box">
+                <pre><code>
+      $ touch helloBash.sh
+      $ chmod u+x helloBash.sh
+                </code></pre>
+            </div>
 
-        <p>will create a file and make it executable for the current user. The file contents for the clasic greeting should be: </p>
+            <p>will create a file and make it executable for the current user. The file contents for the clasic greeting should be: </p>
 
-        <div class="code-box">
-            <pre><code>
-  <span class="blue-text">#!/bin/bash</span>
+            <div class="code-box">
+                <pre><code>
+      <span class="blue-text">#!/bin/bash</span>
 
-  <span class="purple-text">echo</span> "Hello, world!"
-            </code></pre>
-        </div>
+      <span class="purple-text">echo</span> "Hello, world!"
+                </code></pre>
+            </div>
 
-        <p>and then we can run the script from the terminal</p>
+            <p>and then we can run the script from the terminal</p>
 
-        <div class="terminal-box">
-            <pre><code>
-  $ ./helloBash.sh
-  Hello, world!
-            </code></pre>
-        </div>
+            <div class="terminal-box">
+                <pre><code>
+      $ ./helloBash.sh
+      Hello, world!
+                </code></pre>
+            </div>
 
-        <p class="end-subsection">The <code>echo</code> command should be familiar from the command line. If you can use it with the command line, then you can use it in bash. </p>
+            <p class="end-subsection">The <code>echo</code> command should be familiar from the command line. If you can use it with the command line, then you can use it in bash. </p>
+        </section>
+        <section>
+            <h2 id="backups">The backups</h2>
 
-        <h2 id="backups">The backups</h2>
+            <p>Initially I planned to just copy some of the files generated by efa, but having a look at the <a href="https://github.com/nicmichael/efa">source code</a> on github reveals that the built-in backup import requires a metadata file created by efa when it creates a backup.</p>
 
-        <p>Initially I planned to just copy some of the files generated by efa, but having a look at the <a href="https://github.com/nicmichael/efa">source code</a> on github reveals that the built-in backup import requires a metadata file created by efa when it creates a backup.</p>
+            <p class="end-subsection">Fortunately, efa has a built-in command line interface (CLI). There is a handy overview of the efaCLI in German on the <a href="http://efa.nmichael.de/dokuwiki/doku.php?id=access_cli">docs wiki</a>. As long as efa is running, we can use the efaCLI from another bash script to run efa-specific commands.</p>
 
-        <p class="end-subsection">Fortunately, efa has a built-in command line interface (CLI). There is a handy overview of the efaCLI in German on the <a href="http://efa.nmichael.de/dokuwiki/doku.php?id=access_cli">docs wiki</a>. As long as efa is running, we can use the efaCLI from another bash script to run efa-specific commands.</p>
+            <h3 id='usb'>Checking the USB</h3>
 
-        <h3 id='usb'>Checking the USB</h3>
+            <p>It's a good idea start by checking if a USB stick is mounted and, if so, getting its mountpoint.</p>
 
-        <p>It's a good idea start by checking if a USB stick is mounted and, if so, getting its mountpoint.</p>
+            <p>The first command of the backup script is <code>findmnt</code> to get what is effectively the path for the USB. The syntax to assign the output of a command to a variable is <code>varName=$( command [args] )</code>. I used <code>df</code> to find what name to give for the source (/dev/sda1 in this case).</p>
 
-        <p>The first command of the backup script is <code>findmnt</code> to get what is effectively the path for the USB. The syntax to assign the output of a command to a variable is <code>varName=$( command [args] )</code>. I used <code>df</code> to find what name to give for the source (/dev/sda1 in this case).</p>
+            <div class="code-box">
+                <pre><code>
+      usb=$( <span class="purple-text">findmnt</span> -rno TARGET /dev/sda1)
+      mounted=<span class="dark-red-text">$?</span>
+                </code></pre>
+            </div>
 
-        <div class="code-box">
-            <pre><code>
-  usb=$( <span class="purple-text">findmnt</span> -rno TARGET /dev/sda1)
-  mounted=<span class="dark-red-text">$?</span>
-            </code></pre>
-        </div>
+            <p>The command is used with the flags <code>rno</code>. The <code>-r</code> flag escapes potentially unsafe characters. It shouldn't be necessary, but who knows how future USBs will be named. The <code>-n</code> flag prints the output without a header line. Because <code>findmnt</code> returns several columns of information, we use the <code>-o TARGET</code> to indicate that we only want the mountpoint information from the TARGET column. </p>
 
-        <p>The command is used with the flags <code>rno</code>. The <code>-r</code> flag escapes potentially unsafe characters. It shouldn't be necessary, but who knows how future USBs will be named. The <code>-n</code> flag prints the output without a header line. Because <code>findmnt</code> returns several columns of information, we use the <code>-o TARGET</code> to indicate that we only want the mountpoint information from the TARGET column. </p>
+            <p>The cryptic looking <code>$?</code> checks the exit status of the preceeding command. It returns 0 if successful or 1 if it fails. I use this value to exit the script directly if the usb isn't mounted.</p>
 
-        <p>The cryptic looking <code>$?</code> checks the exit status of the preceeding command. It returns 0 if successful or 1 if it fails. I use this value to exit the script directly if the usb isn't mounted.</p>
-
-        <div class="code-box">
-            <pre><code>
-  <span class="teal-text">if</span> [[ <span class="dark-red-text">${mounted}</span> -eq 1 ]]; <span class="teal-text">then</span>
-      <span class="purple-text">exit</span> 1
-  <span class="teal-text">fi</span>
-            </code></pre>
-        </div>
-
-        <p class="end-subsection">Now we start to see some proper bash syntax. This can be read as 'if the value of mounted equals 1, then exit the program.'</p>
-
-        <h3 id="creating">Creating the backup</h3>
-
-        <p class="end-subsection">If we're going to be automating use of the CLI, then we need some way to provide the admin login credentials. The <a href="http://efa.nmichael.de/dokuwiki/doku.php?id=config_nopassword">efa docs</a> provide the useful recommendation to create a hidden file called .efacred in the home directory with the login credentials. A quick test confirmed that we can now use the efaCLI without manually entering the password. The security implications will be handled later.</p>
-
-        <p>We also need names for the backup directory and file:</p>
-
-        <div class="code-box">
-            <pre><code>
-  year=$( <span class="purple-text">date</span> +%Y )
-  dateStamp=$( <span class="purple-text">date</span> +%m%d )
-
-  backupDir="<span class="dark-red-text">${usb}</span>/<span class="dark-red-text">${year}</span>_backup"
-  backupFile="<span class="dark-red-text">${backupDir}</span>/efaBackup_<span class="dark-red-text">${dateStamp}</span>.zip"
-
-  <span class="teal-text">if</span> [[ ! -d <span class="dark-red-text">$backupDir</span> ]]; <span class="teal-text">then</span>
-      <span class="purple-text">mkdir</span> <span class="dark-red-text">"$backupDir"</span>
-  <span class="teal-text">fi</span>
-            </code></pre>
-        </div>
-
-        <p>I use the <code>date</code> command with appropriate flags to get both the year and a date stamp. These values are used to generate the backup folder and file names. The <code>if</code> statement can be read as 'if the backup directory doesn't already exist, then make it'.</p>
-
-        <p>Now all that remains is actually making the backup. To do this, we need to start the efaCLI.sh script. There are some options here. I took the approach of giving the location of bash followed by the location of the script to be run.</p>
-
-        <div class="code-box">
-            <pre><code>
-  /bin/bash /opt/efa2/efaCLI.sh admin@localhost/test -cmd "backup create all <span class="dark-red-text">${backupFile}</span>"
-            </code></pre>
-        </div>
-
-        <p class="end-subsection">where 'test' is the name of the project I want to backup.</p>
-
-        <h3 id="clean-up">Removing old backups</h3>
-
-        <p>I will happily admit that this is a silly thing to do. The backup for the small test project that I made weighed in at 25 kB. Let's say a real project is a whopping 1 MB. For a daily backup to a 16 GB drive, I should start to worry about space in about... 40 years.</p>
-
-        <p>Regardless, I decided to write a script to delete the backups after two years.</p>
-
-        <p>Similar to the backup script, the cleanup script checks if the usb is mounted and gets the current year. This time a regular expression will also be useful: </p>
-
-        <div class="code-box">
-            <pre><code>
-  re='^[0-9]{4}$'
-            </code></pre>
-        </div>
-
-        <p>The regular expression isn't as bad as it looks. It translates to 'the first character (^) must be a digit ([0-9]), there must be four digits ({4}) and the last character must be a digit ($)'. In other words, this expression will match four digit integers, which we will assume are year labels.</p>
-
-        <p>We then check for and remove files or directories in <code>usb</code> that are more than two years old.</p>
-
-        <div class="code-box">
-            <pre><code>
-  re='^[0-9]{4}$'
-  currentYear=$( <span class="purple-text">date</span> +%Y )
-
-  <span class="teal-text">for</span> entry <span class="teal-text">in</span> <span class="dark-red-text">"${usb}/"</span>*
-  <span class="teal-text">do</span>
-      name=$( <span class="purple-text">basename</span> <span class="dark-red-text">$entry</span> )
-      year=$( <span class="purple-text">echo</span> <span class="dark-red-text">$name</span> | <span class="purple-text">cut</span> -d'_' -f1)
-      <span class="teal-text">if</span> [[ <span class="dark-red-text">$year</span> =~ <span class="dark-red-text">$re</span> ]]
-      <span class="teal-text">then</span>
-        age=$(( <span class="dark-red-text">$currentYear</span>-<span class="dark-red-text">$year</span> ))
-        <span class="teal-text">if</span> [[ <span class="dark-red-text">$age</span> -gt 2 ]]
-        <span class="teal-text">then</span>
-          <span class="purple-text">rm</span> -r <span class="dark-red-text">$entry</span>
-        <span class="teal-text">fi</span>
+            <div class="code-box">
+                <pre><code>
+      <span class="teal-text">if</span> [[ <span class="dark-red-text">${mounted}</span> -eq 1 ]]; <span class="teal-text">then</span>
+          <span class="purple-text">exit</span> 1
       <span class="teal-text">fi</span>
-  <span class="teal-text">done</span>
-            </code></pre>
-        </div>
+                </code></pre>
+            </div>
 
-        <p><code>basename</code> returns the name of the file or directory instead of the full path. <code>echo</code> and a pipe ( | ) are used to pass the name to the command <code>cut</code>, which slices the string into substrings using the underscore character as the delimiter. <code>cut</code> then returns the first field (<code>-f1</code> ). So if the current entry is the directory 2020_backup, the value of <code>year</code> is 2020.</p>
+            <p class="end-subsection">Now we start to see some proper bash syntax. This can be read as 'if the value of mounted equals 1, then exit the program.'</p>
 
-        <p class="end-subsection">We then check if <code>year</code> is an integer. The <code>=~</code> inside double brackets will check if the value matches the pattern of the regular expression. If it matches, then we assume that the integer is the year label. If the difference from the current year is greater than (<code>-gt</code>) 2, the file or directory is deleted. </p>
+            <h3 id="creating">Creating the backup</h3>
 
-        <h2 id="security">Security Issues</h2>
+            <p class="end-subsection">If we're going to be automating use of the CLI, then we need some way to provide the admin login credentials. The <a href="http://efa.nmichael.de/dokuwiki/doku.php?id=config_nopassword">efa docs</a> provide the useful recommendation to create a hidden file called .efacred in the home directory with the login credentials. A quick test confirmed that we can now use the efaCLI without manually entering the password. The security implications will be handled later.</p>
 
-        <p>One of the first things I did in Part I was add a keyboard shortcut for opening terminal windows. Now I've added a file with the efa admin password saved in plain text. This means it is now trivial for anyone to get the efa admin password.</p>
+            <p>We also need names for the backup directory and file:</p>
 
-        <p>Fortunately, efa can be configured so that the efa window is always on top. This can be done through the GUI for the admin mode via the expert mode of the configuration menu.</p>
+            <div class="code-box">
+                <pre><code>
+      year=$( <span class="purple-text">date</span> +%Y )
+      dateStamp=$( <span class="purple-text">date</span> +%m%d )
 
-        <p class="end-subsection">The keyboard shortcut will still open new terminal windows. However, they won't be accessible unless the efa window is closed, which is an action that requires the admin password.</p>
+      backupDir="<span class="dark-red-text">${usb}</span>/<span class="dark-red-text">${year}</span>_backup"
+      backupFile="<span class="dark-red-text">${backupDir}</span>/efaBackup_<span class="dark-red-text">${dateStamp}</span>.zip"
 
-        <h2 id="cron">The cron job</h2>
+      <span class="teal-text">if</span> [[ ! -d <span class="dark-red-text">$backupDir</span> ]]; <span class="teal-text">then</span>
+          <span class="purple-text">mkdir</span> <span class="dark-red-text">"$backupDir"</span>
+      <span class="teal-text">fi</span>
+                </code></pre>
+            </div>
 
-        <p>At last, we come to the cron jobs. We can schedule running our backup and cleaner with <code>crontab</code> </p>
+            <p>I use the <code>date</code> command with appropriate flags to get both the year and a date stamp. These values are used to generate the backup folder and file names. The <code>if</code> statement can be read as 'if the backup directory doesn't already exist, then make it'.</p>
 
-        <div class="terminal-box">
-            <pre><code>
-  $ crontab -e
-            </code></pre>
-        </div>
+            <p>Now all that remains is actually making the backup. To do this, we need to start the efaCLI.sh script. There are some options here. I took the approach of giving the location of bash followed by the location of the script to be run.</p>
 
-        <p>This initializes a crontab for the user (efa2) and lets us choose what editor we want to use. The basic syntax for a cron job is <code>minute hour day-of-month month day-of-week   command</code> </p>
+            <div class="code-box">
+                <pre><code>
+      /bin/bash /opt/efa2/efaCLI.sh admin@localhost/test -cmd "backup create all <span class="dark-red-text">${backupFile}</span>"
+                </code></pre>
+            </div>
 
-        <p>Our rowing club meets on Wednesdays, Saturdays and Sundays. So I scheduled the backup to run at 2 AM the following day (Monday, Thursday and Sunday), and the cleaner to run every January 1st at 2:10 AM.</p>
-        <div class="terminal-box">
-            <pre><code>
-  0 2 * * 1,4,7 /home/efa2/bin/efaBackup.sh
-  10 2 1 1 * /home/efa2/bin/backupCleaner.sh
-            </code></pre>
-        </div>
+            <p class="end-subsection">where 'test' is the name of the project I want to backup.</p>
 
-        <p>I also decided to make a log file in efa2's home folder and edited the crontab: </p>
-        <div class="terminal-box">
-            <pre><code>
-  0 2 * * 1,4,7 /home/efa2/bin/efaBackup.sh &gt; /home/efa2/cronjob.log 2&gt;&amp;1
-  10 2 1 1 * /home/efa2/bin/backupCleaner.sh &gt; /home/efa2/cronjob.log 2&gt;&amp;1
-            </code></pre>
-        </div>
+            <h3 id="clean-up">Removing old backups</h3>
 
-        <p>The &gt; symbol redirects standard output to the file cronjob.log, over-writing the file each time. &gt;&gt; could be used to append instead. 2&gt;&amp;1 redirects the standard error output to standard out, which itself was already directed to the log file.</p>
+            <p>I will happily admit that this is a silly thing to do. The backup for the small test project that I made weighed in at 25 kB. Let's say a real project is a whopping 1 MB. For a daily backup to a 16 GB drive, I should start to worry about space in about... 40 years.</p>
 
-        <p class="end-subsection">A test run confirmed that everything worked, and the adventures of the efaPi finally came to a close.</p>
+            <p>Regardless, I decided to write a script to delete the backups after two years.</p>
 
-        <h2 id="conclusions">Conclusions</h2>
+            <p>Similar to the backup script, the cleanup script checks if the usb is mounted and gets the current year. This time a regular expression will also be useful: </p>
 
-        <p>Apparently my long-standing reluctance to mess with bash was not totally unfounded. It has plenty of traps for novices. bash also now has the distinction of being the first language where I struggled to initialize a variable (no spaces around the assignment operator!).</p>
+            <div class="code-box">
+                <pre><code>
+      re='^[0-9]{4}$'
+                </code></pre>
+            </div>
 
-        <p>But I'm also really glad that I did finally spend some time with bash. Once I passed the first hurdles, I found myself really enjoying working on the scripts and finally scheduling my first cron job. This was easily my favorite part of the working on the efaPi.</p>
+            <p>The regular expression isn't as bad as it looks. It translates to 'the first character (^) must be a digit ([0-9]), there must be four digits ({4}) and the last character must be a digit ($)'. In other words, this expression will match four digit integers, which we will assume are year labels.</p>
 
+            <p>We then check for and remove files or directories in <code>usb</code> that are more than two years old.</p>
 
+            <div class="code-box">
+                <pre><code>
+      re='^[0-9]{4}$'
+      currentYear=$( <span class="purple-text">date</span> +%Y )
+
+      <span class="teal-text">for</span> entry <span class="teal-text">in</span> <span class="dark-red-text">"${usb}/"</span>*
+      <span class="teal-text">do</span>
+          name=$( <span class="purple-text">basename</span> <span class="dark-red-text">$entry</span> )
+          year=$( <span class="purple-text">echo</span> <span class="dark-red-text">$name</span> | <span class="purple-text">cut</span> -d'_' -f1)
+          <span class="teal-text">if</span> [[ <span class="dark-red-text">$year</span> =~ <span class="dark-red-text">$re</span> ]]
+          <span class="teal-text">then</span>
+            age=$(( <span class="dark-red-text">$currentYear</span>-<span class="dark-red-text">$year</span> ))
+            <span class="teal-text">if</span> [[ <span class="dark-red-text">$age</span> -gt 2 ]]
+            <span class="teal-text">then</span>
+              <span class="purple-text">rm</span> -r <span class="dark-red-text">$entry</span>
+            <span class="teal-text">fi</span>
+          <span class="teal-text">fi</span>
+      <span class="teal-text">done</span>
+                </code></pre>
+            </div>
+
+            <p><code>basename</code> returns the name of the file or directory instead of the full path. <code>echo</code> and a pipe ( | ) are used to pass the name to the command <code>cut</code>, which slices the string into substrings using the underscore character as the delimiter. <code>cut</code> then returns the first field (<code>-f1</code> ). So if the current entry is the directory 2020_backup, the value of <code>year</code> is 2020.</p>
+
+            <p class="end-subsection">We then check if <code>year</code> is an integer. The <code>=~</code> inside double brackets will check if the value matches the pattern of the regular expression. If it matches, then we assume that the integer is the year label. If the difference from the current year is greater than (<code>-gt</code>) 2, the file or directory is deleted. </p>
+        </section>
+        <section>
+            <h2 id="security">Security Issues</h2>
+
+            <p>One of the first things I did in Part I was add a keyboard shortcut for opening terminal windows. Now I've added a file with the efa admin password saved in plain text. This means it is now trivial for anyone to get the efa admin password.</p>
+
+            <p>Fortunately, efa can be configured so that the efa window is always on top. This can be done through the GUI for the admin mode via the expert mode of the configuration menu.</p>
+
+            <p class="end-subsection">The keyboard shortcut will still open new terminal windows. However, they won't be accessible unless the efa window is closed, which is an action that requires the admin password.</p>
+        </section>
+        <section>
+            <h2 id="cron">The cron job</h2>
+
+            <p>At last, we come to the cron jobs. We can schedule running our backup and cleaner with <code>crontab</code> </p>
+
+            <div class="terminal-box">
+                <pre><code>
+      $ crontab -e
+                </code></pre>
+            </div>
+
+            <p>This initializes a crontab for the user (efa2) and lets us choose what editor we want to use. The basic syntax for a cron job is <code>minute hour day-of-month month day-of-week   command</code> </p>
+
+            <p>Our rowing club meets on Wednesdays, Saturdays and Sundays. So I scheduled the backup to run at 2 AM the following day (Monday, Thursday and Sunday), and the cleaner to run every January 1st at 2:10 AM.</p>
+            <div class="terminal-box">
+                <pre><code>
+      0 2 * * 1,4,7 /home/efa2/bin/efaBackup.sh
+      10 2 1 1 * /home/efa2/bin/backupCleaner.sh
+                </code></pre>
+            </div>
+
+            <p>I also decided to make a log file in efa2's home folder and edited the crontab: </p>
+            <div class="terminal-box">
+                <pre><code>
+      0 2 * * 1,4,7 /home/efa2/bin/efaBackup.sh &gt; /home/efa2/cronjob.log 2&gt;&amp;1
+      10 2 1 1 * /home/efa2/bin/backupCleaner.sh &gt; /home/efa2/cronjob.log 2&gt;&amp;1
+                </code></pre>
+            </div>
+
+            <p>The &gt; symbol redirects standard output to the file cronjob.log, over-writing the file each time. &gt;&gt; could be used to append instead. 2&gt;&amp;1 redirects the standard error output to standard out, which itself was already directed to the log file.</p>
+
+            <p class="end-subsection">A test run confirmed that everything worked, and the adventures of the efaPi finally came to a close.</p>
+        </section>
+        <section>
+            <h2 id="conclusions">Conclusions</h2>
+
+            <p>Apparently my long-standing reluctance to mess with bash was not totally unfounded. It has plenty of traps for novices. bash also now has the distinction of being the first language where I struggled to initialize a variable (no spaces around the assignment operator!).</p>
+
+            <p>But I'm also really glad that I did finally spend some time with bash. Once I passed the first hurdles, I found myself really enjoying working on the scripts and finally scheduling my first cron job. This was easily my favorite part of the working on the efaPi.</p>
+        </section>
     </article>
     </main>
     </div>
