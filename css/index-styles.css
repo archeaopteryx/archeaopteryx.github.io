@@ -148,7 +148,7 @@ h1 {
 }
 
 .card-title h3 {
-    border-bottom: 2px solid black;
+    margin-bottom: 2px;
 }
 
 .card-text {

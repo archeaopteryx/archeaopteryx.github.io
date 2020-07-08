@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="175.89316mm"
+   height="191.68282mm"
+   viewBox="0 0 175.89316 191.68282"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (unknown)"
+   sodipodi:docname="cli-arguments-python.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.62"
+     inkscape:cx="302.13031"
+     inkscape:cy="291.4518"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:snap-global="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-1.8837352,-37.287624)">
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#0000ff;stroke-width:0.5;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1"
+       id="rect825"
+       width="51.348549"
+       height="0"
+       x="65.277779"
+       y="118.63419" />
+    <rect
+       style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:#1a1a1a;stroke-width:0.6751709;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1"
+       id="rect834"
+       width="175.21799"
+       height="191.00764"
+       x="2.2213206"
+       y="37.62521"
+       rx="10.494293"
+       ry="11.120229" />
+    <g
+       id="g902"
+       transform="translate(169.00649,20.071675)">
+      <rect
+         ry="8.623826"
+         rx="7.9982181"
+         y="48.496277"
+         x="-164.44669"
+         height="35.132706"
+         width="85.598633"
+         id="rect815"
+         style="opacity:1;fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:0.51907086;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         ry="7.9999948"
+         rx="7.9999948"
+         y="20.467745"
+         x="-114.36829"
+         height="63.170765"
+         width="35.529766"
+         id="rect819"
+         style="opacity:1;fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:0.5;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         ry="7.0909152"
+         rx="8.0045357"
+         y="20.453188"
+         x="-130.17249"
+         height="23.073483"
+         width="51.348549"
+         id="rect821"
+         style="opacity:1;fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:0.47086838;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1" />
+      <ellipse
+         ry="3.2209795"
+         rx="3.4343534"
+         cy="28.789324"
+         cx="-122.47648"
+         id="path823"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#0000ff;stroke-width:0.4592503;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         y="33.270172"
+         x="-130.17249"
+         height="10.256498"
+         width="51.224239"
+         id="rect830"
+         style="opacity:1;fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:0.5;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         ry="8"
+         rx="8"
+         y="48.496277"
+         x="-164.44669"
+         height="57.747681"
+         width="31.728271"
+         id="rect832"
+         style="opacity:1;fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:0.5;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.76111126px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="37.553768"
+       y="111.79166"
+       id="text842"><tspan
+         sodipodi:role="line"
+         id="tspan840"
+         x="37.553768"
+         y="111.79166"
+         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332">$ ./dbScript.py make schemaFile</tspan><tspan
+         sodipodi:role="line"
+         x="37.553768"
+         y="121.49304"
+         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan844">$ ./dbScript.py --help</tspan><tspan
+         sodipodi:role="line"
+         x="37.553768"
+         y="131.19443"
+         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan848">usage: argParseEx.py [-h] {make,ad</tspan><tspan
+         sodipodi:role="line"
+         x="37.553768"
+         y="140.89583"
+         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan850" /><tspan
+         sodipodi:role="line"
+         x="37.553768"
+         y="150.59721"
+         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan852">positional arguments:</tspan><tspan
+         sodipodi:role="line"
+         x="37.553768"
+         y="160.2986"
+         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan854">  {make,add,suggestions}</tspan><tspan
+         sodipodi:role="line"
+         x="37.553768"
+         y="169.99998"
+         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan856">    make                creates a new</tspan><tspan
+         sodipodi:role="line"
+         x="37.553768"
+         y="179.70139"
+         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan904" /><tspan
+         sodipodi:role="line"
+         x="37.553768"
+         y="189.40277"
+         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan906" /><tspan
+         sodipodi:role="line"
+         x="37.553768"
+         y="199.10416"
+         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan908" /><tspan
+         sodipodi:role="line"
+         x="37.553768"
+         y="208.80554"
+         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan910" /><tspan
+         sodipodi:role="line"
+         x="37.553768"
+         y="218.50694"
+         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan914">    add </tspan><tspan
+         sodipodi:role="line"
+         x="37.553768"
+         y="228.20833"
+         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan846" /></text>
+    <g
+       id="g894"
+       transform="rotate(180,-4.6821746,186.67855)">
+      <rect
+         ry="8.623827"
+         rx="7.9982181"
+         y="175.4536"
+         x="-184.47943"
+         height="35.132706"
+         width="85.598633"
+         id="rect815-3"
+         style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke:#ffcc00;stroke-width:0.51907086;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         ry="7.9999948"
+         rx="7.9999948"
+         y="147.42506"
+         x="-134.40103"
+         height="63.170765"
+         width="35.529766"
+         id="rect819-6"
+         style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke:#ffcc00;stroke-width:0.5;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         ry="7.0909152"
+         rx="8.0045357"
+         y="147.41051"
+         x="-150.20523"
+         height="23.073483"
+         width="51.348549"
+         id="rect821-7"
+         style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke:#ffcc00;stroke-width:0.47086838;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1" />
+      <ellipse
+         ry="3.2209795"
+         rx="3.4343534"
+         cy="155.74664"
+         cx="-142.50922"
+         id="path823-5"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ffcc00;stroke-width:0.45925033;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         y="160.22749"
+         x="-150.20523"
+         height="10.256498"
+         width="51.224239"
+         id="rect830-3"
+         style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke:#ffcc00;stroke-width:0.5;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         ry="8"
+         rx="8"
+         y="175.4536"
+         x="-184.47943"
+         height="57.747681"
+         width="31.728271"
+         id="rect832-5"
+         style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke:#ffcc00;stroke-width:0.5;stroke-miterlimit:9.79310322;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+  </g>
+</svg>

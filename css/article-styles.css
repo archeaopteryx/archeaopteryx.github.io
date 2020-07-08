@@ -191,6 +191,10 @@ pre {
     color: hsl(120, 73%, 75%); /*hex 90ee90 */
 }
 
+.dark-green-text {
+    color: #228b22;
+}
+
 .comment-text {
     color: #c0c0c0;
 }
@@ -203,8 +207,8 @@ pre {
     color: hsl(30, 96%, 75%); /*hex: FCBF7D?*/
 }
 
-.aqua-text {
-    color: #00ffff;
+.orange-text {
+    color: #ff4500;
 }
 
 .code-box {
@@ -214,6 +218,13 @@ pre {
     line-height: 1.5;
     margin-top: 10px;
     padding-left: 5px;
+}
+.aqua-text {
+    color: #00ffff;
+}
+
+.lite-blue-text {
+    color: #1e90ff;
 }
 
 .blue-text {
@@ -230,6 +241,10 @@ pre {
 
 .purple-text {
     color: #630060;
+}
+
+.fuchsia-text {
+    color: #ff00ff;
 }
 
 /* end rules for code samples */
