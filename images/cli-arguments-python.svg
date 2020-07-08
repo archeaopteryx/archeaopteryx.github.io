@@ -49,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -130,7 +130,7 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:7.76111126px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;line-height:1.25;font-family:monospace;-inkscape-font-specification:monospace;letter-spacing:0px;word-spacing:0px;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="37.553768"
        y="111.79166"
        id="text842"><tspan
@@ -138,66 +138,66 @@
          id="tspan840"
          x="37.553768"
          y="111.79166"
-         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332">$ ./dbScript.py make schemaFile</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:monospace;fill:#cccccc;stroke-width:0.26458332">$ ./dbScript.py make schemaFil</tspan><tspan
          sodipodi:role="line"
          x="37.553768"
          y="121.49304"
-         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:monospace;fill:#cccccc;stroke-width:0.26458332"
          id="tspan844">$ ./dbScript.py --help</tspan><tspan
          sodipodi:role="line"
          x="37.553768"
          y="131.19443"
-         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
-         id="tspan848">usage: argParseEx.py [-h] {make,ad</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:monospace;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan848">usage: argParseEx.py [-h] {mak</tspan><tspan
          sodipodi:role="line"
          x="37.553768"
          y="140.89583"
-         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:monospace;fill:#cccccc;stroke-width:0.26458332"
          id="tspan850" /><tspan
          sodipodi:role="line"
          x="37.553768"
          y="150.59721"
-         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:monospace;fill:#cccccc;stroke-width:0.26458332"
          id="tspan852">positional arguments:</tspan><tspan
          sodipodi:role="line"
          x="37.553768"
          y="160.2986"
-         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:monospace;fill:#cccccc;stroke-width:0.26458332"
          id="tspan854">  {make,add,suggestions}</tspan><tspan
          sodipodi:role="line"
          x="37.553768"
          y="169.99998"
-         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
-         id="tspan856">    make                creates a new</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:monospace;fill:#cccccc;stroke-width:0.26458332"
+         id="tspan856">    make                create</tspan><tspan
          sodipodi:role="line"
          x="37.553768"
          y="179.70139"
-         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:monospace;fill:#cccccc;stroke-width:0.26458332"
          id="tspan904" /><tspan
          sodipodi:role="line"
          x="37.553768"
          y="189.40277"
-         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:monospace;fill:#cccccc;stroke-width:0.26458332"
          id="tspan906" /><tspan
          sodipodi:role="line"
          x="37.553768"
          y="199.10416"
-         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:monospace;fill:#cccccc;stroke-width:0.26458332"
          id="tspan908" /><tspan
          sodipodi:role="line"
          x="37.553768"
          y="208.80554"
-         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:monospace;fill:#cccccc;stroke-width:0.26458332"
          id="tspan910" /><tspan
          sodipodi:role="line"
          x="37.553768"
          y="218.50694"
-         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:monospace;fill:#cccccc;stroke-width:0.26458332"
          id="tspan914">    add </tspan><tspan
          sodipodi:role="line"
          x="37.553768"
          y="228.20833"
-         style="font-size:7.76111126px;fill:#cccccc;stroke-width:0.26458332"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:monospace;fill:#cccccc;stroke-width:0.26458332"
          id="tspan846" /></text>
     <g
        id="g894"
