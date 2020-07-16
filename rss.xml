@@ -1,33 +1,38 @@
 <?xml version="1.0"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Archeaopteryx coding blog</title>
         <link>https://archeaopteryx.github.io/</link>
+        <atom:link href="https://archeaopteryx.github.io/rss.xml" rel="self" type="application/rss+xml" />
         <description>Self-taught programmer blog</description>
         <language>en-us</language>
-        <pubDate>Thu, 16 Jul 2020 19:00:00 GMT</pubDate>
-        <lastBuildDate>Thu, 16 Jul 2020 19:00:00 GMT</lastBuildDate>
+        <pubDate>Thu, 16 Jul 2020 18:00:00 GMT</pubDate>
+        <lastBuildDate>Thu, 16 Jul 2020 18:00:00 GMT</lastBuildDate>
         <item>
             <title>Command Line Arguments with Python</title>
             <link>https://archeaopteryx.github.io/html/commandLineArgs.html</link>
+            <guid>https://archeaopteryx.github.io/html/commandLineArgs.html</guid>
             <description>Post about using command line options and arguments to change script behavior. Starts by describing how options can be passed to a bash script. Then moves to the getopt module in the python standard library, which is very similar to a bash built-in. While the getopt python module is easy to use, it has limited functionality and is not the recommended way to build command line interfaces for python. The recommended approach is to use argparse, another standard library module. An example of using argparse for command line options and sub-commands with additional arguments is given. Finally, some of the advantages of argparse over getopt are discussed.</description>
             <pubDate>Wed, 08 Jul 2020 19:00:00 GMT</pubDate>
         </item>
         <item>
             <title>EfaPi II: The Cron Job</title>
             <link>https://archeaopteryx.github.io/html/efaPi-part-ii.html</link>
+            <guid>https://archeaopteryx.github.io/html/efaPi-part-ii.html</guid>
             <description>This post is about my first experience writing bash scripts and scheduling a cron job. This was done for the EfaPi, a raspberry Pi dedicated to running an electronic log book for a rowing club. This post consists mostly of explaining what the scripts do, and giving a short introduction to the cron scheduling utility.</description>
             <pubDate>Sun, 07 Jun 2020 19:00:00 GMT</pubDate>
         </item>
         <item>
             <title>EfaPi I: Getting Started</title>
             <link>https://archeaopteryx.github.io/html/efaPi-part-i.html</link>
+            <guid>https://archeaopteryx.github.io/html/efaPi-part-i.html</guid>
             <description>EFA is an electronic log book commonly used by rowers in German speaking countries. This post is about setting up a raspberry Pi to run the EFA software. I used Rasbian Lite, a version of Rasbian with a command line interface but no desktop. I describe making a user through the command line, and what software will be used to run EFA. Because EFA is a GUI application, and there was a request for having GUI access to the file system, this includes a window manager and light weight desktop environment (lxde). A custom keybinding is added by editing lxde-rc.xml, and desktop icons are added by making desktop files. Changes to the autostart file, and the configuration necessary to auto-login a user are given. Finally, the process of disabling the screen-lock for the efa user is described.</description>
             <pubDate>Sun, 07 Jun 2020 19:00:00 GMT</pubDate>
         </item>
         <item>
             <title>Hello, Website!</title>
             <link>https://archeaopteryx.github.io/html/hello-website.html</link>
+            <guid>https://archeaopteryx.github.io/html/hello-website.html</guid>
             <description>Post describing the motivation and some of the design considerations for making this site. This blog serves both as a platform to write about things I find interesting, and as a means to get some first hand experience with websites. Special attention is given to accessibility considerations for users with vision issues. This is comprised of a 'skip to main' option for screen readers, relative font sizing, and constrast considerations for color selection. Finally, the challenge of making a desktop-first site mobile friendly is mentioned. All together, I gained an appreciateion for the service provided by static site generators that make it easy to create websites that are far more beautiful than my simple hand-coded blog, but still am happy to have made my own site.</description>
             <pubDate>Sun, 07 Jun 2020 19:00:00 GMT</pubDate>
         </item>
