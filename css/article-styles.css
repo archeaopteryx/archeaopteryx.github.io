@@ -41,6 +41,12 @@ header {
     justify-content: flex-start;
 }
 
+.upper-bar-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
 .archea-container img{
     width: 150px;
     height: auto;
@@ -51,6 +57,15 @@ header {
     font-size: xxx-large;
     color: saddlebrown;
     align-self: center;
+}
+
+.tagline {
+    display: flex;
+    font-size: 1.5em;
+    color: saddlebrown;
+    font-style: italic;
+    align-self: flex-start;
+    margin: 25px auto auto 200px;
 }
 
 .menu-bar {
@@ -64,7 +79,7 @@ nav.header-menu {
 }
 
 .home, .archive, .about {
-    font-size: large;
+    font-size: 1.3em;
     font-weight: 600;
     color: saddlebrown;
     padding: 2px 25px 2px 25px;
@@ -98,21 +113,27 @@ li.toc a {
     display: block; /*makes whole area clickable*/
     text-decoration: none;
     color: saddlebrown;
-    font-size: large;
+    font-size: 1.2em;
     font-weight: 600;
 }
 
 li.toc-outer {
-    padding: 10px 20px 10px 0px;
+    padding: 5px 20px 10px 0px;
+}
+
+li.toc-outer:first-of-type {
+    padding-top: 10px;
 }
 
 li.toc-inner {
-    padding:20px 20px 0px 20px;
+    padding:10px 20px 0px 20px;
 }
 
 li.toc-inner:last-of-type {
-    padding: 20px 20px 10px 20px;
+    padding: 10px 20px 5px 20px;
 }
+
+/* End sidebar/TOC navigation */
 
 /*Main content area */
 .page-inner {
@@ -130,20 +151,20 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: xx-large;
+    font-size: 2.1em;
 }
 
 h2 {
-    font-size: xx-large;
+    font-size: 2em;
 }
 
 h3 {
-    font-size: x-large;
+    font-size: 1.7em;
 }
 
 p {
-    font-size: 1.2em;
-    line-height: 2;
+    font-size: 1.3em;
+    line-height: 2.1;
     margin-top: 1.5em;
 }
 

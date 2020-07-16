@@ -34,10 +34,12 @@ header {
 }
 
 .tagline {
-    font-size: x-large;
+    display: flex;
+    font-size: 1.5em;
     color: saddlebrown;
     font-style: italic;
-    margin: 25px 10% 0px 50px;
+    align-self: flex-start;
+    margin: 25px auto auto 200px;
 }
 
 .menu-bar {
@@ -53,7 +55,7 @@ nav.header-menu {
 }
 
 .home, .archive, .about {
-    font-size: large;
+    font-size: 1.3em;
     font-weight: 600;
     color: saddlebrown;
     padding: 2px 25px 2px 25px;
@@ -72,22 +74,23 @@ nav.header-menu {
 section {
     padding: 20px 20px 100px 50px;
     width: 45em;
+    margin-left: 250px;
     align-self: center;
 }
 
 h1 {
     color: saddlebrown;
-    font-size: xx-large;
+    font-size: 2.1em;
 }
 
 h2 {
     color: #287D4D; /*near seagreen */
-    font-size: xx-large;
+    font-size: 2em;
     margin-top: 20px;
 }
 
 p {
-    font-size: 1.2em;
+    font-size: 1.3em;
     line-height: 2;
     margin-top: 1.5em;
 }
