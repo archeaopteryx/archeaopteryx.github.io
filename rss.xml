@@ -6,8 +6,8 @@
         <atom:link href="https://archeaopteryx.github.io/rss.xml" rel="self" type="application/rss+xml" />
         <description>Self-taught programmer blog</description>
         <language>en-us</language>
-        <pubDate>Thu, 16 Jul 2020 18:00:00 GMT</pubDate>
-        <lastBuildDate>Thu, 16 Jul 2020 18:00:00 GMT</lastBuildDate>
+        <pubDate>Thu, 16 Jul 2020 16:00:00 GMT</pubDate>
+        <lastBuildDate>Thu, 16 Jul 2020 16:00:00 GMT</lastBuildDate>
         <item>
             <title>Command Line Arguments with Python</title>
             <link>https://archeaopteryx.github.io/html/commandLineArgs.html</link>
