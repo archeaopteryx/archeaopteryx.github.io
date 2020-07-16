@@ -60,7 +60,7 @@
 
                     <p>This realization only hit when I was playing around with bash scripts for the <a href="efaPi-part-ii.html">efaPi project</a>. I thought it would be fun to automate testing. Since I was thinking in terms of how I normally interact with the command line, I started to wonder how options and arguments from the command line result in different behavior from programs. And so began my foray into command line interfaces.</p>
 
-                    <p class="end-subsection">I will give a short overview of the basic handling of command line arguments with bash, followed by examples for how similar results can be achieved with two modules in the python standard library: getopt and argparse.</p>
+                    <p class="end-subsection">In this post I will give a short overview of the basic handling of command line arguments with bash, followed by examples for how similar results can be achieved with two modules in the python standard library: getopt and argparse.</p>
 
                     </section>
                     <section>
@@ -69,7 +69,7 @@
 
                     <p>While writing the bash scripts for efaPi, I decided to add an optional argument to run the scripts in a test mode.</p>
 
-                    <p>First, it should be clearly stated that handling a single optional with bash does not actually require any fancy footwork. I could have simply checked to see if the first argument (<code>$1</code>) matched some option keyword and set a variable accordingly: </p>
+                    <p>First, it should be clearly stated that handling a single optional with bash does not actually require any fancy footwork. I could have simply checked to see if the first argument (<code><span class="dark-red-text">$1</span></code>) matched some option keyword and set a variable accordingly: </p>
 
                     <div class="code-box">
                         <pre><code>
@@ -100,7 +100,7 @@
 
                     <p>If the first character in the opt string is a colon, then <code>getopts</code> will use silent error handling. If a colon follows an option character, then that option takes an argument. So the optstring <code>":vf:"</code> will use silent handling, have an option "-v" that does not take an argument, and an option "-f" that does take an argument.</p>
 
-                    <p><code>getopts</code> is intended to be run in a while loop and will return false to break out of the loop once it exhausts the options to check for. If an option from the optstring is found, then the response is selected using a case switch. So for my simple case of checking for the '-t' option to decide if the script should run in testing mode:</p>
+                    <p><code>getopts</code> is intended to be run in a <code>while</code> loop and will return <code>false</code> to break out of the loop once it exhausts the possible options. If an option from the optstring is found, then the response is selected using a case switch. So for my simple case of checking for the '-t' option to decide if the script should run in testing mode:</p>
 
                     <div class="code-box">
                         <pre><code>
@@ -113,7 +113,7 @@
                         </code></pre>
                     </div>
 
-                    <p class="end-subsection">Now that we've seen the optstr in action, we can switch to python's getopt module.</p>
+                    <p class="end-subsection">Now that we've seen the optstr in action, we can switch to python's rather similar <code>getopt</code> module.</p>
 
                     </section>
                     <section>
@@ -122,7 +122,9 @@
 
                     <p>Python's getopt module is inspired by the getopt() method from C and is a comfortable switch from <code>getopts</code> in bash.</p>
 
-                    <p>This was for a different project with different options. I wanted the following options: help (-h, --help) to display help text, make (-m, --make) to create tables from schema defined in a file, add (-a, --addFromFile) to add entries to a table from file, suggestions (-s, --suggestions) to get related titles for a given title and language.</p>
+                    <p>This was for a different project with different options. I wanted the following options: help (<code>-h</code>, <code>--help</code>) to display help text, make (<code>-m</code>, <code>--make</code>) to create tables from schema defined in a file, add (<code>-a</code>, <code>--addFromFile</code>) to add entries to a table from file, suggestions (<code>-s</code>, <code>--suggestions</code>) to get related titles for a given title and language.</p>
+
+                    <p>My first approach with <code>getopt</code> is certainly reminiscent of the bash script: </p>
 
                     <div class="code-box">
                         <pre><code>
@@ -153,13 +155,11 @@
                         </code></pre>
                     </div>
 
-                    <p>The functions called by the if/elif statements are not shown for simplicity.</p>
+                    <p>The functions called by the <code>if/elif</code> statements are not shown for simplicity.</p>
 
-                    <p>The <code>getopt.getopt()</code> method takes the argument list to be parsed (<code>argv</code>, analogous to <code><span class='dark-red-text'>$@</span></code> in bash), the string of short (single character name) options, and an optional list of long (multi-character name) options.</p>
+                    <p>The <code>getopt.getopt()</code> method takes the argument list to be parsed (<code>argv</code>, analogous to <code><span class='dark-red-text'>$@</span></code> in bash), the string of short (single character name) options, and an optional list of long (multi-character name) options. The string of short options has a strong resemblence to the optstr in bash.</p>
 
-                    <p>We can get the list of arguments from the command line using <code>sys.argv</code>. Unlike bash, this list also includes the name of the running program. For this reason, we exclude the first member of the list from <code>sys.argv</code> when we pass it.</p>
-
-                    <p>The string of short options looks very similar to the optstring in bash, only the support for long options looks different from bash. Long options use an equal sign instead of a colon to indicate that they take an argument.</p>
+                    <p>We can get the list of arguments from the command line using <code>sys.argv</code>. Unlike bash, this list also includes the name of the running program. For this reason, we exclude the first member of the list from <code>sys.argv</code> when passing it.</p>
 
                     <p>The <code>getopt.getopt()</code> method returns two lists. The first is a list of matched option - argument pairs, and the second is a list that holds any "leftover" arguments. </p>
 
@@ -243,7 +243,7 @@
 
                     <p>This works, but I wasn't pleased about the <code>if</code> switch series. It is possible to avoid this construct when calling functions by options with <code>argparse</code>, but I found myself running into difficulties because I also wanted to pass arguments to the functions.</p>
 
-                    <p>This is probably because I was abusing options when I really wanted 'sub-commands'. I did not want small adjustments to the behavior of the program (options), but rather wanted totally different behaviors depending on the command line arguments. Sub-commands are given without a leading dash: </p>
+                    <p>This is probably because I was abusing options when I really wanted 'sub-commands'. I did not want small adjustments to the behavior of the program (options), but rather wanted totally different behaviors depending on the command line arguments (sub-commands). Sub-commands are given without a leading dash: </p>
 
                     <div class="terminal-box">
                         <pre><code>
@@ -253,7 +253,7 @@
                         </code></pre>
                     </div>
 
-                    <p>Rewriting the code using subcommands instead of options:</p>
+                    <p>Rewriting the code using sub-commands instead of options:</p>
 
                     <div class="code-box">
                         <pre><code>
@@ -291,9 +291,9 @@
                         </code></pre>
                     </div>
 
-                    <p>with an explicit example of how to access the arguments in the function called.</p>
+                    <p>including an explicit example of how to access the arguments in the function called.</p>
 
-                    <p><code>parser.parse_args()</code> returns a Namespace object holding attributes that are defined by the <code>.add_argument()</code> and <code>.set_defaults()</code> methods. To demonstrate, we can run the script with the 'make' subcommand and print the Namespace object assigned to <code>args</code>: </p>
+                    <p><code>parser.parse_args()</code> returns a <code>Namespace</code> object holding attributes that are defined by the <code>.add_argument()</code> and <code>.set_defaults()</code> methods. To demonstrate, we can run the script with the 'make' subcommand and print the <code>Namespace</code> object assigned to <code>args</code>: </p>
 
                     <div class="terminal-box">
                         <pre><code>
@@ -303,7 +303,7 @@
                         </code></pre>
                     </div>
 
-                    <p>So <code>args.func(args)</code> calls the function <code>args.func</code>, in this case the makeFunction, with args passed as an arguement.</p>
+                    <p>So <code>args.func(args)</code> calls the function <code>args.func</code>, in this case the makeFunction, with args passed as an argument.</p>
 
                     <p>Both of these approaches generated the same nicely formatted help text. This is an advantage of <code>argparse</code> over <code>getopts</code>, no additional code was needed to produce the following: </p>
 
@@ -312,7 +312,7 @@
                         <figcaption>Help message text generated by argparse</figcaption>
                     </figure>
 
-                    <p class="end-subsection">The text is the original contents of the strings, which was replaced by ellipsis in the code snippets for readability.</p>
+                    <p class="end-subsection">The text is the original contents of the strings, which werw replaced by ellipsis in the code snippets for readability.</p>
 
                     </section>
                     <section>
