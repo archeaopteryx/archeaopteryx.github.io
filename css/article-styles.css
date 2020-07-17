@@ -78,7 +78,7 @@ nav.header-menu {
     display: flex;
 }
 
-.home, .archive, .about {
+.home, .archive, .about, .rss {
     font-size: 1.3em;
     font-weight: 600;
     color: saddlebrown;
@@ -88,9 +88,14 @@ nav.header-menu {
     align-self: flex-end;
 }
 
-.home a, .archive a, .about a {
+.home a, .archive a, .about a, .rss a {
     text-decoration: none;
     color: saddlebrown;
+}
+
+.rss img {
+    height: 0.9em;
+    width: auto;
 }
 /* Sidebar, TOC navigation */
 .sidebar {

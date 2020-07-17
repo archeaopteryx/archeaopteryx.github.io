@@ -54,7 +54,7 @@ nav.header-menu {
     background-color: rgb(255, 255, 255);
 }
 
-.home, .archive, .about {
+.home, .archive, .about, .rss {
     font-size: 1.3em;
     font-weight: 600;
     color: saddlebrown;
@@ -62,9 +62,14 @@ nav.header-menu {
     background-color: rgb(255, 255, 255);
 }
 
-.home a, .archive a, .about a {
+.home a, .archive a, .about a, .rss a {
     text-decoration: none;
     color: saddlebrown;
+}
+
+.rss img {
+    height: 0.9em;
+    width: auto;
 }
 
 /*end css for header */
