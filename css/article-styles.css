@@ -98,14 +98,23 @@ nav.header-menu {
     width: auto;
 }
 /* Sidebar, TOC navigation */
+.left-column-wrapper {
+    display: flex;
+    flex-direction: column;
+}
 .sidebar {
     width: 250px;
     padding-top: 20px;
     padding-left: 20px;
     background-color: #F3F3F3;
-    border-right: 1px solid grey;
-    border-bottom: 1px solid grey;
+    /*border-right: 1px solid grey;
+    border-bottom: 1px solid grey;*/
     align-self: flex-start;
+}
+
+.left-column {
+    background-color: #F3F3F3;
+    flex: 1;
 }
 
 ul.toc-ul{
