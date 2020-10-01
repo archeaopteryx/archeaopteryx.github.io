@@ -13,7 +13,7 @@
             <link>https://archeaopteryx.github.io/html/python-error-shared-library.html</link>
             <guid>https://archeaopteryx.github.io/html/python-error-shared-library.html</guid>
             <description>After an OS upgrade, trying to run python in virtual environments failed with the error message "python: error while loading shared libraries: libpython3.7m.so.1.0: cannot open shared object file: No such file or directory". Not knowing what a .so file actually is or why I need it, it took some poking around to realize that it is a low level 'shared object' file that is necessary for the python interpreter. This file was missing due to python3.7 being uninstalled and replaced with python3.8 during the OS upgrade. During this process, I also found that I had accidentally used two different virtual environments over time, which caused brief confusion regarding why some venvs had a pyvenv.cfg file.</description>
-            <pubDate>Thu, 01 Oct 2020 11:00:00 GMT</pudDate>
+            <pubDate>Thu, 01 Oct 2020 11:00:00 GMT</pubDate>
         </item>
         <item>
             <title>Command Line Arguments with Python</title>
