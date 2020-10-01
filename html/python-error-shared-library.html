@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="libpython3.7m.so, venv, python">
+        <meta name="description" content="troubleshooting python error: while loading shared libraries: libpython3.7m.so.1.0:">
+        <link rel="stylesheet" href="../css/article-styles.css">
+        <link rel="icon" href="../images/archeaopteryx-icon.png">
+        <title>Error loading shared library</title>
+    </head>
+    <body>
+
+        <header>
+            <div class="upper-bar">
+                <div class="upper-bar-left">
+                    <div class="archea-container"><img src="../images/archeaopteryx-1.svg" alt="cartoon drawing of an archaeopteryx working on a laptop" width="150" height="107" /></div>
+                    <div class="title">Archeaopteryx</div>
+                </div>
+                <div class="tagline">Adventures of a self-taught coder</div>
+            </div>
+            <div class="menu-bar">
+                <a class="skip-main" href="#main">Skip to main content</a>
+                <nav class="header-menu">
+                    <div class="home"><a href='../index.html'>Home</a></div>
+                    <div class="archive"><a href='../archive.html'>Archive</a></div>
+                    <div class="about"><a href='../about.html'>About</a></div>
+                    <div class="rss"><a href="https://archeaopteryx.github.io/rss.xml">RSS <img src="../images/rssIcon.svg" alt="RSS icon"> </a>
+                </nav>
+            </div>
+        </header>
+
+
+        <div class="page-inner">
+
+            <div class="left-column-wrapper">
+                <aside class='sidebar'>
+                    <h2>Contents:</h2>
+                    <nav>
+                        <ul class='toc-ul'>
+                            <li class='toc toc-outer'><a href="#intro">Introduction</a></li>
+                            <li class='toc toc-outer'><a href="#"what-is-so"">- What are <code>.so</code> files? </a></li>
+                            <li class='toc toc-outer'><a href="#quest">- The quest for the <code>.so</code></a></li>
+                            <li class='toc toc-outer'><a href="#pyvenv-cfg">- <code>pyvenv.cfg</code> and final thoughts</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <div class="left-column"></div>
+            </div>
+
+            <main id='main' tabindex="-1">
+
+                <article>
+
+                    <h1 id='intro'>python: error while loading shared libraries:</h1>
+
+                    <p>I recently decided to live on the edge and actually update to the current version of my operating system. I made my backups and found a good book to keep busy during the five hours my laptop needs for such a Herculean task. Everything went smoothly, and I was able to continue working without issue.</p>
+
+                    <p>A bit later I wanted to work on a django project that I hadn't touched for a while. I activated the virtual environment and tried to run the server</p>
+
+                    <div class="terminal-box">
+                        <pre><code>
+  $ python manage.py runserver
+  python: error while loading shared libraries: libpython3.7m.so.1.0: cannot open
+  shared object file: No such file or directory
+                        </code></pre>
+                    </div>
+
+                    <p>That... was not what I was hoping for.</p>
+
+                    <p>I checked a few other projects with virtual environments and found that all of the virtual environments that I created before updating my OS gave the error, while those created after the update were fine.</p>
+
+                    <p class="end-subsection">Now, the solution turned out to be painfully obvious, but I made a few newbie errors that slowed me down a fair bit. At least the approximately 1.2 million hits returned by google for "python: error while loading shared libraries:" (noticed while writing this that <a href="https://help.duckduckgo.com/duckduckgo-help-pages/results/number-of-results/"> ddg doesn't give the number of results</a>) assure me that I'm not alone. Hopefully, this note can help some future newbie.</p>
+
+                    <h2 id="what-is-so">What are <code>.so</code> files anyway?</h2>
+
+                    <p>Since I didn't know anything about this <code>.so</code> file, I initially went after a "red herring". I noticed that the working venvs had a file called <code>pyvenv.cfg</code> while the ones returning an error message did not. This file is mentioned in <a href="https://www.python.org/dev/peps/pep-0405/">PEP 405</a> and, as expected, contains a home key pointing to the parent directory of the python install.</p>
+
+                    <div class="code-box">
+                        <pre><code>
+  home = /usr/bin
+  include-system-site-packages = false
+  version = 3.8.5
+                        </code></pre>
+                    </div>
+
+                    <p>My first thought was that the other venvs needed this file. So I copied it into a venv that wasn't working and tried running python again, both leaving the version number as 3.8.5, and after changing it to 3.7. Both attempts still gave the missing <code>.so</code> file error. At this point I was curious: what is this <code>.so</code> file anyway?</p>
+
+                    <p class="end-subsection">The 'so' stands for 'shared object'. As far as I currently understand, these files are important for linking external libraries and for defining how code is laid out and linked at a low level. The analagous file on Windows systems is <code>.dll</code> (dynamic link library). The <code>libpython*.so</code> files are mentioned as part of <a href="https://www.python.org/dev/peps/pep-0384/">PEP 384</a> -- Defining a Stable ABI. For those of us lacking a formal education in computer science, ABI stands for 'application binary interface'.</p>
+
+                    <h2 id="quest">The quest for the <code>.so</code></h2>
+
+                    <p>After being convinced that <code>.so</code> files are properly important, it seemed like a good idea to find where mine were. The most likely suspects were the <code>\lib</code>, <code>\lib64</code> and <code>\usr</code> directories. I searched fairly generally for <code>.so</code> files containing 'libpython' and <code>\lib64</code> turned out to be a good guess</p>
+
+                    <div class="terminal-box">
+                        <pre><code>
+  $ cd /lib64
+  $ find . -name 'libpython?.*.so*'
+  ./libpython3.8.so.1.0
+  ./python2.7/config/libpython2.7.so
+  ./libpython3.8.so
+  ./libpython2.7.so
+  ./libpython2.7.so.1.0
+                        </code></pre>
+                    </div>
+
+                    <p>ok, so there are shared object files for python libraries, but none for python3.7, and none with an 'm' in the name. To be honest, I'm still not sure what the differences between <code>libpython?.?.so</code> and <code>libpython?.?m.so</code> are. Anybody who can clarify the matter is welcome to send an e-mail :)</p>
+
+                    <p>I wasn't sure where <code>libpython3.7m.so.1.0</code> should come from, and most of the threads I found assumed that you had the file and just needed to update some reference to it. Searching on pkgs.org for "libpython3.7m.so.1.0" turned out to be more useful. It brought up packages for python 3.7 interpreters. Finally, I had the lightbulb moment that I must be missing python3.7. </p>
+
+                    <p>Having a look at the python3.7 package for my architecture </p>
+
+                    <figure>
+                        <img src="../images/python37package.jpg" alt="screenshot of the the list of libraries provided with the python37 package from pkgs.org" class="centered-img" width="569" height="209">
+                        <figcaption>Screenshot from pkgs.org</figcaption>
+                    </figure>
+
+
+                    <p>shows that the required <code>.so</code> file is indeed part of this package and checking for an installation of python 3.7 with the <code>which</code> comand confirmed that I didn't have a python 3.7 interpreter. It must have been automatically removed during the OS update and replaced with 3.8.</p>
+
+                    <p>Righto, then I just need to follow the friendly 'install HowTo' on pkgs.org...</p>
+
+                    <div class="terminal-box">
+                        <pre><code>
+  $ dnf install python37
+  No match for argument: 37
+                        </code></pre>
+                    </div>
+
+                    <p>Of course not. Do you know python3.7?</p>
+
+                    <div class="terminal-box">
+                        <pre><code>
+  $ dnf install python3.7
+  Dependecies resolved.
+  ================================================================================
+   Package           Architecture    Version               Repository        Size
+  ================================================================================
+  Installing:
+   <span class='lime-text'>python37</span>          x86_64          3.7.9-1.fc32          updates           19 M
+  Transaction Summary
+  ================================================================================
+  Install  1 Package
+                        </code></pre>
+                    </div>
+
+                    <p>Great! And the <code>.so</code> files?</p>
+
+                    <div class="terminal-box">
+                        <pre><code>
+  $ cd /lib64
+  $ find . -name 'libpython3.*.so*'
+  ./libpython3.8.so.1.0
+  ./libpython3.7m.so.1.0
+  ./libpython3.8.so
+  ./libpython3.7dm.so.1.0
+  ./libpython3.7dm.so
+  ./libpython3.7m.so
+                        </code></pre>
+                    </div>
+
+                    <p>I still don't know what all these files do in great detail (*.7dm.so?) but at least the file I wanted is indeed there. Let's go back to the introDjango venv:</p>
+
+                    <div class="terminal-box">
+                        <pre><code>
+  $ source venv/bin/activate
+  (venv) [katie@linux introDjango]$ python
+  Python 3.7.9 (default, Aug 20 2020, 14:07:20)
+  [GCC 10.2.1 20200723 (Red Hat 10.2.1-1)] on linux
+  Type "help", "copyright", "credits" or "license" for more information.
+  >>>
+                        </code></pre>
+                    </div>
+
+                    <p class="end-subsection">It lives!</p>
+
+                    <h2 id="pyvenv-cfg"><code>pyvenv.cfg</code> and final thoughts</h2>
+
+                    <p>On one hand, problem solved. If you see the 'shared library not found' error, then either make a new venv (you did make a <code>requirements.txt</code> with <code>pip freeze</code> before updating the OS... right?) using one of your available python interpreters, or install the missing python version. On the other hand, I didn't understand why some of my virtual environments have a <code>pyvenv.cfg</code> while others do not.</p>
+
+                    <p>Having inconsistencies between venvs sounded suspiciously like a possible issue between keyboard and chair. I had a faint memory of learning that virtual environments are a good idea, but being unsure about <strong>which</strong> package I should use to make my virtual environments. There are quite a few options, after all. So I had a look at my bash history: </p>
+
+                    <div class="terminal-box">
+                        <pre><code>
+  $ cd ~/
+  $ grep -n 'venv venv' .bash_history
+  <span class='lime-text'>710:</span>python3 -m <span style="color:#FF302C;">venv venv</span>
+  <span class='lime-text'>924:</span>python3 -m <span style="color:#FF302C;">venv venv</span>
+  <span class='lime-text'>980:</span>python3 -m <span style="color:#FF302C;">venv venv</span>
+  $ grep -n 'virtualenv venv' .bash_history
+  <span class='lime-text'>237:</span><span style="color:#FF302C;">virtualenv venv</span> -p python3.7
+  <span class='lime-text'>457:</span><span style="color:#FF302C;">virtualenv venv</span>
+  <span class='lime-text'>579:</span><span style="color:#FF302C;">virtualenv venv</span>
+  <span class='lime-text'>644:</span><span style="color:#FF302C;">virtualenv venv</span>
+                        </code></pre>
+                    </div>
+
+                    <p>There you go: I mixed the <code>venv</code> and <code>virtualenv</code> packages. I checked some of the lines around of these commands in my bash history, for instance:</p>
+
+                    <div class="terminal-box">
+                        <pre><code>
+  $ sed -n '235, 237p' .bash_history
+  mkdir introDjango
+  cd introDjango/
+  virtualenv venv -p python3.7
+                        </code></pre>
+                    </div>
+
+                    <p>where 'introDjango' did not have a <code>pyvenv.cfg</code>. This basically confirmed that the <code>venv</code> directories containing <code>pyvenv.cfg</code> were the ones made with the standard library <code>venv</code> package.</p>
+
+                    <p>Even though it tripped me up a bit, I think it's great that one can switch between <code>venv</code> and <code>virtualenv</code> without noticing.</p>
+
+                    <p>But I also think this highlights the double edged sword that is 'user-friendliness'. I was allowed to be lazy about keeping track of my python versions, required files and initial project setup, and it ultimately left me more lost when something went wrong than I should have been. At least I'll know better next time!</p>
+
+                </article>
+            </main>
+
+        </div>
+
+        <footer>
+            <small>&copy; Copyright 2020 archeaopteryx.<small>
+        </footer>
+
+    </body>
+</html>
