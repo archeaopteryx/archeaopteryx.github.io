@@ -1,3 +1,6 @@
 template.css
 template.html
 images/archeaopteryx-draft.svg
+venv
+__init__.py
+*.pyc

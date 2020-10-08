@@ -3,6 +3,7 @@ from collections import deque
 from pathlib import Path
 
 from prettyTerm import PrettyTerm as pt
+from pageObjects import Page, ArticlePage, ArchivePage
 
 '''
 automate link testing
@@ -21,48 +22,44 @@ article_dir = main_dir.joinpath('html')
 
 article_list = list(article_dir.glob('*.html'))
 
-def check_quick_nav(path):
-    quick_nav_refs = deque()
-    header_ids = deque()
+
+def check_quick_nav(nav_refs, header_ids, name):
     mismatched = []
-    with open(path) as f:
-        soup = BeautifulSoup(f, 'html.parser')
-    for ref in soup.find_all('li'):
-        anchor = next(ref.children)
-        quick_nav_refs.append(anchor.get('href'))
-    for header in soup.find_all(['h1', 'h2', 'h3']):
-        id_value = header.get('id')
-        if id_value is None:
-            continue
-        id_value = "#"+str(id_value)
-        header_ids.append(id_value)
-    if len(list(quick_nav_refs)) != len(list(header_ids)):
-        print("{0} has an unequal number of quickNav links and header ids".format(path.name))
+    if len(list(nav_refs)) != len(list(header_ids)):
+        print("{0} has an unequal number of quickNav links and header ids".format(name))
         return False
-    try:
-        qn = quick_nav_refs.pop()
-        h = header_ids.pop()
-        if qn != h:
-            mismatched.append((qn, h))
-    except IndexError:
-        pass
-    if len(mismatched) == 0:
-        return True
-    else:
-        print("{0} had mismatches: {1}".format(path.name, mismatched))
+    while True:
+        try:
+            nr = nav_refs.pop()
+            hi = header_ids.pop()
+            if nr != hi:
+                mismatched.append((nr, hi))
+        except IndexError:
+            break
+    if len(mismatched) != 0:
+        print("{0} had mismatches: {1}".format(name, mismatched))
         return False
+    return True
 
 def quick_nav_test():
     print("\n"+20*"="+" Starting quick nav test "+20*"=")
     passed = 1
     for article in article_list:
-        link_check = check_quick_nav(article)
+        name = article.name
+        article_obj = ArticlePage(article)
+        nav_refs = article_obj.nav_refs
+        header_ids = article_obj.header_ids
+        link_check = check_quick_nav(nav_refs, header_ids, name)
         if link_check == False:
             passed *= 0
-            print(pt.red+"{0} failed"+pt.reset)
+            print(pt.red+"quick_nav_test failed"+pt.reset)
     if passed == 1:
         print(pt.green+"All articles passed"+pt.reset)
     print(20*"="+" quick nav test complete"+20*"=")
 
+'''
+archive_path = main_dir.joinpath('archive.html')
+archive = ArchivePage(archive_path)
+'''
 
-quick_nav_test()
+#quick_nav_test()
