@@ -23,11 +23,14 @@ class Page():
             soup = BeautifulSoup(f, "html.parser", parse_only=only_header)
         for key in dict:
             div = soup.find('div', dict[key])
-            try:
-                anchor = next(div.children)
-                dict[key] = anchor.get('href')
-            except StopIteration:
-                dict[key] = None
+            if not div is None:
+                try:
+                    anchor = next(div.children)
+                    dict[key] = anchor.get('href')
+                except StopIteration:
+                    dict[key] = None
+            else:
+                 dict[key] = None
         links = (dict["img_home"], dict["home"], dict["archive"], dict["about"], dict["rss"])
         return links
 
@@ -35,6 +38,7 @@ class Page():
 class ArticlePage(Page):
 
     def __init__(self, path):
+        self.name = path.name
         self.nav_refs = self.get_nav_links(path)
         self.header_ids = self.get_h_ids(path)
         Page.__init__(self, path)
