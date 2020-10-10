@@ -3,8 +3,21 @@ from collections import deque
 from pathlib import Path
 
 class Page():
+    """
+    Object organizing the link information in the archeaopteryx pages
+    """
 
     def __init__(self, path):
+        """
+        instance variables:
+        name -- file name with extension
+        page_type -- home, about, archive or article
+        ing_home -- link anchored to the archeaopteryx image
+        home -- link anchored to 'home' in the menu bar
+        archive -- link anchored to 'archive' in the menu bar
+        about -- link anchored to 'about' in the menu bar
+        rss -- link anchored to 'rss' in the menu bar
+        """
         self.name = path.name
         self.page_type = self.get_page_type(self.name)
         self.img_home, self.home, self.archive, self.about, self.rss = self.get_header_links(path)
@@ -36,9 +49,18 @@ class Page():
 
 
 class ArticlePage(Page):
+    """
+    Extends Page class to include Navigation links and header ids
+    """
 
     def __init__(self, path):
-        self.name = path.name
+        """
+        instance variables:
+        nav_refs -- deque of all links in the navigation bar
+        header_ids -- deque of all ids in h1, h2 and h3 elements
+
+        other instance variables inherited from Page class
+        """
         self.nav_refs = self.get_nav_links(path)
         self.header_ids = self.get_h_ids(path)
         Page.__init__(self, path)

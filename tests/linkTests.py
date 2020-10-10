@@ -5,15 +5,17 @@ from pathlib import Path
 from prettyTerm import PrettyTerm as pt
 from pageObjects import Page, ArticlePage, ArchivePage
 
-'''
-automate link testing
-check that:
+"""
+Automate internal link testing for the archeaopteryx site.
+
+run_link_tests checks that:
 - the quickNav on articles links to all sections
 - all pages except index link to home when clicking on the archeaopteryx
 - all pages excpet index have 'home', 'archive', 'about' and 'rss' links in top bar
 - index has 'archive', 'about' and 'rss' links
 - all articles listed in archive
-'''
+If run without arguments, then all general and article pages are checked. If the name of an article is given, then run_link_tests only checks the header and quickNav links for that article, as well as checking that the article was added to the archive.
+"""
 
 def __check_quick_nav(article):
     nav_refs = article.nav_refs
@@ -36,9 +38,6 @@ def __check_quick_nav(article):
     return True
 
 def __quick_nav_test(article_obj_list):
-    '''
-    Check that the article quick nav links match up to section header ids
-    '''
     print("\n"+20*"="+" Starting quick nav test "+20*"=")
     passed = 1
     for article in article_obj_list:
@@ -51,11 +50,17 @@ def __quick_nav_test(article_obj_list):
     print(65*"=")
 
 
+def __new_archive_link_test(article_path, archive):
+    links = archive.article_links
+    print("\n"+21*"="+" starting archive test "+21*"=")
+    if article_path in links:
+        print(pt.green+"Archive passed"+pt.reset)
+    else:
+        print(pt.red+"Missing link or file for {}".format(article_path)+pt.reset)
+    print(65*"=")
+
+
 def __archive_links_test(article_list, archive):
-    '''
-    Check that all links in the archive are unique and that every article has a
-    link in the archive
-    '''
     links = archive.article_links
 
     article_set = set()
@@ -83,9 +88,6 @@ def __archive_links_test(article_list, archive):
 
 
 def __article_header_test(article_obj_list):
-    '''
-    Check that all articles have the correct header links
-    '''
     link_dict = {"img":"../index.html", "home":"../index.html", "archive": "../archive.html", "about": "../about.html"}
     passed = 1
     print("\n"+18*"="+" starting article header test "+17*"=")
@@ -101,9 +103,6 @@ def __article_header_test(article_obj_list):
 
 
 def __general_header_check(page, page_dict):
-    '''
-    Check that non-article pages have correct header links
-    '''
     link_dict = {"img":"index.html", "home":"index.html", "archive": "archive.html", "about": "about.html", "rss":"https://archeaopteryx.github.io/rss.xml"}
     passed = 1
     for key in page_dict:
@@ -155,22 +154,33 @@ def __general_test():
 
 
 def __single_article_test(article_name):
+
     main_dir = Path(Path.cwd()).parent
     article_path = main_dir.joinpath('html', article_name)
-    article_dir = main_dir.joinpath('html')
-    article_list = list(article_dir.glob('*.html'))
     article = ArticlePage(article_path)
     article_obj_list = []
     article_obj_list.append(article)
 
+    archive_link = "html/" + str(article_name)
     archive, *args = __init_general()
 
     __article_header_test(article_obj_list)
     __quick_nav_test(article_obj_list)
-    __archive_links_test(article_list, archive)
+    __new_archive_link_test(archive_link, archive)
 
 
 def run_link_tests(article_name=None):
+    """
+    Check that expected links are present for the archeaopteryx pages
+
+    The tests check that the expected header links are present, that all
+    articles are listed in the archive, and that all quick nav links in an
+    article match up to header id values. If no article name is provided,
+    then all articles and general pages will be tested.
+
+    Keyword arguments:
+        article_name -- name of a single article to test. (default is None)
+    """
     if article_name is None:
         __general_test()
     else:
