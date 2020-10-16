@@ -4,3 +4,5 @@ images/archeaopteryx-draft.svg
 venv
 __init__.py
 *.pyc
+main.js
+images/menuIcon.svg

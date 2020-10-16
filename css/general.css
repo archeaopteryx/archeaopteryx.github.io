@@ -1,0 +1,120 @@
+:root {
+    --title-text-color: saddlebrown;
+    --title-text-size: xxx-large;
+    --tagline-size: 1.5em;
+    --topbar-bg: rgb(255, 255, 255);
+
+    --near-seagreen: #287D4D;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.upper-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.upper-bar-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.archea-container img{
+    width: 150px;
+    height: auto;
+    margin: 10px;
+}
+
+.title {
+    font-size: var(--title-text-size);
+    color: var(--title-text-color);
+    align-self: center;
+}
+
+.tagline {
+    display: flex;
+    font-size: var(--tagline-size);
+    color: var(--title-text-color);
+    font-style: italic;
+    align-self: flex-start;
+    margin: 25px auto auto 200px;
+}
+
+.menu-bar {
+    background-color: var(--near-seagreen); /*near seagreen */
+    display: flex;
+}
+
+nav.header-menu {
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--topbar-bg);
+}
+
+.home, .archive, .about, .rss {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--title-text-color);
+    padding: 2px 25px 2px 25px;
+    background-color: var(--topbar-bg);
+}
+
+.home a, .archive a, .about a, .rss a {
+    text-decoration: none;
+    color: var(--title-text-color);
+}
+
+.rss img {
+    height: 0.9em;
+    width: auto;
+}
+
+/* begin rules for footer */
+footer {
+    margin-left: 20px;
+}
+
+.footer-text {
+    font-size: small;
+}
+/* end rules for footer */
+
+/* adjust display for snaller screens */
+
+@media only screen and (min-width: 501px) and (max-width: 850px) {
+
+    .tagline {
+        display: none;
+    }
+    .archea-container img {
+        width: 100px;
+        height: auto;
+        margin: 5px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+
+    .upper-bar {
+        display: none;
+    }
+    .home, .archive, .about, .rss {
+        font-size: 1.1em;
+        padding: 5px 10px 5px 10px;
+    }
+
+    #rss-label{
+        display: none;
+    }
+
+    .menu-bar {
+        align-items: flex-end;
+    }
+
+}

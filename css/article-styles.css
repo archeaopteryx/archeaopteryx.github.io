@@ -30,73 +30,12 @@ a.skip-main:focus {
 }
 
 /* Header, top bar */
-header {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-}
-
-.upper-bar {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.upper-bar-left {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-}
-
-.archea-container img{
-    width: 150px;
-    height: auto;
-    margin: 10px;
-}
-
-.title {
-    font-size: xxx-large;
-    color: saddlebrown;
-    align-self: center;
-}
-
-.tagline {
-    display: flex;
-    font-size: 1.5em;
-    color: saddlebrown;
-    font-style: italic;
-    align-self: flex-start;
-    margin: 25px auto auto 200px;
-}
-
-.menu-bar {
-    background-color: #287D4D; /*near seagreen */
-    display: flex;
-}
 
 nav.header-menu {
     margin-left: auto;
     display: flex;
 }
 
-.home, .archive, .about, .rss {
-    font-size: 1.3em;
-    font-weight: 600;
-    color: saddlebrown;
-    padding: 2px 25px 2px 25px;
-    /*background-color: rgba(84, 255, 159, 0.7); /*seagreen with alpha channel*/
-    background-color: rgb(255, 255, 255);
-    align-self: flex-end;
-}
-
-.home a, .archive a, .about a, .rss a {
-    text-decoration: none;
-    color: saddlebrown;
-}
-
-.rss img {
-    height: 0.9em;
-    width: auto;
-}
 /* Sidebar, TOC navigation */
 .left-column-wrapper {
     display: flex;
@@ -126,7 +65,7 @@ ul.toc-ul{
 li.toc a {
     display: block; /*makes whole area clickable*/
     text-decoration: none;
-    color: saddlebrown;
+    color: var(--title-text-color);
     font-size: 1.2em;
     font-weight: 600;
 }
@@ -161,7 +100,7 @@ article {
 }
 
 h1, h2, h3 {
-    color: #287D4D; /*near seagreen */
+    color: var(--near-seagreen);
 }
 
 h1 {
@@ -283,16 +222,6 @@ pre {
 }
 
 /* end rules for code samples */
-/* start rules for footer */
-
-footer {
-    margin-left: 20px;
-}
-
-.footer-text {
-    font-size: small;
-}
-/*end rules for footer */
 
 /* adjust display for snaller screens */
 
@@ -303,14 +232,6 @@ footer {
     }
     .sidebar {
         display: none;
-    }
-    .tagline {
-        display: none;
-    }
-    .archea-container img {
-        width: 100px;
-        height: auto;
-        margin: 5px;
     }
 }
 
@@ -323,12 +244,7 @@ footer {
     .sidebar {
         display: none;
     }
-    .upper-bar {
-        display: none;
-    }
-    .home, .archive, .about {
-        padding: 10px;
-    }
+
     .terminal-box {
         overflow: auto;
         scroll-behavior: smooth;
