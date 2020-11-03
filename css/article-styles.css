@@ -135,6 +135,11 @@ p:last-of-type {
     max-width: 100%;
     height: auto;
 }
+
+img  {
+    max-width: 100%;
+}
+
 figcaption {
     color: grey;
 }
@@ -243,6 +248,10 @@ pre {
     }
     .sidebar {
         display: none;
+    }
+
+    p {
+        font-size: 1em;
     }
 
     .terminal-box {

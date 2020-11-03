@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/article-styles.css">
+        <link rel="icon" href="../images/archeaopteryx-icon.png">
+        <title>PHP crash course</title>
+    </head>
+    <body>
+
+        <header>
+            <div class="upper-bar">
+                <div class="upper-bar-left">
+                    <div class="archea-container"><a href="../index.html"><img src="../images/archeaopteryx-1.svg" alt="cartoon drawing of an archaeopteryx working on a laptop" width="150" height="107" /></a></div>
+                    <div class="title">Archeaopteryx</div>
+                </div>
+                <div class="tagline">Adventures of a self-taught coder</div>
+            </div>
+            <div class="menu-bar">
+                <a class="skip-main" href="#main">Skip to main content</a>
+                <nav class="header-menu">
+                    <div class="home"><a href='../index.html'>Home</a></div>
+                    <div class="archive"><a href='../archive.html'>Archive</a></div>
+                    <div class="about"><a href='../about.html'>About</a></div>
+                    <div class="rss"><a href="https://archeaopteryx.github.io/rss.xml"><span id="rss-label">RSS</span><img src="../images/rssIcon.svg" alt="RSS icon"> </a></div>
+                </nav>
+            </div>
+        </header>
+
+
+    <div class="page-inner">
+
+        <div class="left-column-wrapper">
+            <aside class='sidebar'>
+                <h2>Contents:</h2>
+                <nav>
+                    <ul class='toc-ul'>
+                        <li class='toc toc-outer'><a href="#intro">Introduction</a></li>
+                        <li class='toc toc-outer'><a href="#django">Deploying Django</a>
+                        <li class='toc toc-outer'><a href="#php">Switching to PHP</a></li>
+                        <li class='toc toc-outer'><a href="#conclusion">Conclusion</a></li>
+                    </ul>
+                </nav>
+            </aside>
+            <div class="left-column"></div>
+        </div>
+
+            <main id='main' tabindex="-1">
+
+                <article>
+                    <section>
+                    <h1 id="intro">How I learned to stop worrying, and love PHP</h1>
+
+                    <p>I recently found myself in the position of needed to clear out a bunch of stuff. There were about 50 items to get rid of, most of which were small and not really worth the effort of putting up for sale. Under normal conditions, I would have tried to see how well the idea of a 'garage sale' works in Germany. However, this is the year 2020 and normalcy has gone out the window.</p>
+
+                    <p>Instead, I made a static website detailing the items I wanted to give away and passed the URL around to local friends. This worked beautifully. A few people commented that they liked the idea and that I should generalize it so other people could make listings. Seemed like a good project for making my first dynamic site.</p>
+
+                    <figure>
+                        <img src="../images/phpCrashCourse/listingPage.jpg" alt="Screenshot of the listing page for things I wanted to give away while moving." width="600">
+                        <figcaption>My page for cleaning out my flat</figcaption>
+                    </figure>
+
+                    <p>Feeling more comfortable with Python than any other language and this being my first dynamic site meant that I directly reached for a Python framework. Somehow Django caught my eye and I dove in. This was probably not the best decision.</p>
+
+                    <p>Don't get me wrong. The docs are great, it's easy to find support, there are plenty of great built-ins, and common security issues are directly handled by Django. At the same time, the learning curve felt steep and I found myself having difficulty with dynamic inline formsets. After two weeks of form-based frustration, I decided to first just deploy a demo site that would lack functionality.</p>
+                </section>
+                <section>
+                    <h2 id="django">Deploying Django</h2>
+
+                    <p>Turns out deploying a Django site isn't as easy as one would hope.</p>
+
+                    <p>I already had a domain and shared hosting package with Strato, which I assumed I could also use for a Django site since 'Ruby and Python' were listed as being supported. There was no further information given, but surely they wouldn't provide a Python interpreter without supporting Python frameworks, right?</p>
+
+                    <p>Well, you can start a Python 2 or 3 interpreter. But I didn't even get so far as having an active virtual environment (was greeted with a mysterious 'Badly placed ()'s.' error). So I wrote customer support and reconsidered my options.</p>
+
+                    <p>I had invested quite some time and effort into Django at this point and was willing to shell out a bit more money to try to get it running. This time I carefully chose a host that definitely supported Django. Unfortunately, the host didn't take care of domain registration, so I had to register another domain and point it to the new host. After going through the deployment checklist I finally entered the new URL to find</p>
+
+                    <figure>
+                        <img src="../images/phpCrashCourse/badgateway.jpg" alt="screenshot of a 502 bad gateway error message" width="600">
+                        <figcaption>A naiive attempt to deploy a site built using Django</figcaption>
+                    </figure>
+
+                    <p>This was great. I had an email from the domain registrar that nameserver changes could take up to 48 hours. This could be an issue where I just have to wait it out. I could put this to the side and do something totally unrelated for 48 hours to refresh. And I was so fed up with the past two days spent trying to get this site online that I decided to do something drastic with my 48 hour reprive.</p>
+
+                    <p>I would re-write the site in PHP.</p>
+                </section>
+                <section>
+                    <h2 id="php">Switching to PHP</h2>
+                    <p>Now, I may be a coding newbie, but I still got the memo that PHP is one of the most hated languages out there. And this is despite being practicaly ubiquitous (Wordpress sites use PHP, and that's about a 3rd of the Indexed Web). So I expected it to be the horror of all horror languages, something that would leave me wondering how I could ever be so foolish as to think I could code my way out of a paper bag. Basically, I expected Assembly language.</p>
+
+                    <p>Maybe it was just my low expectations, but I actually find PHP thus far to be a perfectly pleasant language. And a very accessible one at that. The manual/docs are fantastic, and there's no shortage of useful tips and nice  explanations to be found if you do get stuck.</p>
+
+                    <p>So what's the deal?</p>
+
+                    <p>Apparently PHP wasn't intended at its conception to be a fully fledged language. It was a handy collection of Perl scripts that became popular and the whole thing got out of hand. So it's not always consistent, it's poorly designed compared to other languages, and it gives you the freedom to write horrible, insecure code.</p>
+
+                    <p>It's possible that this is a case where being a newbie with an engineer's mindset is to my advantage. The tool works for the task I want to accomplish. I'm happy, and I assume any ugly code is part of my learning experience rather than a failure the language. However, it also seems that some of modern PHP's bad reputation is undeserved due to being based on outdated perceptions of the language.</p>
+
+                    <p>The switch was painless and the demo version of the site was indeed working after 48 hours working at a relaxed pace. Deployment was as simple as changing the database information and uploading the files to the server.</p>
+
+                    <figure>
+                        <img src="../images/phpCrashCourse/home.jpg" alt="Screenshot of the demo homepage" width="600">
+                        <figcaption>It lives!</figcaption>
+                    </figure>
+
+                    <p>The demo page was online before the first automated email from Strato reassuring me that they would answer my question as soon as possible.</p>
+                </section>
+                <section>
+                    <h2 id="conclusion">Conclusion</h2>
+
+                    <p>Originally I planned to write about things to be aware of for your first dive into PHP, but there really weren't any issues worth writing about. I had also hoped to be able to write about deploying Django on Strato's shared hosting, but that just isn't possible.</p>
+
+                    <p>Customer service did get back to me eventually with the answer that Django is only supported for virtual or dedicated servers. Which I now know isn't unusual, but it's probably not an uncommon newbie-error. They neglected to answer my other question regarding what the practical use of their shared hosting Python support actually is. So the mystery remains. As does my bad gateway issue.</p>
+
+                    <p>This means that all I can actually write is encouragement for other self-taught coders getting into web-dev from Python. Modern PHP really isn't so bad. Unlike sites using Python frameworks, you can be sure that you'll be able to deploy on pretty much any server easily. You do have to be mindful of security, but that's generally true of web-dev and it's probably best not to get lulled into a false sense of security. And making the jump from Python to PHP is easier than jumping into a fully-fledged framework.</p>
+
+                    <p>Oh, and if your redirects aren't working: the L in 'location' has to be capitalized. &#128077;</p>
+                </section>
+
+            </article>
+        </main>
+
+    </div>
+
+    <footer>
+        <small>&copy; Copyright 2020 archeaopteryx.<small>
+    </footer>
+
+</body>
+</html>
