@@ -7,7 +7,14 @@
         <description>Self-taught programmer blog</description>
         <language>en-us</language>
         <pubDate>Thu, 16 Jul 2020 16:00:00 GMT</pubDate>
-        <lastBuildDate>Tue, 03 Nov 2020 19:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 04 Dec 2020 18:20:00 GMT</lastBuildDate>
+        <item>
+            <title>My first PHP deployment</title>
+            <link>https://archeaopteryx.github.io/html/first-php-deployment.html</link>
+            <guid>https://archeaopteryx.github.io/html/first-php-deployment.html</guid>
+            <description>The adventures of a coding newbie continue with the deployment of my first dynamic site written in PHP. Development was done using PHP's built in server and without making any changes to the values in the php.ini file. Redirects worked when testing on localhost despite the location header being set after the headers should already sent. Oddly, the site worked in the development environment, but failed to perform redirects when hosted on the remote server. A small investigation determined that this was due to the php.ini installed locally having a nonzero output_buffer value while the remote server php.ini had output buffering turned off. Deployment also revealed that my assumptions about reasonable default file rights were incorrect. Once the site was working, placement of the footer was improved by using auto margins with flexbox.</description>
+            <pubDate>Fri, 04 Dec 2020 18:20:00 GMT</pubDate>
+        </item>
         <item>
             <title>How I learned to stop worrying, and love PHP</title>
             <link>https://archeaopteryx.github.io/html/phpCrashCourse.html</link>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/article-styles.css">
+        <link rel="icon" href="../images/archeaopteryx-icon.png">
+        <title>Deployment Newbie</title>
+    </head>
+    <body>
+
+        <header>
+            <div class="upper-bar">
+                <div class="upper-bar-left">
+                    <div class="archea-container"><a href="../index.html"><img src="../images/archeaopteryx-1.svg" alt="cartoon drawing of an archaeopteryx working on a laptop" width="150" height="107" /></a></div>
+                    <div class="title">Archeaopteryx</div>
+                </div>
+                <div class="tagline">Adventures of a self-taught coder</div>
+            </div>
+            <div class="menu-bar">
+                <a class="skip-main" href="#main">Skip to main content</a>
+                <nav class="header-menu">
+                    <div class="home"><a href='../index.html'>Home</a></div>
+                    <div class="archive"><a href='../archive.html'>Archive</a></div>
+                    <div class="about"><a href='../about.html'>About</a></div>
+                    <div class="rss"><a href="https://archeaopteryx.github.io/rss.xml"><span id="rss-label">RSS</span><img src="../images/rssIcon.svg" alt="RSS icon"> </a></div>
+                </nav>
+            </div>
+        </header>
+
+
+    <div class="page-inner">
+
+        <div class="left-column-wrapper">
+            <aside class='sidebar'>
+                <h2>Contents:</h2>
+                <nav>
+                    <ul class='toc-ul'>
+                        <li class='toc toc-outer'><a href="#intro">How bad can it be?</a></li>
+                        <li class='toc toc-outer'><a href="#redirect">Redirects with PHP header()</a>
+                            <ul class="toc toc-ul">
+                                <li class="toc toc-inner"><a href="#header_sent">Testing with header_sent()</a></li>
+                            </ul>
+                        </li>
+                        <li class='toc toc-outer'><a href="#flexbox">Flexbox auto margins</a></li>
+                        <li class='toc toc-outer'><a href="#error">403 Forbidden</a></li>
+                        <li class='toc toc-outer'><a href="#conclusion">Parting Thoughts...</a></li>
+                    </ul>
+                </nav>
+            </aside>
+            <div class="left-column"></div>
+        </div>
+
+            <main id='main' tabindex="-1">
+
+                <article>
+                    <section>
+                    <h1 id="intro">How bad can it be?</h1>
+
+                    <p>I recently dove into PHP and created my first dynamic website. This is dangerous territory for a self-taught newbie. For the first time, I actually had to worry about security.</p>
+
+                    <p>Fortunately for me, I do not journey alone though the Valley of Newbie. I happen to have a good friend who is not only an excellent person, but also a programmer extraordinaire with years of professional PHP development under his belt. His handle is Bunkerbewohner, and you can check him out via his <a href="https://substr.net/">blog</a> or <a href="https://github.com/bunkerbewohner">github</a>. He gave encouragement when I told him my PHP plans, and offered to give feedback if I added him to the repo.</p>
+
+                    <p>So I made my site, added Bunkerbewohner to the repository, thought 'how bad can it be? Surely I've tested this thing six ways from Sunday', and pushed the code to the server.</p>
+
+                    <p>I know. Classic newbie.</p>
+
+                    <p>My friend wrote almost immediately that the redirects didn't work.</p>
+                </section>
+                <section>
+                    <h2 id="redirect">Redirects with PHP header()</h2>
+
+                    <p>My files that mixed PHP and HTML generally had the structure:</p>
+
+                    <div class="terminal-box">
+                        <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="coral-text">html</span> <span class="gold-text">lang</span>=<span class="lite-green-text">"en"</span> <span class="gold-text">dir</span>=<span class="lite-green-text">"ltr"</span>&gt;
+    &lt;<span class="coral-text">head</span>&gt;
+        ...
+    &lt;/<span class="coral-text">head</span>&gt;
+    &lt;<span class="coral-text">body</span>&gt;
+    <span class="brown-text">&lt;?php</span>
+        ...
+        <span class="aqua-text">header</span>(<span class="lite-green-text">"Location: otherplace"</span>);
+    <span class="brown-text">?&gt;</span>
+    ...
+    &lt;/<span class="coral-text">body</span>&gt;
+&lt;/<span class="coral-text">html</span>&gt;
+                        </code></pre>
+                    </div>
+
+                    <p>I'm sure any experienced PHP devs reading this immediately see where this is going. </p>
+
+                    <p>It was already clear that using header to redirect could only work if the HTML header was not already sent, and that there were many things that could trigger this (eg an echo statement, or trailing whitespace after a preceeding PHP script). Unfortunately, I had developed an incorrect mental model regarding when the header is sent because my redirects were working when  testing on localhost.</p>
+
+                    <p>Despite my conviction that the redirects must be fine, I took Bunkerbewohner's suggestion to move the relevant PHP so it came before the HTML head.</p>
+
+                    <div class="terminal-box">
+                        <pre><code>
+<span class="brown-text">&lt;?php</span>
+    ...
+    <span class="aqua-text">header</span>(<span class="lite-green-text">"Location: otherplace"</span>);
+<span class="brown-text">?&gt;</span>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="coral-text">html</span> <span class="gold-text">lang</span>=<span class="lite-green-text">"en"</span> <span class="gold-text">dir</span>=<span class="lite-green-text">"ltr"</span>&gt;
+    &lt;<span class="coral-text">head</span>&gt;
+        ...
+    &lt;/<span class="coral-text">head</span>&gt;
+    &lt;<span class="coral-text">body</span>&gt;
+        ...
+    &lt;/<span class="coral-text">body</span>&gt;
+&lt;/<span class="coral-text">html</span>&gt;
+                        </code></pre>
+                    </div>
+
+                    <p>Problem solved, and 'redirect must come before any HTML output' was clarified. Yet the solution left me with a serious question: why was the behavior different when I tested on localhost?</p>
+                </section>
+                <section>
+                    <h3 id="header_sent">Testing with <code>header_sent()</code></h3>
+
+                    <p>Time to investigate. PHP fortunately has a method that checks if or where headers have been sent: the aptly named <a href="https://www.php.net/manual/en/function.headers-sent.php"><code>headers_sent</code></a>. I made a basic dummy script to check the output of headers_sent, using the optional parameters to get the line at which the headers are sent.</p>
+
+                    <p>First, I put my dummy script on the remote server and associated it with a domain reserved for a future project:</p>
+
+                    <div class="code-with-img">
+                        <div class="terminal-box code-subbox">
+                            <pre><code>
+1 &lt;!DOCTYPE html&gt;
+2 &lt;<span class="coral-text">html</span> <span class="gold-text">lang</span>=<span class="lite-green-text">"en"</span> <span class="gold-text">dir</span>=<span class="lite-green-text">"ltr"</span>&gt;
+3     &lt;<span class="coral-text">head</span>&gt;
+4         &lt;<span class="coral-text">meta</span> <span class="gold-text">charset</span>=<span class="lite-green-text">"utf-8"</span>&gt;
+5         &lt;<span class="coral-text">link</span> <span class="gold-text">rel</span>=<span class="lite-green-text">"stylesheet"</span> <span class="gold-text">href</span>=<span class="lite-green-text">"/testCSS/styles.css"</span>&gt;
+6         &lt;<span class="coral-text">title</span>&gt;Header Test&lt;/<span class="coral-text">title</span>&gt;
+7     &lt;/<span class="coral-text">head</span>&gt;
+8     &lt;<span class="coral-text">body</span>&gt;
+9          <span class="brown-text">&lt;?php</span>
+10         <span class="red-text">$isSent</span> = <span class="aqua-text">headers_sent</span>(<span class="red-text">$fileVar</span>, <span class="red-text">$lineVar</span>);
+11         (<span class="red-text">$isSent</span>) ? <span class="red-text">$isSent</span> = <span class="lite-green-text">'True'</span> : <span class="red-text">$isSent</span> = <span class="lite-green-text">'False'</span>;
+12         <span class="brown-text">?&gt;</span>
+13         &lt;<span class="coral-text">h2</span>&gt;<span class="brown-text">&lt;?php</span> <span class="aqua-text">echo</span> <span class="red-text">$isSent</span>.'&lt;<span class="coral-text">br</span>&gt;line:'.<span class="red-text">$lineVar</span>; <span class="brown-text">?&gt;</span>&lt;/<span class="coral-text">h2</span>&gt;
+14         &lt;<span class="coral-text">img</span> <span class="gold-text">src</span>=<span class="lite-green-text">"filler.jpg"</span> &gt;
+15     &lt;/<span class="coral-text">body</span>&gt;
+16 &lt;/<span class="coral-text">html</span>&gt;
+                            </code></pre>
+                        </div>
+<img src="../images/first-php-deployment/headersSent-line1.jpg" alt="screenshot of the output of the dummy script when hosted on the remote server, showing that the header was sent before reaching the PHP script." width="500" class="shadow-img">
+                    </div>
+
+                    <p>So far so good. This is consistent with the behavior of my site. If <code>headers_sent()</code> is instead called before the DOCTYPE statement, then it returns false. Again, consistent with 'the relevant PHP must come before any HTML for the redirect to work'.</p>
+
+                    <div class="code-with-img">
+                        <div class="terminal-box code-subbox">
+                            <pre><code>
+1 <span class="brown-text">&lt;?php</span>
+2    <span class="red-text">$isSent</span> = <span class="aqua-text">headers_sent</span>(<span class="red-text">$fileVar</span>, <span class="red-text">$lineVar</span>);
+3    (<span class="red-text">$isSent</span>) ? <span class="red-text">$isSent</span> = <span class="lite-green-text">'True'</span> : <span class="red-text">$isSent</span> = <span class="lite-green-text">'False'</span>;
+4 <span class="brown-text">?&gt;</span>
+5 &lt;!DOCTYPE html&gt;
+6 &lt;<span class="coral-text">html</span> <span class="gold-text">lang</span>=<span class="lite-green-text">"en"</span> <span class="gold-text">dir</span>=<span class="lite-green-text">"ltr"</span>&gt;
+7     &lt;<span class="coral-text">head</span>&gt;
+8         &lt;<span class="coral-text">meta</span> <span class="gold-text">charset</span>=<span class="lite-green-text">"utf-8"</span>&gt;
+9         &lt;<span class="coral-text">link</span> <span class="gold-text">rel</span>=<span class="lite-green-text">"stylesheet"</span> <span class="gold-text">href</span>=<span class="lite-green-text">"/testCSS/styles.css"</span>&gt;
+10         &lt;<span class="coral-text">title</span>&gt;Header Test&lt;/<span class="coral-text">title</span>&gt;
+11     &lt;/<span class="coral-text">head</span>&gt;
+12     &lt;<span class="coral-text">body</span>&gt;
+13         &lt;<span class="coral-text">h1</span>&gt;Headers sent:&lt;/<span class="coral-text">h1</span>&gt;
+14         &lt;<span class="coral-text">h2</span>&gt;<span class="brown-text">&lt;?php</span> <span class="aqua-text">echo</span> <span class="red-text">$isSent</span>.'&lt;<span class="coral-text">br</span>&gt;line:'.<span class="red-text">$lineVar</span>; <span class="brown-text">?&gt;</span>&lt;/<span class="coral-text">h2</span>&gt;
+15         &lt;<span class="coral-text">img</span> <span class="gold-text">src</span>=<span class="lite-green-text">"filler.jpg"</span> &gt;
+16     &lt;/<span class="coral-text">body</span>&gt;
+17 &lt;/<span class="coral-text">html</span>&gt;
+                            </code></pre>
+                        </div>
+<img src="../images/first-php-deployment/headersSent-false.jpg" alt="screenshot of the output of the dummy script when hosted on the remote server showing that the header was not sent before the PHP script, as long as the script came before all HTML" width="500" class="shadow-img">
+                    </div>
+
+                    <p>Next I ran the same dummy script with the PHP built in server running locally. To my confusion, the dummy script always returned <samp>false</samp> when run on localhost. This was regardless of the presence of echo statements, or whether HTML was output before the script.</p>
+
+                    <div class="code-with-img">
+                        <div class="terminal-box code-subbox">
+                            <pre><code>
+1 &lt;!DOCTYPE html&gt;
+2 &lt;<span class="coral-text">html</span> <span class="gold-text">lang</span>=<span class="lite-green-text">"en"</span> <span class="gold-text">dir</span>=<span class="lite-green-text">"ltr"</span>&gt;
+3     &lt;<span class="coral-text">head</span>&gt;
+4         &lt;<span class="coral-text">meta</span> <span class="gold-text">charset</span>=<span class="lite-green-text">"utf-8"</span>&gt;
+5         &lt;<span class="coral-text">link</span> <span class="gold-text">rel</span>=<span class="lite-green-text">"stylesheet"</span> <span class="gold-text">href</span>=<span class="lite-green-text">"/testCSS/styles.css"</span>&gt;
+6         &lt;<span class="coral-text">title</span>&gt;Header Test&lt;/<span class="coral-text">title</span>&gt;
+7     &lt;/<span class="coral-text">head</span>&gt;
+8     &lt;<span class="coral-text">body</span>&gt;
+9        <span class="brown-text">&lt;?php</span>
+10         <span class="aqua-text">echo</span> <span class="lite-green-text">'&lt;h1&gt;Headers sent:&lt;/h1&gt;'</span>;
+11         <span class="red-text">$isSent</span> = <span class="aqua-text">headers_sent</span>(<span class="red-text">$fileVar</span>, <span class="red-text">$lineVar</span>);
+12         (<span class="red-text">$isSent</span>) ? <span class="red-text">$isSent</span> = <span class="lite-green-text">'True'</span> : <span class="red-text">$isSent</span> = <span class="lite-green-text">'False'</span>;
+13         <span class="brown-text">?&gt;</span>
+14         &lt;<span class="coral-text">h2</span>&gt;<span class="brown-text">&lt;?php</span> <span class="aqua-text">echo</span> <span class="red-text">$isSent</span>.'&lt;<span class="coral-text">br</span>&gt;line:'.<span class="red-text">$lineVar</span>; <span class="brown-text">?&gt;</span>&lt;/<span class="coral-text">h2</span>&gt;
+15         &lt;<span class="coral-text">img</span> <span class="gold-text">src</span>=<span class="lite-green-text">"filler.jpg"</span> &gt;
+16     &lt;/<span class="coral-text">body</span>&gt;
+17 &lt;/<span class="coral-text">html</span>&gt;
+                            </code></pre>
+                        </div>
+<img src="../images/first-php-deployment/headersSent-localFalse.jpg" alt="screenshot of the output of the dummy script when hosted on localhost showing that the header was not sent even after outputting HTML and an echo statement" width="500" class="shadow-img">
+                    </div>
+
+                    <p>My first suspicion was that this was either some unexpected behavior of PHP's built in server, or a consequence of hosting and delivering the files on the same machine.</p>
+
+                    <p>To test if this was due to the PHP built in server, I decided to go full LAMP (Linux, Apache Mysql, PHP) and run my little test on Apache on local. Again, <code>header_sent()</code> reported that the headers were never sent. This wasn't special to the PHP server. </p>
+
+                    <p>Reading through the comments on the <code>header_sent()</code> manual page brought me to</p>
+
+                    <blockquote cite="https://www.php.net/manual/en/function.headers-sent.php#75835">
+Yes, <br>
+headers_sent() will return false, even if you sent something to the ouptut using print() or header() , if output_buffering is different from Off in you php.ini, and the length of what you sent does not exceed the size of output_buffering.<br><br>
+To test it, try this code with  these values in php.ini <br>
+1) output_buffering=32 <br>
+2) output buffering = 4096
+                    </blockquote>
+
+                    <p>Which finally made the lightbulb go off. Output buffering!</p>
+
+                    <p>Indeed, checking out the default <samp>php.ini</samp> in <samp>/etc</samp> showed that it had output buffering set to 4096. The default value is 'off', and that seems to be what the host running the remote server uses. To test, I copied this file into my dummy script folder and set output buffering to zero. You can direct the built-in PHP server to a particular <samp>.ini</samp> file with the <code>-c</code> flag. Assuming you're already in the project directory:</p>
+
+                    <div class="terminal-box">
+                        <pre><code>
+$ php -S localhost:8080 -c php.ini
+                        </code></pre>
+                    </div>
+
+                    <p>Now running the dummy script gives the expected output!</p>
+
+                    <div class="code-with-img">
+                        <div class="terminal-box code-subbox">
+                            <pre><code>
+1 &lt;!DOCTYPE html&gt;
+2 &lt;<span class="coral-text">html</span> <span class="gold-text">lang</span>=<span class="lite-green-text">"en"</span> <span class="gold-text">dir</span>=<span class="lite-green-text">"ltr"</span>&gt;
+3     &lt;<span class="coral-text">head</span>&gt;
+4         &lt;<span class="coral-text">meta</span> <span class="gold-text">charset</span>=<span class="lite-green-text">"utf-8"</span>&gt;
+5         &lt;<span class="coral-text">link</span> <span class="gold-text">rel</span>=<span class="lite-green-text">"stylesheet"</span> <span class="gold-text">href</span>=<span class="lite-green-text">"/testCSS/styles.css"</span>&gt;
+6         &lt;<span class="coral-text">title</span>&gt;Header Test&lt;/<span class="coral-text">title</span>&gt;
+7     &lt;/<span class="coral-text">head</span>&gt;
+8     &lt;<span class="coral-text">body</span>&gt;
+9        <span class="brown-text">&lt;?php</span>
+10         <span class="aqua-text">echo</span> <span class="lite-green-text">'&lt;h1&gt;Headers sent:&lt;/h1&gt;'</span>;
+11         <span class="red-text">$isSent</span> = <span class="aqua-text">headers_sent</span>(<span class="red-text">$fileVar</span>, <span class="red-text">$lineVar</span>);
+12         (<span class="red-text">$isSent</span>) ? <span class="red-text">$isSent</span> = <span class="lite-green-text">'True'</span> : <span class="red-text">$isSent</span> = <span class="lite-green-text">'False'</span>;
+13         <span class="brown-text">?&gt;</span>
+14         &lt;<span class="coral-text">h2</span>&gt;<span class="brown-text">&lt;?php</span> <span class="aqua-text">echo</span> <span class="red-text">$isSent</span>.'&lt;<span class="coral-text">br</span>&gt;line:'.<span class="red-text">$lineVar</span>; <span class="brown-text">?&gt;</span>&lt;/<span class="coral-text">h2</span>&gt;
+15         &lt;<span class="coral-text">img</span> <span class="gold-text">src</span>=<span class="lite-green-text">"filler.jpg"</span> &gt;
+16     &lt;/<span class="coral-text">body</span>&gt;
+17 &lt;/<span class="coral-text">html</span>&gt;
+                            </code></pre>
+                        </div>
+<img src="../images/first-php-deployment/headersSent-localTrue.jpg" alt="screenshot of the output of the dummy script when hosted on localhost showing that the header was not sent even after outputting HTML and an echo statement" width="500" class="shadow-img">
+                    </div>
+
+                </section>
+                <section>
+                    <h2 id="flexbox">Flexbox auto margins</h2>
+
+                    <p>While Bunkerbewohner was looking in my code to find the cause of my redirect woes, he noticed that I was using a javascript function to place the footer for each page. He kindly asked why I was bothering with that instead of simply using <a href="https://www.w3.org/TR/css-flexbox-1/#auto-margins">auto-margins with flexbox</a>.</p>
+
+                    <p>Good question.</p>
+
+                    <p>What was the footer fuss? Basically, if the page content was less than the page height, then I wanted to position the footer at the bottom of the window. Otherwise, the footer should come directly after the content.</p>
+
+                    <img src="../images/first-php-deployment/footerSchematics.png" alt="schematic demonstrating the desired footer placement." width="700" height="270">
+
+                    <p>My first solution was to use JS to check if the content height was less than the viewport height and, if so, absolutely position the footer at the bottom of the screen. Which is ok, but it was a personal goal to not require JS for the site. Having the footer floating around if JS is disabled, nayah, it's not ideal.</p>
+
+                    <p>This is where auto-margins with flexbox can come in handy.</p>
+
+                    <p>Normally auto-margins can be used to center an item horizontally:</p>
+
+                    <div class="code-with-img">
+                        <div class="terminal-box code-subbox">
+                            <pre><code>
+<span class="coral-text">body</span> {
+    background: rgb(120, 120, 120);
+}
+
+<span class="gold-text">.red-box</span> {
+    width: 200px;
+    height: 200px;
+    background: darkred;
+    margin: auto;
+}
+                            </code></pre>
+                        </div>
+                        <img src="../images/first-php-deployment/redbox-normalAutoMargin.png" alt="Example demonstrating horizontal centering with a redbox on a grey background">
+                    </div>
+
+                    <p>which isn't terribly useful for placing a footer. If you know the height of the element you want to place, then you could use <code>calc()</code> to place it at the bottom of the window:</p>
+
+                    <div class="code-with-img">
+                        <div class="terminal-box code-subbox">
+                            <pre><code>
+<span class="coral-text">body</span> {
+    background: rgb(120, 120, 120);
+}
+
+<span class="gold-text">.red-box</span> {
+    width: 200px;
+    height: 200px;
+    background: darkred;
+    margin: auto;
+    margin-top: calc(100vh - 200px);
+}
+                            </code></pre>
+                        </div>
+                        <img src="../images/first-php-deployment/redbox-calc.png" alt="Example demonstrating footer placement at the bottom of the window using calc() in CSS">
+                    </div>
+
+                    <p>but that's not going to help very much when we don't know in advance if the content above the footer is larger than the screen height.</p>
+
+                    <p>However, if our parent container is a flex container of defined height, then auto-margins can be used for both horizontal and vertical margins. This is nicely demonstrated by centering an item by simply setting all margins to auto:</p>
+
+                    <div class="code-with-img">
+                        <div class="terminal-box code-subbox">
+                            <pre><code>
+<span class="coral-text">body</span> {
+    background: rgb(120, 120, 120);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+<span class="gold-text">.red-box</span> {
+    width: 200px;
+    height: 200px;
+    background: darkred;
+    margin: auto;
+}
+                            </code></pre>
+                        </div>
+                        <img src="../images/first-php-deployment/redbox-flexAutoMargin.png" alt="Example of a red box centered horizontally and vertically using auto margins inside a flex parent container">
+                    </div>
+
+                    <p>Now this is useful for flexible footer placement. As long as the parent container is a flex item with a <code>min-height</code>, giving the footer <code>margin-top: auto;</code> will allocate any free space to the footer's top margin.</p>
+
+                    <p>An easy solution for a common problem, and also something handy to have in mind when you want to group items without nesting div elements</p>
+
+                    <div class="code-with-img">
+                        <div class="terminal-box code-subbox">
+                            <pre><code>
+<span class="coral-text">body</span> {
+    background: rgb(120, 120, 120);
+    display: flex;
+}
+
+<span class="gold-text">.left-box</span> {
+    height: 75px;
+    width: 100px;
+    background: teal;
+    border: 2px solid blue;
+    margin-left: 10px;
+}
+
+<span class="gold-text">.right-box</span>  {
+    height: 75px;
+    width: 100px;
+    background: darkgreen;
+    border: 2px solid green;
+    margin-left: auto;
+}
+                            </code></pre>
+                        </div>
+                        <img src="../images/first-php-deployment/exampleFlexMargins.png" alt="Example of using flexbox auto magins to group items. There is a group of boxes on the left, and a right box that has margin-left:auto;">
+                    </div>
+                    <p>So the header situation was clarified and unnecessary JS was replaced by pure CSS. The only remaining surprise for bringing the site online was... </p>
+                </section>
+                <section>
+                    <h2 id="error">403 Forbidden</h2>
+                    <p>This caught me off guard. 403-Forbidden is an 'access denied' error. The site creates a folder for each user. I set the access rights for the folders to 766 (<samp>rwxrw-rw</samp>) under the assumption that, well, those were reasonable access rights.</p>
+
+                    <p>Apparently the executable right is needed to be able to change into the folder, so the grand solution to this problem was to change from 766 to 755 (<samp>rwxr-xr-x</samp>). Nothing massive, but still another point where the shift from local development to 'production' tripped me up.</p>
+                </section>
+                <section>
+                    <h2 id="conclusion">Parting Thoughts...</h2>
+
+                    <p>I would love to wrap up with 'and thus concludes the story of my first PHP deployment...' but that wouldn't be accurate. I'm sure there will plenty of changes in the future as I get feedback and continue learning. Can't really conclude a never-ending story.</p>
+
+                    <p>Instead, I  can only summarize 'lessons learned so far'. Like how important it is to make sure that your development environment really mimics the 'production' environment. And how valuable a second set of eyes and feedback from more experienced coders are. Also, that it's important to have at least an idea of what settings can be changed, and how to change them.</p>
+
+                    <p>If you want to see my new site: check out <a href="https://stuff-exchange.de">stuff-exchange.de</a></p>
+                </section>
+            </article>
+        </main>
+
+    </div>
+
+    <footer>
+        <small>&copy; Copyright 2020 archeaopteryx.<small>
+    </footer>
+
+</body>
+</html>
