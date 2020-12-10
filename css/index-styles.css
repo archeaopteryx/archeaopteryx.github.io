@@ -26,6 +26,10 @@ p {
     display: none;
 }
 
+.mobileArchea {
+    display: none;
+}
+
 .display-area {
     border-top: 1px solid var(--title-text-color);
     padding: 25px;
@@ -171,22 +175,41 @@ a.tablet-link {
     }
 
     .title{
-        font-size: xx-large;
+        font-size: 2.2em;
         margin: 5px 0px 10px 5px;
     }
-    .archea-container img {
+    /*.archea-container img {
         width: 50px;
         height: auto;
         margin: 5px;
+    }*/
+
+    .titleWrapper{
+        display: flex;
+    }
+    #topbarArchea {
+        display: none;
+    }
+
+    .mobileArchea {
+        display: block;
+    }
+
+    .mobileArchea img {
+        max-width: 25vw;
+        height: auto;
+    }
+
+    #latestPostsHeader{
+        display: block;
+        margin: auto auto auto 15px;
+        font-size: 1.7em;
     }
 
     .tagline {
         display: none;
     }
 
-    h1 {
-        font-size: x-large;
-    }
     .display-area {
         padding: 10px 0px 10px 10px;
     }

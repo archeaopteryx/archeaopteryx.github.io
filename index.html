@@ -13,10 +13,10 @@
         <header>
             <div class="upper-bar">
                 <div class="upper-bar-left">
-                    <div class="archea-container"><img src="images/archeaopteryx-1.svg" alt="cartoon drawing of an archaeopteryx working on a laptop" width="150" height="107" /></div>
+                    <div class="archea-container" id="topbarArchea"><img src="images/archeaopteryx-1.svg" alt="cartoon drawing of an archaeopteryx working on a laptop" width="150" height="107" /></div>
                     <div class="title">Archeaopteryx</div>
                 </div>
-                <div class="tagline">Adventures of a self-taught coder</div>
+                <div class="tagline">Adventures of a novice coder</div>
             </div>
             <div class="menu-bar">
                 <nav class="header-menu">
@@ -30,10 +30,12 @@
 
 
         <main>
+            <div class="display-area">
+                <div class="titleWrapper">
+                    <div class="mobileArchea"><img src="images/archeaopteryx-1.svg" alt="cartoon drawing of an archaeopteryx working on a laptop" width="150" /></div>
 
-        <div class="display-area">
-
-        <h1>Latest Posts:</h1>
+                    <h1 id="latestPostsHeader">Latest Posts:</h1>
+                </div>
 
         <div class="card-gallery">
 
@@ -62,7 +64,7 @@
                     <div class="mobile-info">
                         <h2>The Deployment Newbie</h2>
                         <p>Broken redirects, wrong file permissions, and a brief aside on using auto-margins in flexbox.</p>
-                        <p><a href="html/first-php-deployment.html">Click here to read more...</a></p>
+                        <p><a href="html/first-php-deployment.html">Read more...</a></p>
                     </div>
 
             <!-- ========================================================================== -->
@@ -90,9 +92,9 @@
 
             <div class="mobile-info">
                 <h2>Django vs. PHP</h2>
-                <h3>Adventures with </br>stuff-exchange.de</h3>
+                <h3>Adventures with stuff-exchange.de</h3>
                 <p>The poor reputation of PHP and my comfort with Python led me to start writing my first dynamic site with Django. Difficulties during deployment caused me to reconsider.</p>
-                <p><a href="html/phpCrashCourse.html">Click here to read more...</a></p>
+                <p><a href="html/phpCrashCourse.html">Read more...</a></p>
             </div>
 
         <!-- ============================================================================== -->
@@ -122,7 +124,7 @@
             <div class="mobile-info" id="soError-python">
                 <h2>libpython3.7m.so.1.0 not found!</h2>
                 <p>A note about troubleshooting the python error "error while loading shared libraries"</p>
-                <p><a href="html/python-error-shared-library.html">Click here to read more...</a></p>
+                <p><a href="html/python-error-shared-library.html">Read more...</a></p>
             </div>
 
         <!-- ============================================================================== -->
@@ -149,12 +151,6 @@
             </div>
 
 
-            <div class="mobile-info" id="cli-python">
-                <h2>Command Line Arguments with Python</h2>
-                <p>A short exploration of using command line options, sub-commands and arguments with <code>getopt</code> and <code>argparse</code> in python.</p>
-                <p><a href="html/commandLineArgs.html">Click here to read more...</a></p>
-            </div>
-
         <!-- =============================================================================== -->
 
             <!-- ========================================================================== -->
@@ -176,16 +172,9 @@
                     </div>
                 </div>
                 </a>
-                <a class="tablet-link" href="html/efaPi-part-ii.html">Click to read more </a>
+                <a class="tablet-link" href="html/efaPi-part-ii.html">Click to read more</a>
             </div>
 
-
-            <div class="mobile-info" id="efaPi-ii-mobile">
-                <h2>The efaPi</h2>
-                <h3>Part II: The Cron Job</h3>
-                <p>In which bash scripts and cron jobs are used to automate creating and maintaining local backups of a rowing club's electronic log book.</p>
-                <p><a href="html/efaPi-part-ii.html">Click here to read more...</a></p>
-            </div>
 
 <!-- =============================================================================== -->
 
@@ -208,16 +197,9 @@
                     </div>
                 </div>
                 </a>
-                <a class="tablet-link" href="html/efaPi-part-i.html">Click to read more </a>
+                <a class="tablet-link" href="html/efaPi-part-i.html">Click to read more</a>
             </div>
 
-
-            <div class="mobile-info" id=""mobile-efa1"">
-                <h2>The efaPi</h2>
-                <h3>Part I: Getting Started</h3>
-                <p>A mini project to migrate the electronic log book of a rowing club to a raspberry pi. This post covers the initial set up and desktop configuration.</p>
-                <p><a href="html/efaPi-part-i.html">Click here to read more...</a></p>
-            </div>
 
 <!-- ============================================================================== -->
 
@@ -239,15 +221,9 @@
                 </div>
             </div>
             </a>
-            <a class="tablet-link" href="html/hello-website.html">Click to read more </a>
+            <a class="tablet-link" href="html/hello-website.html">Click to read more</a>
         </div>
 
-
-        <div class="mobile-info" id="mobile-hello-website">
-            <h2>Hello, Website!</h2>
-            <p>An introductory post about the processing of making this website and some design considerations.</p>
-            <p><a href="html/hello-website.html">Click here to read more...</a></p>
-        </div>
 
 <!-- =================================================================================== -->
 
