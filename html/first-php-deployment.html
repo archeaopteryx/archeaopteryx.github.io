@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/article-styles.css">
+        <link rel="stylesheet" href="../css/code-styles.css">
         <link rel="icon" href="../images/archeaopteryx-icon.png">
         <title>Deployment Newbie</title>
     </head>
@@ -73,7 +74,7 @@
 
                     <p>My files that mixed PHP and HTML generally had the structure:</p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
 &lt;!DOCTYPE html&gt;
 &lt;<span class="coral-text">html</span> <span class="gold-text">lang</span>=<span class="lite-green-text">"en"</span> <span class="gold-text">dir</span>=<span class="lite-green-text">"ltr"</span>&gt;
@@ -97,7 +98,7 @@
 
                     <p>Despite my conviction that the redirects must be fine, I took Bunkerbewohner's suggestion to move the relevant PHP so it came before the HTML head.</p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
 <span class="brown-text">&lt;?php</span>
     ...
@@ -125,7 +126,7 @@
                     <p>First, I put my dummy script on the remote server and associated it with a domain reserved for a future project:</p>
 
                     <div class="code-with-img">
-                        <div class="terminal-box code-subbox">
+                        <div class="code-box terminal-box code-subbox">
                             <pre><code>
 1 &lt;!DOCTYPE html&gt;
 2 &lt;<span class="coral-text">html</span> <span class="gold-text">lang</span>=<span class="lite-green-text">"en"</span> <span class="gold-text">dir</span>=<span class="lite-green-text">"ltr"</span>&gt;
@@ -151,7 +152,7 @@
                     <p>So far so good. This is consistent with the behavior of my site. If <code>headers_sent()</code> is instead called before the DOCTYPE statement, then it returns false. Again, consistent with 'the relevant PHP must come before any HTML for the redirect to work'.</p>
 
                     <div class="code-with-img">
-                        <div class="terminal-box code-subbox">
+                        <div class="code-box terminal-box code-subbox">
                             <pre><code>
 1 <span class="brown-text">&lt;?php</span>
 2    <span class="red-text">$isSent</span> = <span class="aqua-text">headers_sent</span>(<span class="red-text">$fileVar</span>, <span class="red-text">$lineVar</span>);
@@ -178,7 +179,7 @@
                     <p>Next I ran the same dummy script with the PHP built in server running locally. To my confusion, the dummy script always returned <samp>false</samp> when run on localhost. This was regardless of the presence of echo statements, or whether HTML was output before the script.</p>
 
                     <div class="code-with-img">
-                        <div class="terminal-box code-subbox">
+                        <div class="code-box terminal-box code-subbox">
                             <pre><code>
 1 &lt;!DOCTYPE html&gt;
 2 &lt;<span class="coral-text">html</span> <span class="gold-text">lang</span>=<span class="lite-green-text">"en"</span> <span class="gold-text">dir</span>=<span class="lite-green-text">"ltr"</span>&gt;
@@ -220,7 +221,7 @@ To test it, try this code with  these values in php.ini <br>
 
                     <p>Indeed, checking out the default <samp>php.ini</samp> in <samp>/etc</samp> showed that it had output buffering set to 4096. The default value is 'off', and that seems to be what the host running the remote server uses. To test, I copied this file into my dummy script folder and set output buffering to zero. You can direct the built-in PHP server to a particular <samp>.ini</samp> file with the <code>-c</code> flag. Assuming you're already in the project directory:</p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
 $ php -S localhost:8080 -c php.ini
                         </code></pre>
@@ -229,7 +230,7 @@ $ php -S localhost:8080 -c php.ini
                     <p>Now running the dummy script gives the expected output!</p>
 
                     <div class="code-with-img">
-                        <div class="terminal-box code-subbox">
+                        <div class="code-box terminal-box code-subbox">
                             <pre><code>
 1 &lt;!DOCTYPE html&gt;
 2 &lt;<span class="coral-text">html</span> <span class="gold-text">lang</span>=<span class="lite-green-text">"en"</span> <span class="gold-text">dir</span>=<span class="lite-green-text">"ltr"</span>&gt;
@@ -272,7 +273,7 @@ $ php -S localhost:8080 -c php.ini
                     <p>Normally auto-margins can be used to center an item horizontally:</p>
 
                     <div class="code-with-img">
-                        <div class="terminal-box code-subbox">
+                        <div class="code-box terminal-box code-subbox">
                             <pre><code>
 <span class="coral-text">body</span> {
     background: rgb(120, 120, 120);
@@ -292,7 +293,7 @@ $ php -S localhost:8080 -c php.ini
                     <p>which isn't terribly useful for placing a footer. If you know the height of the element you want to place, then you could use <code>calc()</code> to place it at the bottom of the window:</p>
 
                     <div class="code-with-img">
-                        <div class="terminal-box code-subbox">
+                        <div class="code-box terminal-box code-subbox">
                             <pre><code>
 <span class="coral-text">body</span> {
     background: rgb(120, 120, 120);
@@ -315,7 +316,7 @@ $ php -S localhost:8080 -c php.ini
                     <p>However, if our parent container is a flex container of defined height, then auto-margins can be used for both horizontal and vertical margins. This is nicely demonstrated by centering an item by simply setting all margins to auto:</p>
 
                     <div class="code-with-img">
-                        <div class="terminal-box code-subbox">
+                        <div class="code-box terminal-box code-subbox">
                             <pre><code>
 <span class="coral-text">body</span> {
     background: rgb(120, 120, 120);
@@ -340,7 +341,7 @@ $ php -S localhost:8080 -c php.ini
                     <p>An easy solution for a common problem, and also something handy to have in mind when you want to group items without nesting div elements</p>
 
                     <div class="code-with-img">
-                        <div class="terminal-box code-subbox">
+                        <div class="code-box terminal-box code-subbox">
                             <pre><code>
 <span class="coral-text">body</span> {
     background: rgb(120, 120, 120);

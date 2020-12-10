@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/article-styles.css">
+        <link rel="stylesheet" href="../css/code-styles.css">
         <link rel="icon" href="../images/archeaopteryx-icon.png">
         <title>Hello, Website!</title>
     </head>
@@ -93,49 +94,49 @@
 
                     <p>Having a 'skip-to-main' option spares users relying on screenreaders or keyboard navigation from going through all of the navigation options before reaching the content. Fortunately for the casual coder, there are plenty of resources that give suggestions for implementing the 'skip to main' feature without it being noticed by users that don't need it. I wound up adding</p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-    <span class="comment-text">/*Hidden skip to main option for keyboard users */</span>
-    <span class="coral-text">a</span><span class="gold-text">.skip-main</span> {
-        left: <span class="aqua-text">-999px</span>;
-        position: absolute;
-        top: auto;
-        width: <span class="aqua-text">1px</span>;
-        height: <span class="aqua-text">1px</span>;
-        overflow: hidden;
-        z-index: <span class="aqua-text">-999</span>;
-    }
+<span class="comment-text">/*Hidden skip to main option for keyboard users */</span>
+<span class="coral-text">a</span><span class="gold-text">.skip-main</span> {
+    left: <span class="aqua-text">-999px</span>;
+    position: absolute;
+    top: auto;
+    width: <span class="aqua-text">1px</span>;
+    height: <span class="aqua-text">1px</span>;
+    overflow: hidden;
+    z-index: <span class="aqua-text">-999</span>;
+}
 
-    <span class="coral-text">a</span><span class="gold-text">.skip-main:focus</span> {
-        left: auto;
-        top: auto;
-        width: <span class="aqua-text">30%</span>;
-        height: auto;
-        overflow: auto;
-        margin: <span class="aqua-text">0 35%</span>;
-        padding: <span class="aqua-text">5px</span>;
-        font-size: x-large;
-        outline: <span class="aqua-text">3px</span> solid red;
-        background-color: <span class="aqua-text">#FFF</span>;
-        text-align: center;
-        z-index: <span class="aqua-text">999</span>;
-    }
+<span class="coral-text">a</span><span class="gold-text">.skip-main:focus</span> {
+    left: auto;
+    top: auto;
+    width: <span class="aqua-text">30%</span>;
+    height: auto;
+    overflow: auto;
+    margin: <span class="aqua-text">0 35%</span>;
+    padding: <span class="aqua-text">5px</span>;
+    font-size: x-large;
+    outline: <span class="aqua-text">3px</span> solid red;
+    background-color: <span class="aqua-text">#FFF</span>;
+    text-align: center;
+    z-index: <span class="aqua-text">999</span>;
+}
                         </code></pre>
                     </div>
 
                     <p>to the css for the my article pages. This basically means that an anchor element of class 'skip-main' is initially only 1 pixel and located off the viewable screen. If a 'skip-main' anchor element comes into focus via the tab key, then it moves onto the viewable area and becomes a noticable feature. This anchor element should then link to the start of the main content. I added the necessary anchor</p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  &lt;<span class="coral-text">a</span><span class="gold-text"> class=</span><span class="lite-green-text">"skip-main"</span> <span class="gold-text">href=</span><span class="lite-green-text">"#main"</span>&gt;Skip to main content&lt;/<span class="coral-text">a</span>&gt;
+&lt;<span class="coral-text">a</span><span class="gold-text"> class=</span><span class="lite-green-text">"skip-main"</span> <span class="gold-text">href=</span><span class="lite-green-text">"#main"</span>&gt;Skip to main content&lt;/<span class="coral-text">a</span>&gt;
                         </code></pre>
                     </div>
 
                     <p>to the div with my main navigation menu and gave my <code>main</code> element the id 'main' for the anchor reference to hook to, as well as the tabindex value of -1. </p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  &lt;<span class="coral-text">main </span><span class="gold-text">id=</span><span class="lite-green-text">"main"</span><span class="gold-text"> tabindex=</span><span class="lite-green-text">"-1"</span>&gt;
+&lt;<span class="coral-text">main </span><span class="gold-text">id=</span><span class="lite-green-text">"main"</span><span class="gold-text"> tabindex=</span><span class="lite-green-text">"-1"</span>&gt;
                         </code></pre>
                     </div>
 

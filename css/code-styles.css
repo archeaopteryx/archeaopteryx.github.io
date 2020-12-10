@@ -1,0 +1,131 @@
+code samp {
+    font-family: "Lucida Console", Monaco, monospace;
+}
+
+.code-with-img{
+    display: flex;
+}
+
+.code-with-img img {
+    display: block;
+    width: 500px;
+    max-width: 80vw;
+    height: 100%;
+    margin-left: 10px;
+}
+
+.shadow-img {
+    margin-left: 5px;
+    box-shadow: rgba(100, 100, 111, 0.5) 0px 3px 10px 3px;
+}
+
+
+
+.code-box {
+    font-size: 1.3em;
+    width: 650px;
+    max-width: 95%;
+    background-color: hsl(0, 0%, 95%);
+    color: #000000;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+.code-box pre {
+    padding-left: 1em;
+    overflow: auto;
+    scroll-behavior: smooth;
+}
+
+
+.terminal-box {
+    background: rgb(30, 30, 30);
+    color: #cfcfcf;
+}
+
+.code-subbox {
+    width: 500px;
+    max-width: 90vw;
+    margin-bottom: auto;
+}
+
+.lime-text {
+    color: hsl(120, 80%, 50%);
+}
+
+.lite-green-text {
+    color: hsl(120, 73%, 75%); /*hex 90ee90 */
+}
+
+.dark-green-text {
+    color: #228b22;
+}
+
+.comment-text {
+    color: #c0c0c0;
+}
+
+.coral-text {
+    color: hsl(350, 96%, 70%); /*color: #FB6583;*/
+}
+
+.gold-text {
+    color: hsl(30, 96%, 75%); /*hex: FCBF7D?*/
+}
+
+.orange-text {
+    color: #ff4500;
+}
+
+.aqua-text {
+    color: #0dd;
+}
+
+.lite-blue-text {
+    color: #1e90ff;
+}
+
+.blue-text {
+    color: blue;
+}
+
+.teal-text {
+    color: #007060;
+}
+
+.dark-red-text {
+    color: #780000;
+}
+
+.purple-text {
+    color: #630060;
+}
+
+.fuchsia-text {
+    color: #ff00ff;
+}
+
+.red-text {
+    color: #f02020;
+}
+
+.brown-text {
+    color: brown;
+}
+
+/* end rules for code samples */
+@media only screen and (max-width: 500px) {
+
+    .code-with-img {
+        flex-direction: column;
+    }
+
+    .code-with-img img {
+        margin: 10px auto 0px auto;
+    }
+
+    .code-box {
+        font-size: 1em;
+    }
+
+}

@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/article-styles.css">
+        <link rel="stylesheet" href="../css/code-styles.css">
         <link rel="icon" href="../images/archeaopteryx-icon.png">
         <title>efaPi: Setup</title>
     </head>
@@ -110,9 +111,9 @@
 
             <p>At this point, I would like to note that it is generally recommended to use more friendly scripts such as adduser and deluser instead of the built-in utilities useradd and userdel. I ignored this good advice and had some fun, but also a few false starts.</p>
 
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-  $ sudo useradd -s /bin/bash -d /home/efa2 -m efa2
+$ sudo useradd -s /bin/bash -d /home/efa2 -m efa2
                 </code></pre>
             </div>
 
@@ -120,10 +121,10 @@
 
             <p> Finally, efa2 is the name of the user being created. The last lines of the /etc/passwd file can be checked:</p>
 
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-  $ tail /etc/shadow
-  efa2:x:1001:1001::/home/efa2:/bin/bash
+$ tail /etc/shadow
+efa2:x:1001:1001::/home/efa2:/bin/bash
                 </code></pre>
             </div>
 
@@ -140,13 +141,13 @@
 
             <p>At this point, we can also download the efa2 zip archive and move it to /opt/efa2</p>
 
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-  $ sudo apt-get install lxde-core lxterminal lightdm openbox
-  $ sudo apt-get install openjdk-8-jre nano zip unzip xscreensaver
-  $ sudo mkdir /opt/efa2
-  $ wget http://efa.nmichael.de/download/efa222.zip
-  $ sudo mv efa222.zip /opt/efa2
+$ sudo apt-get install lxde-core lxterminal lightdm openbox
+$ sudo apt-get install openjdk-8-jre nano zip unzip xscreensaver
+$ sudo mkdir /opt/efa2
+$ wget http://efa.nmichael.de/download/efa222.zip
+$ sudo mv efa222.zip /opt/efa2
                 </code></pre>
             </div>
 
@@ -164,21 +165,21 @@
 
             <p>The file of choice turned out to be a lxde-rc.xml under ~/.config/openbox. After scrolling down to the keyboard section I added</p>
 
-            <div class="terminal-box lime-text">
+            <div class="code-box terminal-box lime-text">
                 <pre><code>
-    &lt;keybind key="C-A-t"&gt;
-        &lt;action name = "Execute"&gt;
-            &lt;command&gt;lxterminal&lt;/command&gt;
-        &lt;/action&gt;
-    &lt;/keybind&gt;
+&lt;keybind key="C-A-t"&gt;
+    &lt;action name = "Execute"&gt;
+        &lt;command&gt;lxterminal&lt;/command&gt;
+    &lt;/action&gt;
+&lt;/keybind&gt;
                 </code></pre>
             </div>
 
             <p>After saving and closing the file, the config file needed to be reloaded</p>
 
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-  $ openbox-lxde --reconfigure
+$ openbox-lxde --reconfigure
                 </code></pre>
             </div>
 
@@ -189,13 +190,13 @@
 
             <p>The resulting pcmanfm.desktop file in efa2's Desktop folder contains:</p>
 
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-  [Desktop Entry]
-  Type=Link
-  Name=File Manager
-  Icon=system-file-manager
-  URL=/usr/share/applications/pcmanfm.desktop
+[Desktop Entry]
+Type=Link
+Name=File Manager
+Icon=system-file-manager
+URL=/usr/share/applications/pcmanfm.desktop
                 </code></pre>
             </div>
 
@@ -203,14 +204,14 @@
 
             <p>I also wanted to make a desktop icon for efa. In this case, there isn't an existing .desktop file in */share/applications, so that needs to be created first. Since I only want the applications to be available for the user efa2, I decided to make the application desktop file in /home/efa2/.local/share/applications. </p>
 
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-  [Desktop Entry]
-  Type=Application
-  Name=efa
-  Icon=/opt/efa2/doc/efa2.png
-  TryExec=/opt/efa2/efaBths.sh
-  Exec=bash /opt/efa2/efaBths.sh
+[Desktop Entry]
+Type=Application
+Name=efa
+Icon=/opt/efa2/doc/efa2.png
+TryExec=/opt/efa2/efaBths.sh
+Exec=bash /opt/efa2/efaBths.sh
                 </code></pre>
             </div>
 
@@ -218,18 +219,18 @@
 
             <p>The desktop-database has to be updated for the new desktop file to work </p>
 
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-  $ update-desktop-database ~/.local/share/applications/efa.desktop
+$ update-desktop-database ~/.local/share/applications/efa.desktop
                 </code></pre>
             </div>
 
             <p>There's also a useful utility called desktop-file-validate that can give hints for reasons the desktop file might not be working. In my case, I initially forgot to include the 'Name' entry.</p>
 
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-  $ desktop-file-validate ~/.local/share/applications/efa.desktop
-  error: required key "Name" in group "Desktop Entry" is not present
+$ desktop-file-validate ~/.local/share/applications/efa.desktop
+error: required key "Name" in group "Desktop Entry" is not present
                 </code></pre>
             </div>
 
@@ -244,11 +245,11 @@
 
             <p>The config file very helpfully already contained everything I needed, just commented out. In the section <code>[Seat:*]</code> the following lines had to be uncommented </p>
 
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-  autologin-guest=false
-  autologin-user=efa2
-  autologin-user-timeout=0
+autologin-guest=false
+autologin-user=efa2
+autologin-user-timeout=0
                 </code></pre>
             </div>
 
@@ -274,9 +275,9 @@
 
             <p>I disabled the screenlock from xscreensaver again and went off seeking the relevant files. The file /usr/bin/lxlock contained an if-elif-else block for determining which screen locker to use. There was quite a list, with light-locker preceeding xscreensaver. So I decided to try changing the configuration for light-locker.</p>
 
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-  $ light-locker --lock-after-screensaver=0 --no-lock-on-suspend
+$ light-locker --lock-after-screensaver=0 --no-lock-on-suspend
                 </code></pre>
             </div>
 

@@ -1,8 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 /*Hidden skip to main option for keyboard users */
 a.skip-main {
     left: -999px;
@@ -66,7 +62,7 @@ li.toc a {
     display: block; /*makes whole area clickable*/
     text-decoration: none;
     color: var(--title-text-color);
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: 600;
 }
 
@@ -99,26 +95,9 @@ article {
     align-self: center;
 }
 
-h1, h2, h3 {
-    color: var(--near-seagreen);
-}
-
-h1 {
-    font-size: 2.1em;
-}
 
 h2 {
-    font-size: 2em;
-}
-
-h3 {
-    font-size: 1.7em;
-}
-
-p {
-    font-size: 1.3em;
-    line-height: 2.1;
-    margin-top: 1.5em;
+    margin-top: 20px;
 }
 
 .end-subsection {
@@ -144,11 +123,6 @@ img  {
 figcaption {
     color: grey;
 }
-/* Start rulesfor code samples */
-
-code samp {
-    font-family: "Lucida Console", Monaco, monospace;
-}
 
 blockquote {
     background: #f5f5f5;
@@ -156,116 +130,6 @@ blockquote {
     margin: 10px;
     padding: 10px;
 }
-
-.code-with-img{
-    display: flex;
-}
-
-.code-with-img img {
-    display: block;
-    width: 500px;
-    max-width: 80vw;
-    height: 100%;
-    margin-left: 10px;
-}
-
-.shadow-img {
-    margin-left: 5px;
-    box-shadow: rgba(100, 100, 111, 0.5) 0px 3px 10px 3px;
-}
-
-.code-subbox {
-    width: 500px;
-    max-width: 90vw;
-    margin-bottom: auto;
-}
-
-.terminal-box {
-    font-size: 1.3em;
-    background: rgb(30, 30, 30);
-    color: #cfcfcf;
-    line-height: 1.5;
-    margin-top: 10px;
-    padding-left: 5px;
-}
-
-.terminal-box pre {
-    overflow: auto;
-}
-
-.lime-text {
-    color: hsl(120, 80%, 50%);
-}
-
-.lite-green-text {
-    color: hsl(120, 73%, 75%); /*hex 90ee90 */
-}
-
-.dark-green-text {
-    color: #228b22;
-}
-
-.comment-text {
-    color: #c0c0c0;
-}
-
-.coral-text {
-    color: hsl(350, 96%, 70%); /*color: #FB6583;*/
-}
-
-.gold-text {
-    color: hsl(30, 96%, 75%); /*hex: FCBF7D?*/
-}
-
-.orange-text {
-    color: #ff4500;
-}
-
-.code-box {
-    font-size: 1.3em;
-    background-color: hsl(0, 0%, 95%);
-    color: #000000;
-    line-height: 1.5;
-    margin-top: 10px;
-    padding-left: 5px;
-}
-.aqua-text {
-    color: #0dd;
-}
-
-.lite-blue-text {
-    color: #1e90ff;
-}
-
-.blue-text {
-    color: blue;
-}
-
-.teal-text {
-    color: #007060;
-}
-
-.dark-red-text {
-    color: #780000;
-}
-
-.purple-text {
-    color: #630060;
-}
-
-.fuchsia-text {
-    color: #ff00ff;
-}
-
-.red-text {
-    color: #f02020;
-}
-
-.brown-text {
-    color: brown;
-}
-
-/* end rules for code samples */
 
 /* adjust display for snaller screens */
 
@@ -289,21 +153,4 @@ blockquote {
         display: none;
     }
 
-    p {
-        font-size: 1em;
-    }
-
-    .code-with-img {
-        flex-direction: column;
-    }
-
-    .code-with-img img {
-        margin: 10px auto 0px auto;
-    }
-
-    .terminal-box {
-        font-size: 1em;
-        overflow: auto;
-        scroll-behavior: smooth;
-    }
 }

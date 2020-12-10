@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/article-styles.css">
+        <link rel="stylesheet" href="../css/code-styles.css">
         <link rel="icon" href="../images/archeaopteryx-icon.png">
         <title>CLI arguments</title>
     </head>
@@ -94,10 +95,10 @@
 
                     <p>When a bash script is run with additional arguments, everything on the command line except the script name is stored by bash in the <code><span class='dark-red-text'>$@</span></code> variable. Demonstrating with a dummyScript.sh that echos <code><span class='dark-red-text'>$@</span></code>: </p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  $ ./dummyScript.sh -a arg1 -b arg2
-  -a arg1 -b arg2
+$ ./dummyScript.sh -a arg1 -b arg2
+-a arg1 -b arg2
                         </code></pre>
                     </div>
 
@@ -109,12 +110,12 @@
 
                     <div class="code-box">
                         <pre><code>
-  testFlag=<span class="fuchsia-text">'false'</span>
-  <span class="teal-text">while</span> <span class="purple-text">getopts</span> <span class="fuchsia-text">":t"</span> flag; <span class="teal-text">do</span>
-      <span class="teal-text">case</span> <span class="dark-red-text">"${flag}"</span> <span class="teal-text">in</span>
+testFlag=<span class="fuchsia-text">'false'</span>
+<span class="teal-text">while</span> <span class="purple-text">getopts</span> <span class="fuchsia-text">":t"</span> flag; <span class="teal-text">do</span>
+    <span class="teal-text">case</span> <span class="dark-red-text">"${flag}"</span> <span class="teal-text">in</span>
         t) testFlag=<span class="fuchsia-text">'true'</span>;;
-      <span class="teal-text">esac</span>
-  <span class="teal-text">done</span>
+    <span class="teal-text">esac</span>
+<span class="teal-text">done</span>
                         </code></pre>
                     </div>
 
@@ -168,14 +169,14 @@
 
                     <p>The <code>getopt.getopt()</code> method returns two lists. The first is a list of matched option - argument pairs, and the second is a list that holds any "leftover" arguments. </p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  $ ./scriptName.py -h
-  opts = [('h', '')] args = []
-  $ ./scriptName.py -a exampleFile.csv
-  opts = [('a', 'exampleFile.csv')] args = []
-  $ ./scriptName.py -s "Glenkill" "de"
-  opts = [('s', 'Glennkill')] args = ['de']
+$ ./scriptName.py -h
+opts = [('h', '')] args = []
+$ ./scriptName.py -a exampleFile.csv
+opts = [('a', 'exampleFile.csv')] args = []
+$ ./scriptName.py -s "Glenkill" "de"
+opts = [('s', 'Glennkill')] args = ['de']
                         </code></pre>
                     </div>
 
@@ -183,10 +184,10 @@
 
                     <div class="code-box">
                         <pre><code>
-    flagPos = argv.index(<span class="dark-green-text">"-s"</span>)
-    title = argv[flagPos+1]    <span class="dark-green-text"># could use arg</span>
-    language = argv[flagPos+2] <span class="dark-green-text"># could use args[0]</span>
-    getSuggestions(title, language)
+flagPos = argv.index(<span class="dark-green-text">"-s"</span>)
+title = argv[flagPos+1]    <span class="dark-green-text"># could use arg</span>
+language = argv[flagPos+2] <span class="dark-green-text"># could use args[0]</span>
+getSuggestions(title, language)
                         </code></pre>
                     </div>
 
@@ -214,35 +215,35 @@
 
                     <div class="code-box">
                         <pre><code>
-  <span class="purple-text">import</span> argparse
-  <span class="purple-text">import</span> sys
+<span class="purple-text">import</span> argparse
+<span class="purple-text">import</span> sys
 
-  <span class="purple-text">def</span> <span class="blue-text">cli_parse</span>():
-      parser = argparse.<span class="blue-text">ArgumentParser</span>()
+<span class="purple-text">def</span> <span class="blue-text">cli_parse</span>():
+parser = argparse.<span class="blue-text">ArgumentParser</span>()
 
-      make_text = <span class="dark-green-text">"..."</span>
-      parser.<span class="blue-text">add_argument</span>(<span class="dark-green-text">'-m'</span>, <span class="dark-green-text">'--make'</span>, <span class="orange-text">type</span>=str, <span class="orange-text">help</span>=make_text,
-                            <span class="orange-text">metavar</span>=<span class="dark-green-text">"SQL FILE"</span>)
+make_text = <span class="dark-green-text">"..."</span>
+parser.<span class="blue-text">add_argument</span>(<span class="dark-green-text">'-m'</span>, <span class="dark-green-text">'--make'</span>, <span class="orange-text">type</span>=str, <span class="orange-text">help</span>=make_text,
+                    <span class="orange-text">metavar</span>=<span class="dark-green-text">"SQL FILE"</span>)
 
-      add_text = <span class="dark-green-text">"..."</span>
-      parser.<span class="blue-text">add_argument</span>(<span class="dark-green-text">'-a'</span>, <span class="dark-green-text">'--addFromFile'</span>, <span class="orange-text">type</span>=str,
-                            <span class="orange-text">help</span>=add_text, <span class="orange-text">metavar</span>=<span class="dark-green-text">"FILE"</span>)
+add_text = <span class="dark-green-text">"..."</span>
+parser.<span class="blue-text">add_argument</span>(<span class="dark-green-text">'-a'</span>, <span class="dark-green-text">'--addFromFile'</span>, <span class="orange-text">type</span>=str,
+                    <span class="orange-text">help</span>=add_text, <span class="orange-text">metavar</span>=<span class="dark-green-text">"FILE"</span>)
 
-      sugg_text = <span class="dark-green-text">"..."</span>
-      parser.<span class="blue-text">add_argument</span>(<span class="dark-green-text">'-s'</span>, <span class="dark-green-text">'--suggestions'</span>, <span class="orange-text">type</span>=str, <span class="orange-text">nargs</span>=2,
-                            <span class="orange-text">help</span>=sugg_text, <span class="orange-text">metavar</span>=(<span class="dark-green-text">"TITLE"</span>, <span class="dark-green-text">"LANGUAGE"</span>))
+sugg_text = <span class="dark-green-text">"..."</span>
+parser.<span class="blue-text">add_argument</span>(<span class="dark-green-text">'-s'</span>, <span class="dark-green-text">'--suggestions'</span>, <span class="orange-text">type</span>=str, <span class="orange-text">nargs</span>=2,
+                    <span class="orange-text">help</span>=sugg_text, <span class="orange-text">metavar</span>=(<span class="dark-green-text">"TITLE"</span>, <span class="dark-green-text">"LANGUAGE"</span>))
 
-      args = parser.<span class="blue-text">parse_args</span>()
-      <span class="purple-text">if</span> args.<span class="dark-red-text">make</span> :
-          <span class="blue-text">makeFunction</span>(args.<span class="dark-red-text">make</span>)
-      <span class="purple-text">if</span> args.<span class="dark-red-text">addFromFile</span>:
-          <span class="blue-text">addFunction</span>(args.<span class="dark-red-text">addFromFile</span>)
-      <span class="purple-text">if</span> args.<span class="dark-red-text">suggestions</span>:
-          <span class="blue-text">suggestionFunction</span>(args.<span class="dark-red-text">suggestions</span>)
+args = parser.<span class="blue-text">parse_args</span>()
+<span class="purple-text">if</span> args.<span class="dark-red-text">make</span> :
+    <span class="blue-text">makeFunction</span>(args.<span class="dark-red-text">make</span>)
+<span class="purple-text">if</span> args.<span class="dark-red-text">addFromFile</span>:
+    <span class="blue-text">addFunction</span>(args.<span class="dark-red-text">addFromFile</span>)
+<span class="purple-text">if</span> args.<span class="dark-red-text">suggestions</span>:
+    <span class="blue-text">suggestionFunction</span>(args.<span class="dark-red-text">suggestions</span>)
 
 
-  <span class="blue-text">if</span> __name__ = <span class="dark-green-text">"__main__"</span>:
-      <span class="blue-text">cli_parse</span>()
+<span class="purple-text">if</span> __name__ = <span class="dark-green-text">"__main__"</span>:
+    <span class="blue-text">cli_parse</span>()
                         </code></pre>
                     </div>
 
@@ -250,11 +251,11 @@
 
                     <p>This is probably because I was abusing options when I really wanted 'sub-commands'. I did not want small adjustments to the behavior of the program (options), but rather wanted totally different behaviors depending on the command line arguments (sub-commands). Sub-commands are given without a leading dash: </p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  $ ./someScript.py -m testFile.sq      # short option
-  $ ./someScript.py --make testFile.sql # long option
-  $ ./someScript.py make testFile.sql   # sub-command
+$ ./someScript.py -m testFile.sq      # short option
+$ ./someScript.py --make testFile.sql # long option
+$ ./someScript.py make testFile.sql   # sub-command
                         </code></pre>
                     </div>
 
@@ -262,37 +263,37 @@
 
                     <div class="code-box">
                         <pre><code>
-  <span class="purple-text">import</span> argparse
-  <span class="purple-text">import</span> sys
+<span class="purple-text">import</span> argparse
+<span class="purple-text">import</span> sys
 
-  <span class="purple-text">def</span> <span class="blue-text">makeFunction</span>(<span class="orange-text">args</span>):
-      <span class="lite-blue-text">print</span>(<span class="dark-green-text">"called make function with {}"</span>.<span class="blue-text">format</span>(args.<span class="dark-red-text">sqlfile</span>))
+<span class="purple-text">def</span> <span class="blue-text">makeFunction</span>(<span class="orange-text">args</span>):
+    <span class="lite-blue-text">print</span>(<span class="dark-green-text">"called make function with {}"</span>.<span class="blue-text">format</span>(args.<span class="dark-red-text">sqlfile</span>))
 
-  <span class="purple-text">def</span> <span class="blue-text">cli_parse</span>():
-      parser = argparse.<span class="blue-text">ArgumentParser</span>()
-      subparser = parser.<span class="blue-text">add_subparsers</span>()
+<span class="purple-text">def</span> <span class="blue-text">cli_parse</span>():
+    parser = argparse.<span class="blue-text">ArgumentParser</span>()
+    subparser = parser.<span class="blue-text">add_subparsers</span>()
 
-      make_text = <span class="dark-green-text">"..."</span>
-      parser_make = subparser.<span class="blue-text">add_parser</span>(<span class="dark-green-text">"make"</span>, <span class="orange-text">help</span>=make_text)
-      parser_make.<span class="blue-text">add_argument</span>(<span class="dark-green-text">"sqlFile"</span>)
-      parser_make.<span class="blue-text">set_defaults</span>(func=makeFunction)
+    make_text = <span class="dark-green-text">"..."</span>
+    parser_make = subparser.<span class="blue-text">add_parser</span>(<span class="dark-green-text">"make"</span>, <span class="orange-text">help</span>=make_text)
+    parser_make.<span class="blue-text">add_argument</span>(<span class="dark-green-text">"sqlFile"</span>)
+    parser_make.<span class="blue-text">set_defaults</span>(func=makeFunction)
 
-      add_text = <span class="dark-green-text">"..."</span>
-      parser_add = subparser.<span class="blue-text">add_parser</span>(<span class="dark-green-text">"add"</span>, <span class="orange-text">help</span>=add_text)
-      parser_add.<span class="blue-text">add_argument</span>(<span class="dark-green-text">"file"</span>)
-      parser_add.<span class="blue-text">set_defaults</span>(func=addFunction)
+    add_text = <span class="dark-green-text">"..."</span>
+    parser_add = subparser.<span class="blue-text">add_parser</span>(<span class="dark-green-text">"add"</span>, <span class="orange-text">help</span>=add_text)
+    parser_add.<span class="blue-text">add_argument</span>(<span class="dark-green-text">"file"</span>)
+    parser_add.<span class="blue-text">set_defaults</span>(func=addFunction)
 
-      sugg_text = <span class="dark-green-text">"..."</span>
-      parser_sugg = subparser.<span class="blue-text">add_parser</span>(<span class="dark-green-text">"suggestions"</span>, <span class="orange-text">help</span>=sugg_text)
-      parser_sugg.<span class="blue-text">add_argument</span>(<span class="dark-green-text">"title"</span>)
-      parser_sugg.<span class="blue-text">add_argument</span>(<span class="dark-green-text">"language"</span>)
-      parser_sugg.<span class="blue-text">set_defaults</span>(func=suggestionFunction)
+    sugg_text = <span class="dark-green-text">"..."</span>
+    parser_sugg = subparser.<span class="blue-text">add_parser</span>(<span class="dark-green-text">"suggestions"</span>, <span class="orange-text">help</span>=sugg_text)
+    parser_sugg.<span class="blue-text">add_argument</span>(<span class="dark-green-text">"title"</span>)
+    parser_sugg.<span class="blue-text">add_argument</span>(<span class="dark-green-text">"language"</span>)
+    parser_sugg.<span class="blue-text">set_defaults</span>(func=suggestionFunction)
 
-      args = parser.<span class="blue-text">parse_args</span>()
-      args.func(args)
+    args = parser.<span class="blue-text">parse_args</span>()
+    args.func(args)
 
-  <span class="blue-text">if</span> __name__ = <span class="dark-green-text">"__main__"</span>:
-      <span class="blue-text">cli_parse</span>()
+<span class="blue-text">if</span> __name__ = <span class="dark-green-text">"__main__"</span>:
+    <span class="blue-text">cli_parse</span>()
                         </code></pre>
                     </div>
 
@@ -300,11 +301,11 @@
 
                     <p><code>parser.parse_args()</code> returns a <code>Namespace</code> object holding attributes that are defined by the <code>.add_argument()</code> and <code>.set_defaults()</code> methods. To demonstrate, we can run the script with the 'make' subcommand and print the <code>Namespace</code> object assigned to <code>args</code>: </p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  $ ./exampleScript.py make testFile.sql
-  Namespace(func=&lt;function makeFunction at 0x7faec74c4d40&gt;, sqlFile='testFile.sql')
-  called make function with testFile.sql
+$ ./exampleScript.py make testFile.sql
+Namespace(func=&lt;function makeFunction at 0x7faec74c4d40&gt;, sqlFile='testFile.sql')
+called make function with testFile.sql
                         </code></pre>
                     </div>
 

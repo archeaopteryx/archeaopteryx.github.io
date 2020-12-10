@@ -7,6 +7,35 @@
     --near-seagreen: #287D4D;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3 {
+    color: var(--near-seagreen);
+}
+
+h1 {
+    font-size: 2.1em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.7em;
+}
+
+p {
+    font-size: 1.3em;
+    line-height: 2.1;
+    margin-top: 1.5em;
+}
+
+
 header {
     display: flex;
     justify-content: space-between;
@@ -115,6 +144,11 @@ footer {
 
     .menu-bar {
         align-items: flex-end;
+    }
+
+    p {
+        font-size: 1em;
+        line-height: 1.75;
     }
 
 }

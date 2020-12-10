@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/article-styles.css">
+        <link rel="stylesheet" href="../css/code-styles.css">
         <link rel="icon" href="../images/archeaopteryx-icon.png">
         <title>efaPi: Setup</title>
     </head>
@@ -84,7 +85,7 @@
 
             <div class="code-box blue-text">
                 <pre><code>
-      #!/bin/bash
+#!/bin/bash
                 </code></pre>
             </div>
 
@@ -96,10 +97,10 @@
 
             <p>Following tradition:</p>
 
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-      $ touch helloBash.sh
-      $ chmod u+x helloBash.sh
+$ touch helloBash.sh
+$ chmod u+x helloBash.sh
                 </code></pre>
             </div>
 
@@ -107,18 +108,18 @@
 
             <div class="code-box">
                 <pre><code>
-      <span class="blue-text">#!/bin/bash</span>
+<span class="blue-text">#!/bin/bash</span>
 
-      <span class="purple-text">echo</span> "Hello, world!"
+<span class="purple-text">echo</span> "Hello, world!"
                 </code></pre>
             </div>
 
             <p>and then we can run the script from the terminal</p>
 
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-      $ ./helloBash.sh
-      Hello, world!
+$ ./helloBash.sh
+Hello, world!
                 </code></pre>
             </div>
 
@@ -139,8 +140,8 @@
 
             <div class="code-box">
                 <pre><code>
-      usb=$( <span class="purple-text">findmnt</span> -rno TARGET /dev/sda1)
-      mounted=<span class="dark-red-text">$?</span>
+usb=$( <span class="purple-text">findmnt</span> -rno TARGET /dev/sda1)
+mounted=<span class="dark-red-text">$?</span>
                 </code></pre>
             </div>
 
@@ -150,9 +151,9 @@
 
             <div class="code-box">
                 <pre><code>
-      <span class="teal-text">if</span> [[ <span class="dark-red-text">${mounted}</span> -eq 1 ]]; <span class="teal-text">then</span>
-          <span class="purple-text">exit</span> 1
-      <span class="teal-text">fi</span>
+<span class="teal-text">if</span> [[ <span class="dark-red-text">${mounted}</span> -eq 1 ]]; <span class="teal-text">then</span>
+    <span class="purple-text">exit</span> 1
+<span class="teal-text">fi</span>
                 </code></pre>
             </div>
 
@@ -166,15 +167,15 @@
 
             <div class="code-box">
                 <pre><code>
-      year=$( <span class="purple-text">date</span> +%Y )
-      dateStamp=$( <span class="purple-text">date</span> +%m%d )
+year=$( <span class="purple-text">date</span> +%Y )
+dateStamp=$( <span class="purple-text">date</span> +%m%d )
 
-      backupDir="<span class="dark-red-text">${usb}</span>/<span class="dark-red-text">${year}</span>_backup"
-      backupFile="<span class="dark-red-text">${backupDir}</span>/efaBackup_<span class="dark-red-text">${dateStamp}</span>.zip"
+backupDir="<span class="dark-red-text">${usb}</span>/<span class="dark-red-text">${year}</span>_backup"
+backupFile="<span class="dark-red-text">${backupDir}</span>/efaBackup_<span class="dark-red-text">${dateStamp}</span>.zip"
 
-      <span class="teal-text">if</span> [[ ! -d <span class="dark-red-text">$backupDir</span> ]]; <span class="teal-text">then</span>
-          <span class="purple-text">mkdir</span> <span class="dark-red-text">"$backupDir"</span>
-      <span class="teal-text">fi</span>
+<span class="teal-text">if</span> [[ ! -d <span class="dark-red-text">$backupDir</span> ]]; <span class="teal-text">then</span>
+    <span class="purple-text">mkdir</span> <span class="dark-red-text">"$backupDir"</span>
+<span class="teal-text">fi</span>
                 </code></pre>
             </div>
 
@@ -184,7 +185,7 @@
 
             <div class="code-box">
                 <pre><code>
-      /bin/bash /opt/efa2/efaCLI.sh admin@localhost/test -cmd "backup create all <span class="dark-red-text">${backupFile}</span>"
+/bin/bash /opt/efa2/efaCLI.sh admin@localhost/test -cmd "backup create all <span class="dark-red-text">${backupFile}</span>"
                 </code></pre>
             </div>
 
@@ -200,7 +201,7 @@
 
             <div class="code-box">
                 <pre><code>
-      re='^[0-9]{4}$'
+re='^[0-9]{4}$'
                 </code></pre>
             </div>
 
@@ -210,22 +211,22 @@
 
             <div class="code-box">
                 <pre><code>
-      re='^[0-9]{4}$'
-      currentYear=$( <span class="purple-text">date</span> +%Y )
+re='^[0-9]{4}$'
+currentYear=$( <span class="purple-text">date</span> +%Y )
 
-      <span class="teal-text">for</span> entry <span class="teal-text">in</span> <span class="dark-red-text">"${usb}/"</span>*
-      <span class="teal-text">do</span>
-          name=$( <span class="purple-text">basename</span> <span class="dark-red-text">$entry</span> )
-          year=$( <span class="purple-text">echo</span> <span class="dark-red-text">$name</span> | <span class="purple-text">cut</span> -d'_' -f1)
-          <span class="teal-text">if</span> [[ <span class="dark-red-text">$year</span> =~ <span class="dark-red-text">$re</span> ]]
-          <span class="teal-text">then</span>
-            age=$(( <span class="dark-red-text">$currentYear</span>-<span class="dark-red-text">$year</span> ))
-            <span class="teal-text">if</span> [[ <span class="dark-red-text">$age</span> -gt 2 ]]
-            <span class="teal-text">then</span>
-              <span class="purple-text">rm</span> -r <span class="dark-red-text">$entry</span>
-            <span class="teal-text">fi</span>
-          <span class="teal-text">fi</span>
-      <span class="teal-text">done</span>
+<span class="teal-text">for</span> entry <span class="teal-text">in</span> <span class="dark-red-text">"${usb}/"</span>*
+<span class="teal-text">do</span>
+    name=$( <span class="purple-text">basename</span> <span class="dark-red-text">$entry</span> )
+    year=$( <span class="purple-text">echo</span> <span class="dark-red-text">$name</span> | <span class="purple-text">cut</span> -d'_' -f1)
+    <span class="teal-text">if</span> [[ <span class="dark-red-text">$year</span> =~ <span class="dark-red-text">$re</span> ]]
+    <span class="teal-text">then</span>
+        age=$(( <span class="dark-red-text">$currentYear</span>-<span class="dark-red-text">$year</span> ))
+        <span class="teal-text">if</span> [[ <span class="dark-red-text">$age</span> -gt 2 ]]
+        <span class="teal-text">then</span>
+            <span class="purple-text">rm</span> -r <span class="dark-red-text">$entry</span>
+        <span class="teal-text">fi</span>
+    <span class="teal-text">fi</span>
+<span class="teal-text">done</span>
                 </code></pre>
             </div>
 
@@ -247,27 +248,27 @@
 
             <p>At last, we come to the cron jobs. We can schedule running our backup and cleaner with <code>crontab</code> </p>
 
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-      $ crontab -e
+$ crontab -e
                 </code></pre>
             </div>
 
             <p>This initializes a crontab for the user (efa2) and lets us choose what editor we want to use. The basic syntax for a cron job is <code>minute hour day-of-month month day-of-week   command</code> </p>
 
             <p>Our rowing club meets on Wednesdays, Saturdays and Sundays. So I scheduled the backup to run at 2 AM the following day (Monday, Thursday and Sunday), and the cleaner to run every January 1st at 2:10 AM.</p>
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-      0 2 * * 1,4,7 /home/efa2/bin/efaBackup.sh
-      10 2 1 1 * /home/efa2/bin/backupCleaner.sh
+0 2 * * 1,4,7 /home/efa2/bin/efaBackup.sh
+10 2 1 1 * /home/efa2/bin/backupCleaner.sh
                 </code></pre>
             </div>
 
             <p>I also decided to make a log file in efa2's home folder and edited the crontab: </p>
-            <div class="terminal-box">
+            <div class="code-box terminal-box">
                 <pre><code>
-      0 2 * * 1,4,7 /home/efa2/bin/efaBackup.sh &gt; /home/efa2/cronjob.log 2&gt;&amp;1
-      10 2 1 1 * /home/efa2/bin/backupCleaner.sh &gt; /home/efa2/cronjob.log 2&gt;&amp;1
+0 2 * * 1,4,7 /home/efa2/bin/efaBackup.sh &gt; /home/efa2/cronjob.log 2&gt;&amp;1
+10 2 1 1 * /home/efa2/bin/backupCleaner.sh &gt; /home/efa2/cronjob.log 2&gt;&amp;1
                 </code></pre>
             </div>
 

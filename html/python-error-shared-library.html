@@ -7,6 +7,7 @@
         <meta name="description" content="troubleshooting python error: while loading shared libraries: libpython3.7m.so.1.0:">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/article-styles.css">
+        <link rel="stylesheet" href="../css/code-styles.css">
         <link rel="icon" href="../images/archeaopteryx-icon.png">
         <title>Error loading shared library</title>
     </head>
@@ -59,11 +60,11 @@
 
                     <p>A bit later I wanted to work on a django project that I hadn't touched for a while. I activated the virtual environment and tried to run the server</p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  $ python manage.py runserver
-  python: error while loading shared libraries: libpython3.7m.so.1.0: cannot open
-  shared object file: No such file or directory
+$ python manage.py runserver
+python: error while loading shared libraries: libpython3.7m.so.1.0: cannot open
+shared object file: No such file or directory
                         </code></pre>
                     </div>
 
@@ -79,9 +80,9 @@
 
                     <div class="code-box">
                         <pre><code>
-  home = /usr/bin
-  include-system-site-packages = false
-  version = 3.8.5
+home = /usr/bin
+include-system-site-packages = false
+version = 3.8.5
                         </code></pre>
                     </div>
 
@@ -93,15 +94,15 @@
 
                     <p>After being convinced that <code>.so</code> files are properly important, it seemed like a good idea to find where mine were. The most likely suspects were the <code>\lib</code>, <code>\lib64</code> and <code>\usr</code> directories. I searched fairly generally for <code>.so</code> files containing 'libpython' and <code>\lib64</code> turned out to be a good guess</p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  $ cd /lib64
-  $ find . -name 'libpython?.*.so*'
-  ./libpython3.8.so.1.0
-  ./python2.7/config/libpython2.7.so
-  ./libpython3.8.so
-  ./libpython2.7.so
-  ./libpython2.7.so.1.0
+$ cd /lib64
+$ find . -name 'libpython?.*.so*'
+./libpython3.8.so.1.0
+./python2.7/config/libpython2.7.so
+./libpython3.8.so
+./libpython2.7.so
+./libpython2.7.so.1.0
                         </code></pre>
                     </div>
 
@@ -121,55 +122,55 @@
 
                     <p>Righto, then I just need to follow the friendly 'install HowTo' on pkgs.org...</p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  $ dnf install python37
-  No match for argument: 37
+$ dnf install python37
+No match for argument: 37
                         </code></pre>
                     </div>
 
                     <p>Of course not. Do you know python3.7?</p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  $ dnf install python3.7
-  Dependecies resolved.
-  ================================================================================
-   Package           Architecture    Version               Repository        Size
-  ================================================================================
-  Installing:
-   <span class='lime-text'>python37</span>          x86_64          3.7.9-1.fc32          updates           19 M
-  Transaction Summary
-  ================================================================================
-  Install  1 Package
+$ dnf install python3.7
+Dependecies resolved.
+================================================================================
+ Package           Architecture    Version               Repository        Size
+================================================================================
+Installing:
+ <span class='lime-text'>python37</span>          x86_64          3.7.9-1.fc32          updates           19 M
+Transaction Summary
+================================================================================
+Install  1 Package
                         </code></pre>
                     </div>
 
                     <p>Great! And the <code>.so</code> files?</p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  $ cd /lib64
-  $ find . -name 'libpython3.*.so*'
-  ./libpython3.8.so.1.0
-  ./libpython3.7m.so.1.0
-  ./libpython3.8.so
-  ./libpython3.7dm.so.1.0
-  ./libpython3.7dm.so
-  ./libpython3.7m.so
+$ cd /lib64
+$ find . -name 'libpython3.*.so*'
+./libpython3.8.so.1.0
+./libpython3.7m.so.1.0
+./libpython3.8.so
+./libpython3.7dm.so.1.0
+./libpython3.7dm.so
+./libpython3.7m.so
                         </code></pre>
                     </div>
 
                     <p>I still don't know what all these files do in great detail (*.7dm.so?) but at least the file I wanted is indeed there. Let's go back to the introDjango venv:</p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  $ source venv/bin/activate
-  (venv) [katie@linux introDjango]$ python
-  Python 3.7.9 (default, Aug 20 2020, 14:07:20)
-  [GCC 10.2.1 20200723 (Red Hat 10.2.1-1)] on linux
-  Type "help", "copyright", "credits" or "license" for more information.
-  >>>
+$ source venv/bin/activate
+(venv) [katie@linux introDjango]$ python
+Python 3.7.9 (default, Aug 20 2020, 14:07:20)
+[GCC 10.2.1 20200723 (Red Hat 10.2.1-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
                         </code></pre>
                     </div>
 
@@ -181,29 +182,29 @@
 
                     <p>Having inconsistencies between venvs sounded suspiciously like a possible issue between keyboard and chair. I had a faint memory of learning that virtual environments are a good idea, but being unsure about <strong>which</strong> package I should use to make my virtual environments. There are quite a few options, after all. So I had a look at my bash history: </p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  $ cd ~/
-  $ grep -n 'venv venv' .bash_history
-  <span class='lime-text'>710:</span>python3 -m <span style="color:#FF302C;">venv venv</span>
-  <span class='lime-text'>924:</span>python3 -m <span style="color:#FF302C;">venv venv</span>
-  <span class='lime-text'>980:</span>python3 -m <span style="color:#FF302C;">venv venv</span>
-  $ grep -n 'virtualenv venv' .bash_history
-  <span class='lime-text'>237:</span><span style="color:#FF302C;">virtualenv venv</span> -p python3.7
-  <span class='lime-text'>457:</span><span style="color:#FF302C;">virtualenv venv</span>
-  <span class='lime-text'>579:</span><span style="color:#FF302C;">virtualenv venv</span>
-  <span class='lime-text'>644:</span><span style="color:#FF302C;">virtualenv venv</span>
+$ cd ~/
+$ grep -n 'venv venv' .bash_history
+<span class='lime-text'>710:</span>python3 -m <span style="color:#FF302C;">venv venv</span>
+<span class='lime-text'>924:</span>python3 -m <span style="color:#FF302C;">venv venv</span>
+<span class='lime-text'>980:</span>python3 -m <span style="color:#FF302C;">venv venv</span>
+$ grep -n 'virtualenv venv' .bash_history
+<span class='lime-text'>237:</span><span style="color:#FF302C;">virtualenv venv</span> -p python3.7
+<span class='lime-text'>457:</span><span style="color:#FF302C;">virtualenv venv</span>
+<span class='lime-text'>579:</span><span style="color:#FF302C;">virtualenv venv</span>
+<span class='lime-text'>644:</span><span style="color:#FF302C;">virtualenv venv</span>
                         </code></pre>
                     </div>
 
                     <p>There you go: I mixed the <code>venv</code> and <code>virtualenv</code> packages. I checked some of the lines around of these commands in my bash history, for instance:</p>
 
-                    <div class="terminal-box">
+                    <div class="code-box terminal-box">
                         <pre><code>
-  $ sed -n '235, 237p' .bash_history
-  mkdir introDjango
-  cd introDjango/
-  virtualenv venv -p python3.7
+$ sed -n '235, 237p' .bash_history
+mkdir introDjango
+cd introDjango/
+virtualenv venv -p python3.7
                         </code></pre>
                     </div>
 
