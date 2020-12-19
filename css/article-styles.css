@@ -12,7 +12,7 @@ a.skip-main {
 
 a.skip-main:focus {
     left: auto;
-    top: auto;
+    top: 25px;
     width: 30%;
     height: auto;
     overflow: auto;
