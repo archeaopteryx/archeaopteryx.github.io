@@ -7,7 +7,14 @@
         <description>Self-taught programmer blog</description>
         <language>en-us</language>
         <pubDate>Thu, 16 Jul 2020 16:00:00 GMT</pubDate>
-        <lastBuildDate>Fri, 04 Dec 2020 18:20:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 03 Apr 2021 20:00:00 GMT</lastBuildDate>
+        <item>
+            <title>Dynamic forms with JS</title>
+            <link>https://archeaopteryx.github.io/html/dynamic-forms.html</link>
+            <guid>https://archeaopteryx.github.io/html/dynamic-forms.html</guid>
+            <description>As a web-dev newbie I'm easily distracted by silly projects, and this definitely qualifies as one of them. I decided to use JavaScript to mimic page navigation for part of a personal project. Basically, I got annoyed that my banner image flickers each time a new page is requested and decided to eliminate that for the login area. Users with JS enabled will be able to login, register or reset their password from a single page, with the displayed forms providing the illusion of page navigation. This required an encounter with the history API for reasonable behavior when bookmarking or navigating using the forward and back buttons in the browser. Using JS on a page with forms naturally means it's time to do some client-side pre-validation. For the case of validating new usernames as unique, this involves a bit of asynchronous code and a server request without a page reload. </description>
+            <pubDate>Sat, 03 Apr 2021 20:00:00 GMT</pubDate>
+        </item>
         <item>
             <title>My first PHP deployment</title>
             <link>https://archeaopteryx.github.io/html/first-php-deployment.html</link>
