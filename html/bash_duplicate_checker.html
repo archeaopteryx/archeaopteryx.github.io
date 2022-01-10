@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="../css/general.css">
+      <link rel="stylesheet" href="../css/article-styles.css">
+      <link rel="stylesheet" href="../css/code-styles.css">
+      <link rel="icon" href="../images/archeaopteryx-icon.png">
+      <title>Checking PDFs with Bash</title>
+  </head>
+  <body>
+      <a class="skip-main" href="#main">Skip to main content</a>
+      <header>
+          <div class="upper-bar">
+              <div class="upper-bar-left">
+                  <div class="archea-container"><a href="../index.html"><img src="../images/archeaopteryx-1.svg" alt="cartoon drawing of an archaeopteryx working on a laptop" width="150" height="107" /></a></div>
+                  <div class="title">Archeaopteryx</div>
+              </div>
+              <div class="tagline">Adventures of a novice coder</div>
+          </div>
+          <div class="menu-bar">
+              <nav class="header-menu">
+                  <div class="home"><a href='../index.html'>Home</a></div>
+                  <div class="archive"><a href='../archive.html'>Archive</a></div>
+                  <div class="about"><a href='../about.html'>About</a></div>
+                  <div class="rss"><a href="https://archeaopteryx.github.io/rss.xml"><span id="rss-label">RSS</span><img src="../images/rssIcon.svg" alt="RSS icon"> </a></div>
+              </nav>
+          </div>
+      </header>
+
+
+      <div class="page-inner">
+
+      <div class="left-column-wrapper">
+        <aside class='sidebar'>
+          <h2>Contents:</h2>
+          <nav>
+            <ul class='toc-ul'>
+              <li class='toc toc-outer'><a href="#intro">Introduction</a></li>
+              <li class='toc toc-outer'><a href="#exiftool">Exiftool</a></li>
+              <li class='toc toc-outer'><a href="#hash">Using a hash value</a></li>
+              <li class='toc toc-outer'><a href="#fingerprint">A text fingerprint</a></li>
+              <li class='toc toc-outer'><a href='#conclusions'>Parting thoughts</a></li>
+            </ul>
+          </nav>
+        </aside>
+        <div class="left-column"></div>
+      </div>
+
+        <main id='main' tabindex="-1">
+
+          <article>
+            <section>
+
+              <h1 id="intro">Automate the Soul-Crushing Stuff</h1>
+
+              <p>A teacher sits down to mark assignments. In this age of digitalization, climate change and pandemics, this age-old process has gone digital. Instead of a stack of paper, the teacher is faced with a (virtual) mass of PDF files along with the depressing task of sorting out how many of those are simple copies of each other.</p>
+
+              <p>Finding the duplicates sounds like something to automate! Being in a CLI sort of mood these days, I decided I wanted to try out methods to catch duplicate PDFs by exclusively using commands in a bash shell.</p>
+
+            </section>
+
+            <section>
+              <h2 tabindex="0" id="exiftool">Out of the gates with ExifTool</h2>
+
+              <p>Initially, I reached for a Perl program called <code>exiftool</code> to read the meta-data of some test PDFs:</p>
+
+              <div class="code-box terminal-box">
+                  <pre><code>
+$ sudo dnf install perl-Image-ExifTool
+$ exiftool test1.pdf
+
+ExifTool Version Number         : 12.30
+File Name                       : test1.pdf
+Directory                       : .
+...
+Author                          : gs
+Creator                         : Writer
+Producer                        : LibreOffice 7.1
+Create Date                     : 2022:01:07 19:21:13+01:00
+                  </code></pre>
+              </div>
+
+              <p> with <code>...</code> substituting for another 14 lines of metadata.</p>
+
+              <p>Individual values can be retrieved using <code>-[tagName]</code>, with multi-word tag names being written in CamelCase.</p>
+              <div class="code-box terminal-box">
+                  <pre><code>
+$ exiftool -CreateDate test1.pdf
+
+Create Date                     : 2022:01:07 19:21:13+01:00
+                  </code></pre>
+              </div>
+
+              <p>We can use <code>awk</code> to get the values. <code>awk</code> accepts multi-character field separators, which are set using the <code>-F</code> option. Using ": " as the delimiter separates label and value into the first and second fields without splitting the time stamp:</p>
+
+              <div class="code-box terminal-box">
+                  <pre><code>
+$ exiftool -Author -Producer -CreateDate test1.pdf | awk -F ": "  '{printf "%s ", $2} END {print ""}'
+
+gs LibreOffice 7.1 2022:01:07 19:21:13+01:00
+                  </code></pre>
+              </div>
+
+              <p>Since the tag values are terminated with a newline, each tag passed to <code>awk</code> is treated as a record. The <code>print</code> function separates values from different records with another newline. <code>printf</code> does not include this 'output record separator' (ORS), permitting the single line output. A newline character should be added after the last record  using the <code>END</code> keyword.</p>
+
+              <p>Now we can iterate over the files, sort the output, and report duplicate variables.</p>
+
+              <div class="code-box terminal-box">
+                  <pre><code>
+$ for file in *; do echo -n "${file} " && exiftool -Author -Producer -CreateDate $file | awk -F ": " '{printf "%s ", $2} END {print ""}'; done | sort -k 3 -k 2 -k 4 | uniq -f 1 -D
+
+test1_copy.pdf  gs LibreOffice 7.1 : 2021:12:20 18:50:31+01:00
+test1.pdf       gs LibreOffice 7.1 : 2021:12:20 18:50:31+01:00
+musterman_test1_copy.pdf gs LibreOffice 7.1 : 2021:12:20 18:50:31+01:00
+test2_copy.pdf     LibreOffice 7.1 : 2021:11:21 15:28:23+01:00
+test2.pdf          LibreOffice 7.1 : 2021:11:21 15:28:23+01:00
+                  </code></pre>
+              </div>
+
+              <p>I've taken the liberty of modifying the spacing of the output for readability.</p>
+
+              <p>Here we have to do a bit of contorting to work around limitations of <code>uniq</code>. Namely, duplicates are only identified if they are in adjacent rows, and fields can only skipped by starting to read at the n<sup>th</sup> field. We can ignore the file name when deciding if two records are duplicates, but only if the file name field comes before all fields that we do want to consider. Also, we should be mindful of the order in which we sort the fields.</p>
+
+              <p>With that working, I wanted to see how it would look using the older (and faster) <code>cut</code> command instead of <code>awk</code>.</p>
+
+              <div class="code-box terminal-box">
+                  <pre><code>
+$ exiftool -Author -Producer -CreateDate test1.pdf | tr -s " " | cut -d" " -f3- | tr "\n" " " && echo " "
+
+gs LibreOffice 7.1 : 2021:12:20 18:50:31+01:00
+                  </code></pre>
+              </div>
+
+              <p><code>cut</code> only takes single character field separators, so ': ' is no longer an option. An empty space is a good alternative, but we need to replace the series of consecutive spaces after each label with a single space. The <code>-s " "</code> 'squeeze' of <code>tr</code> takes care of that. <code>cut f3-</code> then returns all fields with n&#8805;3 for each record. The selections from each record are again separated by a new line.</p>
+
+              <p>I used the 'replace' functionality of <code>tr</code> to avoid newlines between records for a single file. An echo statement inserts a newline once all records for a particular file have been processed. We can then add the file name, loop over the files in the directory, and do the same procedure as last time:</p>
+
+              <div class="code-box terminal-box">
+                  <pre><code>
+$ (for file in *; do echo -n "${file} " && exiftool -Author -Producer -CreateDate $file | tr -s " " | cut -d" " -f3- | tr "\n" " " && echo " "; done ) | sort -k 3 -k 2 -k 4 | uniq -D -f 1
+                  </code></pre>
+              </div>
+
+              <p>I guess the readability isn't much worse? Honestly, neither is about to win any beauty contests.</p>
+
+              <p>The files submitted by our imaginary students are quite small. Maybe it's worth trying a hash function?</p>
+            </section>
+
+            <section>
+              <h2 tabindex="0" id="hash">Using a Hash Value</h2>
+
+              <div class="code-box terminal-box">
+                  <pre><code>
+$ for file in *; do md5sum $file; done | sort
+
+1f16b5a5b47a2d8ab094e4ee190cb827  test2_copy.pdf
+1f16b5a5b47a2d8ab094e4ee190cb827  test2.pdf
+69b4264ae60b59643dcf8a05fc7be519  test1_copy.pdf
+69b4264ae60b59643dcf8a05fc7be519  test1.pdf
+69b4264ae60b59643dcf8a05fc7be519  musterman_test1_copy.pdf
+cc6e7f3097da21021b11f11774621c61  test3_unique.pdf
+ee488463bdd9be5b2a6ed3da6d7e57e2  test1_sameText.pdf
+                  </code></pre>
+              </div>
+
+              <p>The good news: that's much shorter and gives us the same information as the preceeding monsters. The bad news: the columns are in the wrong order for <code>uniq</code> to tell us which files have duplicate hashes. Fortunately, a bit of <code>awk</code> can remedy the situation: </p>
+
+              <div class="code-box terminal-box">
+                  <pre><code>
+$ for file in *; do md5sum $file; done | sort | awk '{print $2" "$1}' | uniq -D -f 1 | awk '{print $2" "$1}'
+
+1f16b5a5b47a2d8ab094e4ee190cb827 test2_copy.pdf
+1f16b5a5b47a2d8ab094e4ee190cb827 test2.pdf
+69b4264ae60b59643dcf8a05fc7be519 test1_copy.pdf
+69b4264ae60b59643dcf8a05fc7be519 test1.pdf
+69b4264ae60b59643dcf8a05fc7be519 musterman_test1_copy.pdf
+                  </code></pre>
+              </div>
+
+              <p>Now <code>print</code> with its ORS newline works nicely since we just want to flip column order within records.</p>
+
+              <p>I actually rather like this. It's readable, avoids any awkwardness with pre-combining records, and tells us if there are PDF files that were only renamed after being generated. However, it misses cases where students passed around the file used to generate the PDF rather than the PDF itself. In other words, if the students copied a Word file and each exported to PDF on their own machine, this method wouldn't notice the identical content.</p>
+
+            </section>
+
+            <section>
+              <h2 tabindex="0" id="fingerprint">A Text Fingerprint</h2>
+
+              <p>This is a bit trickier; how do we detect when students copied the content, but exported the PDF individually?</p>
+
+              <p>My idea for this problem is to try using either the lexicon (which words are used) or the word frequency to make a sort of 'fingerprint' for the text. To avoid having a toy project get totally out of hand, I decided to simply use the frequency of words that appear more than once.</p>
+
+              <p>I'm sure there are <em>much</em> better ways to do this, but how many of them are you going to get running in a bash shell without writing a custom program, eh?</p>
+
+              <p>To be honest, I underestimated the tools available for the shell and fully expected to hit a wall trying to analyze the text in a PDF. Not only is that possible, I didn't even have to install the tool! The lovely command <code>pdftotext</code> is part of the <code>poppler-utils</code>, which is so handy that I already had it installed.</p>
+
+              <p>Passing the output of <code>pdftotext</code> to <code>tr</code> for removing some characters, and then a second time to replace single spaces with newlines worked quite nicely. The options for <code>uniq</code> tell it to perform case-insensitive comparisons, print each duplicated value once, and print the number of occurances. </p>
+
+              <div class="code-box terminal-box">
+                  <pre><code>
+$ pdftotext test1.pdf -| tr -d "\t\r\n" | tr " " "\n" | sort | uniq -idc
+
+3 –
+2 2020
+2 64
+4 Adresse
+2 Adressen
+...
+                  </code></pre>
+              </div>
+
+              <p>Being at this point tired and out of good ideas for the day, I decided to concatenate the counts into a numeric fingerprint for each file:</p>
+
+              <div class="code-box terminal-box">
+                  <pre><code>
+$ pdftotext test1.pdf -| tr -d "\t\r\n" | tr " " "\n" | sort | uniq -idc | awk '{printf $1} END {print ""}'
+
+322422322261223242342422672442223425232624
+                  </code></pre>
+              </div>
+
+              <p>We just need to run over the files in the directory, sort, find the duplicate fingerprints, and maybe flip column order so it's nicer to read...</p>
+
+              <div class="code-box terminal-box">
+                  <pre><code>
+$ for file in *; do echo -n "${file} " && pdftotext $file -| tr -d "\t\r\n" | tr " " "\n" | sort | uniq -idc | awk '{printf $1} END {print ""}'; done | sort -k 2 | uniq -D -f 1 | awk '{print $2" "$1}'
+
+322422322261223242342422672442223425232624 test1_copy.pdf
+322422322261223242342422672442223425232624 test1.pdf
+322422322261223242342422672442223425232624 test1_sameText.pdf
+322422322261223242342422672442223425232624 test1_copy.pdf
+332633353572272223222523342 test2_copy.pdf
+332633353572272223222523342 test2.pdf
+                  </code></pre>
+              </div>
+
+              <p>So it works, at least for the paces I put it through. It's not clear whether my fingerprint would actually work in the wild, but the files would ultimately have to be manually checked anyway. Woe be unto the teacher who falsely accuses a student of copying.</p>
+
+            </section>
+
+            <section>
+              <h2 tabindex="0" id="conclusions">Parting thoughts</h2>
+
+              <p>This was ridiculous amounts of fun! Personally I love the <a href="https://jvns.ca/blog/2021/09/20/teaching-by-filling-in-knowledge-gaps/">learning backwards</a> strategy. It's just such darn fun to learn something either after, or in the process, of building something with it. Probably because the utility is no longer an abstract idea.</p>
+
+              <p>For what I got out of this: I think this was the most piping and redirecting I've ever done (some intermediate versions were using text files for input and output) as well as the most I've used <code>awk</code>. Also, it finally got me to post something here again :)</p>
+
+            </section>
+
+          </article>
+        </main>
+
+      </div>
+
+      <footer>
+          <small>&copy; Copyright 2020-2022 archeaopteryx.<small>
+      </footer>
+
+    </body>
+</html>

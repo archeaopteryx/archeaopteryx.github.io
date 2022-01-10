@@ -7,7 +7,14 @@
         <description>Self-taught programmer blog</description>
         <language>en-us</language>
         <pubDate>Thu, 16 Jul 2020 16:00:00 GMT</pubDate>
-        <lastBuildDate>Sat, 03 Apr 2021 20:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 10 Jan 2022 20:00:00 GMT</lastBuildDate>
+        <item>
+            <title>Finding duplicate PDFs with bash</title>
+            <link>https://archeaopteryx.github.io/html/bash_duplicate_checker.html</link>
+            <guid>https://archeaopteryx.github.io/html/bash_duplicate_checker.html</guid>
+            <description>A small adventure in looking at the contents and meta-data of PDF files with bash tools. ExifTool is used to read meta-data. Standard tools such as awk, sort und uniq are used to identify duplicate files based on their meta-data. Similar, but more readable results can be obtained by using the file hashes instead. Finally, pdftotext from the poppler-utils is used to create a simple identifying 'fingerprint' based on the contents of the files.</description>
+            <pubDate>Mon, 10 Jan 2022 20:00:00 GMT</pubDate>
+        </item>
         <item>
             <title>Dynamic forms with JS</title>
             <link>https://archeaopteryx.github.io/html/dynamic-forms.html</link>

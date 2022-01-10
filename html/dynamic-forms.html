@@ -11,73 +11,73 @@
     </head>
     <body>
 
-        <header>
-            <a class="skip-main" href="#main">Skip to main content</a>
-            <header>
-                <div class="upper-bar">
-                    <div class="upper-bar-left">
-                        <div class="archea-container"><a href="../index.html"><img src="../images/archeaopteryx-1.svg" alt="cartoon drawing of an archaeopteryx working on a laptop" width="150" height="107" /></a></div>
-                        <div class="title">Archeaopteryx</div>
-                    </div>
-                    <div class="tagline">Adventures of a novice coder</div>
-                </div>
-                <div class="menu-bar">
-                    <nav class="header-menu">
-                        <div class="home"><a href='../index.html'>Home</a></div>
-                        <div class="archive"><a href='../archive.html'>Archive</a></div>
-                        <div class="about"><a href='../about.html'>About</a></div>
-                        <div class="rss"><a href="https://archeaopteryx.github.io/rss.xml"><span id="rss-label">RSS</span><img src="../images/rssIcon.svg" alt="RSS icon"> </a></div>
-                    </nav>
-                </div>
-        </header>
+      <a class="skip-main" href="#main">Skip to main content</a>
+      <header>
+        <div class="upper-bar">
+          <div class="upper-bar-left">
+            <div class="archea-container"><a href="../index.html"><img src="../images/archeaopteryx-1.svg" alt="cartoon drawing of an archaeopteryx working on a laptop" width="150" height="107" /></a></div>
+            <div class="title">Archeaopteryx</div>
+          </div>
+          <div class="tagline">Adventures of a novice coder</div>
+        </div>
+        <div class="menu-bar">
+          <nav class="header-menu">
+            <div class="home"><a href='../index.html'>Home</a></div>
+            <div class="archive"><a href='../archive.html'>Archive</a></div>
+            <div class="about"><a href='../about.html'>About</a></div>
+            <div class="rss"><a href="https://archeaopteryx.github.io/rss.xml"><span id="rss-label">RSS</span><img src="../images/rssIcon.svg" alt="RSS icon"> </a></div>
+          </nav>
+        </div>
+      </header>
 
         <div class="page-inner">
-            <div class="left-column-wrapper">
-                <aside class='sidebar'>
-                    <h2>Contents:</h2>
-                    <nav>
-                        <ul class='toc-ul'>
-                            <li class='toc toc-outer'><a href="#intro">Introduction</a></li>
-                            <li class='toc toc-outer'><a href="#events">Event Listeners</a></li>
-                            <li class='toc toc-outer'><a href="#switching">form switching </a></li>
-                            <li class='toc toc-outer'><a href="#validation">basic validation</a></li>
-                            <li class='toc toc-outer'><a href="#fetch">some fetching code </a></li>
-                            <li class='toc toc-outer'><a href='#conclusions'>parting thoughts</a></li>
-                        </ul>
-                    </nav>
-                </aside>
-                <div class="left-column"></div>
-            </div>
+          <div class="left-column-wrapper">
+            <aside class='sidebar'>
+              <h2>Contents:</h2>
+              <nav>
+                <ul class='toc-ul'>
+                  <li class='toc toc-outer'><a href="#intro">Introduction</a></li>
+                  <li class='toc toc-outer'><a href="#events">Event Listeners</a></li>
+                  <li class='toc toc-outer'><a href="#switching">form switching </a></li>
+                  <li class='toc toc-outer'><a href="#history">browser session history</a></li>
+                  <li class='toc toc-outer'><a href="#validation">basic validation</a></li>
+                  <li class='toc toc-outer'><a href="#fetch">some fetching code </a></li>
+                  <li class='toc toc-outer'><a href='#conclusions'>parting thoughts</a></li>
+                </ul>
+              </nav>
+            </aside>
+            <div class="left-column"></div>
+          </div>
 
             <main id='main' tabindex="-1">
                 <article>
-                    <section>
-                        <h1 id="intro">Something old, something new</h1>
+                  <section>
+                    <h1 id="intro">Something old, something new</h1>
 
-                        <p>It feels like my personal path through learning web development sometimes mirrors the history of the web itself. For instance, this blog lacks many hallmarks of the modern web. For instance, it's a collection of html files. How quaint.</p>
+                    <p>It feels like my personal path through learning web development sometimes mirrors the history of the web itself. For instance, this blog lacks many hallmarks of the modern web. For instance, it's a collection of html files. How quaint.</p>
 
-                        <p>Many modern websites are 'single page applications' - basically one page that create the illusion of multiple pages with JavaScript trickery. While I don't appreciate being forced to allow JS, even I must admit that SPAs feel smoother. </p>
+                    <p>Many modern websites are 'single page applications' - basically one page that create the illusion of multiple pages with JavaScript trickery. While I don't appreciate being forced to allow JS, even I must admit that SPAs feel smoother. </p>
 
-                        <p>I decided to play around a bit with JS and mimic the idea of an SPA for part of my current personal project. A user with JS enabled will be able to login, register, or request a pasword reset from a single page. JS will also take do some client side form validation so the user gets feedback before hitting the <code>submit</code> button.</p>
+                    <p>I decided to play around a bit with JS and mimic the idea of an SPA for part of my current personal project. A user with JS enabled will be able to login, register, or request a pasword reset from a single page. JS will also take do some client side form validation so the user gets feedback before hitting the <code>submit</code> button.</p>
 
-                    </section>
-                    <section>
-                        <h2 id="events">Fundamentals - Event Listeners</h2>
+                  </section>
+                  <section>
+                    <h2 id="events">Fundamentals - Event Listeners</h2>
 
-                        <p>There are several ways to attach event listeners to HTML elements. One of the oldest ways is using HTML attributes</p>
+                    <p>There are several ways to attach event listeners to HTML elements. One of the oldest ways is using HTML attributes</p>
 
-                        <div class="code-box">
-                            <pre><code>
+                    <div class="code-box">
+                      <pre><code>
 <span style="color:#555;">&lt!-- HTML attribute event listener (BAD) --&gt;</span>
 
 &lt;<span style="color:crimson;">input</span> <span class="orange-text">type</span>=<span style="color:green;">"button"</span> <span class="blue-text">id</span>=<span style="color:green;">"mybtn"</span> <span class="orange-text">value</span>=<span style="color:green;">"Click Me!"</span>
         <span class="orange-text">onclick</span>=<span style="color:green;">"console.log(&amp;quote;Clicked&amp;quote;)"</span>/&gt;
-                            </code></pre>
-                        </div>
-                        <p>This isn't great for a few reasons, the most obvious of which being that you're closely coupling the JavaScript code and the HTML, and that the element may be visible before the JS has loaded. The situation can be improved with the DOM level 0 method </p>
+                      </code></pre>
+                    </div>
+                    <p>This isn't great for a few reasons, the most obvious of which being that you're closely coupling the JavaScript code and the HTML, and that the element may be visible before the JS has loaded. The situation can be improved with the DOM level 0 method </p>
 
-                        <div class="code-box">
-                            <pre><code>
+                    <div class="code-box">
+                      <pre><code>
 <span style="color:#555;">&lt!-- DOM level 0 event listener (BETTER) --&gt;</span>
 
 &lt;<span style="color:crimson;">input</span> <span class="orange-text">type</span>=<span style="color:green;">"button"</span> <span class="blue-text">id</span>=<span style="color:green;">"mybtn"</span> <span class="orange-text">value</span>=<span style="color:green;">"Click Me!"</span>/&gt;
@@ -88,15 +88,15 @@
         <span class="red-text">console</span>.<span class="teal-text">log</span>(<span style="color:green;">"clicked"<span style="color:green;">);
     }
 &lt;/<span style="color:crimson;">script</span>&gt;
-                            </code></pre>
-                        </div>
+                      </code></pre>
+                    </div>
 
-                        <p>which has the advantage of having close to universal support, but the disadvantage that you're limited to one listener per event for each element. </p>
+                    <p>which has the advantage of having close to universal support, but the disadvantage that you're limited to one listener per event for each element. </p>
 
-                        <p>A more modern approach that doesn't have this limitation is the DOM Level 2 event handler,</p>
+                    <p>A more modern approach that doesn't have this limitation is the DOM Level 2 event handler,</p>
 
-                        <div class="code-box">
-                            <pre><code>
+                    <div class="code-box">
+                      <pre><code>
 <span style="color:#555;">&lt!-- DOM level 2 event listener (GOOD) --&gt;</span>
 
 &lt;<span style="color:crimson;">input</span> <span class="orange-text">type</span>=<span style="color:green;">"button"</span> <span class="blue-text">id</span>=<span style="color:green;">"mybtn"</span> <span class="orange-text">value</span>=<span style="color:green;">"Click Me!"</span>/&gt;
@@ -109,36 +109,36 @@
         <span class="red-text">console</span>.<span class="teal-text">log</span>(<span style="color:green;">"clicked"</span>);
     }
 &lt;/<span style="color:crimson;">script</span>&gt;
-                            </code></pre>
-                        </div>
+                      </code></pre>
+                    </div>
 
-                        <p>which permits multiple responses to the event.</p>
+                    <p>which permits multiple responses to the event.</p>
 
-                        <p>Historically <code>.addEventListener()</code> wasn't supported by Internet Explorer, but that situation seems to have improved. This means we can skip a discussion of cross browser event handling. The boolean argument deals with event flow and is false &quot;for historical reasons&quot;.</p>
+                    <p>Historically <code>.addEventListener()</code> wasn't supported by Internet Explorer, but that situation seems to have improved. This means we can skip a discussion of cross browser event handling. The boolean argument deals with event flow and is false &quot;for historical reasons&quot;.</p>
 
-                    </section>
-                    <section>
-                        <h2 id="switching">Form Switching</h2>
+                  </section>
+                  <section>
+                    <h2 id="switching">Form Switching</h2>
 
-                        <p>Creating the illusion of switching between form pages can be done either adding and removing elements from the DOM, or by changing the CSS display value. I choose the latter approach. However, as far as I know, real SPA frameworks do create and destroy elements instead of hiding them. But they also use a virtual DOM to optimize this process. Implementing a virtual DOM is left as an exercise for the reader ;) </p>
+                    <p>Creating the illusion of switching between form pages can be done either adding and removing elements from the DOM, or by changing the CSS display value. I choose the latter approach. However, as far as I know, real SPA frameworks do create and destroy elements instead of hiding them. But they also use a virtual DOM to optimize this process. Implementing a virtual DOM is left as an exercise for the reader ;) </p>
 
-                        <p>This means the login page really has three forms, two of which are hidden at any given time. The user can create an account or reset their password by clicking on the links below the submit button. If JS is allowed and the DOM level 2 methods are available, then the default behavior of the links is prevented and a different form becomes visible without leaving the page. </p>
+                    <p>This means the login page really has three forms, two of which are hidden at any given time. The user can create an account or reset their password by clicking on the links below the submit button. If JS is allowed and the DOM level 2 methods are available, then the default behavior of the links is prevented and a different form becomes visible without leaving the page. </p>
 
-                        <p>Since we're staying on the same page, the URL in all cases remains &quot;login.php&quot;. This causes the funny behavior that hitting the &quot;<code>back</code>&quot; button once in the browser after going &quot;index&rarr;login&rarr;register&quot; will bring us to &quot;index&quot; instead of to &quot;login&quot;. Fortunately, we can manipulate the URL as well as the behavior triggered by hitting the &quot;<code>back</code>&quot; button.</p>
-                    </section>
-                    <section>
-                        <h2>Manipulating History</h2>
+                    <p>Since we're staying on the same page, the URL in all cases remains &quot;login.php&quot;. This causes the funny behavior that hitting the &quot;<code>back</code>&quot; button once in the browser after going &quot;index&rarr;login&rarr;register&quot; will bring us to &quot;index&quot; instead of to &quot;login&quot;. Fortunately, we can manipulate the URL as well as the behavior triggered by hitting the &quot;<code>back</code>&quot; button.</p>
+                  </section>
+                  <section>
+                    <h2 id="history">Manipulating History</h2>
 
-                        <p>The browser session history is stored in a history object that can be manipulated via the history API. You can directly see this using the development console (<kbd>ctrl+shift+k</kbd> in Firefox) on a tab after clicking through a few pages. You can see the number of pages on the stack in your history object with <code>history.length</code>, or navigate back and forth with <code>history.go(<em>n</em>)</code>, with n being a positive or negative integer.</p>
+                    <p>The browser session history is stored in a history object that can be manipulated via the history API. You can directly see this using the development console (<kbd>ctrl+shift+k</kbd> in Firefox) on a tab after clicking through a few pages. You can see the number of pages on the stack in your history object with <code>history.length</code>, or navigate back and forth with <code>history.go(<em>n</em>)</code>, with n being a positive or negative integer.</p>
 
-                        <p> Whenever you click '<code>back</code>' in a browser a popstate event fires on the window. The last page added is popped off the stack and the previous page on the stack is request. </p>
+                    <p> Whenever you click '<code>back</code>' in a browser a popstate event fires on the window. The last page added is popped off the stack and the previous page on the stack is request. </p>
 
-                        <p>A page can be added to the stack by visiting it or by using the <code>history.pushState()</code> method. <code>pushState()</code> takes three arguments: the state object, a title value that is ignored by most browsers, and an optional url to display. The state object isn't needed in this case, so we can simply pass a <code>null</code> value. Since the user could directly bookmark this url, it should also work when the user directly navigates to it. </p>
+                    <p>A page can be added to the stack by visiting it or by using the <code>history.pushState()</code> method. <code>pushState()</code> takes three arguments: the state object, a title value that is ignored by most browsers, and an optional url to display. The state object isn't needed in this case, so we can simply pass a <code>null</code> value. Since the user could directly bookmark this url, it should also work when the user directly navigates to it. </p>
 
-                        <p>First, we need to push the current state onto the history stack when we click on the register or reset &quot;links&quot;. A listener for the popstate event on the window will trigger when the user clicks the &quot;<code>back</code>&quot; button and reset the forms.</p>
+                    <p>First, we need to push the current state onto the history stack when we click on the register or reset &quot;links&quot;. A listener for the popstate event on the window will trigger when the user clicks the &quot;<code>back</code>&quot; button and reset the forms.</p>
 
-                        <div class="code-box">
-                            <pre><code>
+                    <div class="code-box">
+                      <pre><code>
 <span style="color:#555;">// in script file</span>
 
 <span class="purple-text">function</span> <span class="teal-text">hookupPageSwitch</span>(register, reset){
@@ -171,19 +171,19 @@
      });
 };
 <span style="color:#555;">// same idea for 'showForms'</span>
-                            </code></pre>
-                        </div>
+                      </code></pre>
+                    </div>
 
-                        <p>Then we just need to run this hookup function when the login page loads.</p>
+                    <p>Then we just need to run this hookup function when the login page loads.</p>
 
-                        <p><code>event.preventDefault()</code> prevents the anchor element from acting as a link. Also note that parameters are added to the URL. Clicking the register link with JS enabled changes the URL from <code>domain/login.php</code> to <code>domain/login.php?page=register</code> instead of to <code>domain/register.php</code>, which is where you would wind up if you clicked the link with JS disabled.</p>
+                    <p><code>event.preventDefault()</code> prevents the anchor element from acting as a link. Also note that parameters are added to the URL. Clicking the register link with JS enabled changes the URL from <code>domain/login.php</code> to <code>domain/login.php?page=register</code> instead of to <code>domain/register.php</code>, which is where you would wind up if you clicked the link with JS disabled.</p>
 
-                        <p>If we changed the URL to &quot;register.php&quot; with <code>pushState()</code>, then register.php would be requested from the server when it is at the top of the stack. So if the user goes &quot;index&rarr; login&rarr; register&rarr; privacyPolicy&quot; and then starts hitting the back button, the result looks like &quot;privacyPolicy&rarr; register&rarr; register&rarr; index&quot;.</p>
+                    <p>If we changed the URL to &quot;register.php&quot; with <code>pushState()</code>, then register.php would be requested from the server when it is at the top of the stack. So if the user goes &quot;index&rarr; login&rarr; register&rarr; privacyPolicy&quot; and then starts hitting the back button, the result looks like &quot;privacyPolicy&rarr; register&rarr; register&rarr; index&quot;.</p>
 
-                        <p> We can't get any information about what page the user was on before hitting the &quot;<code>back</code>&quot; button to prevent this behavior, but we can easily check query strings:</p>
+                    <p> We can't get any information about what page the user was on before hitting the &quot;<code>back</code>&quot; button to prevent this behavior, but we can easily check query strings:</p>
 
-                        <div class="code-box">
-                            <code><pre>
+                    <div class="code-box">
+                      <code><pre>
 <span style="color:#555;">// in login.php</span>
 
 <span class="red-text">window</span>.<span class="teal-text">addEventListener</span>(<span style="color:green;">'load'</span>, <span class="purple-text">function</span>() {
@@ -196,33 +196,33 @@
         <span class="teal-text">setupLogin</span>();
     }
 });
-                            </pre></code>
-                        </div>
+                      </pre></code>
+                    </div>
 
-                        <p>then the navigation will work as expected.</p>
+                    <p>then the navigation will work as expected.</p>
 
-                    </section>
-                    <section>
-                        <h2 id="validation">Basic Validation</h2>
+                  </section>
+                  <section>
+                    <h2 id="validation">Basic Validation</h2>
 
-                        <p>Once everything is set up with the general event utility function, adding validation is pretty uneventful. First some CSS needs to be set up. I used box shadow for a blue glow when the input is in focus. If the input loses focus and fails its validation check, then the <code>error-input</code> class is added to the element to give it a red glow. Also, the default <code>input:invalid</code> CSS rule needs to be overriden so that the fields do not have the 'invalid' style before the user has a chance to click into them. </p>
+                    <p>Once everything is set up with the general event utility function, adding validation is pretty uneventful. First some CSS needs to be set up. I used box shadow for a blue glow when the input is in focus. If the input loses focus and fails its validation check, then the <code>error-input</code> class is added to the element to give it a red glow. Also, the default <code>input:invalid</code> CSS rule needs to be overriden so that the fields do not have the 'invalid' style before the user has a chance to click into them. </p>
 
-                        <img src="../images/dynamicWithJS/formWithCSS.jpg" alt="screenshot of the registration form showing 'glow' effect indicating invalid and in focus fields" width="350" class="shadow-img">
+                    <img src="../images/dynamicWithJS/formWithCSS.jpg" alt="screenshot of the registration form showing 'glow' effect indicating invalid and in focus fields" width="350" class="shadow-img">
 
-                        <p>Next comes the JavaScript. Every field gets an event handler added that removes <code>error-input</code> from the class list when the element is in focus. The CSS rule for the <code>:focus</code> pseudoselector then takes care of adding the blue glow</p>
+                    <p>Next comes the JavaScript. Every field gets an event handler added that removes <code>error-input</code> from the class list when the element is in focus. The CSS rule for the <code>:focus</code> pseudoselector then takes care of adding the blue glow</p>
 
-                        <div class="code-box">
-                            <code><pre>
+                    <div class="code-box">
+                      <code><pre>
 <span class="purple-text">function</span> <span class="teal-text">gainFocus</span>(){
     <span class="red-text">event</span>.<span class="red-text">target</span>.<span class="red-text">classList</span>.<span class="teal-text">remove</span>(<span style="color:green;">"error-input"</span>);
 }
-                            </pre></code>
-                        </div>
+                      </pre></code>
+                    </div>
 
-                        <p>and each field has its own validate function that is triggered when it loses focus (on 'blur'). I used a loop to cut down a bit on repetition.</p>
+                    <p>and each field has its own validate function that is triggered when it loses focus (on 'blur'). I used a loop to cut down a bit on repetition.</p>
 
-                        <div class="code-box">
-                            <code><pre>
+                    <div class="code-box">
+                      <code><pre>
 <span class="purple-text">const</span> fields = {
     newPass: {name: newPass, func: validateNewPassword},
     ...
@@ -236,28 +236,28 @@
                 fields[f].func, <span class="orange-text">false</span>);
     }
 }
-                            </pre></code>
-                        </div>
+                      </pre></code>
+                    </div>
 
-                        <p>One field was a little more exciting to hookup: new username. Here validation requires checking that the username is unique. However, that information is on the server while our JS is running on the client. Luckily for us, it's possible to request information from the server without reloading the page.</p>
-                    </section>
-                    <section>
-                        <h2 id="fetch">Some rather fetching code</h2>
+                    <p>One field was a little more exciting to hookup: new username. Here validation requires checking that the username is unique. However, that information is on the server while our JS is running on the client. Luckily for us, it's possible to request information from the server without reloading the page.</p>
+                  </section>
+                  <section>
+                    <h2 id="fetch">Some rather fetching code</h2>
 
-                        <p>Requests to a server are generally done asynchronously to avoid blocking the flow of the script. An early approach used XMLHTTPRequest objects wrapped in callback functions. Callbacks are passed to another function and do not execute immediately.</p>
+                    <p>Requests to a server are generally done asynchronously to avoid blocking the flow of the script. An early approach used XMLHTTPRequest objects wrapped in callback functions. Callbacks are passed to another function and do not execute immediately.</p>
 
-                        <p>This permits asynchronous code, but you quickly land in deeply nested callbacks once you start dealing with error handling and async requests that depend on other async requests. This problem has been generally mitigated by the introduction of Promises, which provide a smoother interface between asynchronous and synchronous JS code.</p>
+                    <p>This permits asynchronous code, but you quickly land in deeply nested callbacks once you start dealing with error handling and async requests that depend on other async requests. This problem has been generally mitigated by the introduction of Promises, which provide a smoother interface between asynchronous and synchronous JS code.</p>
 
-                        <p>Initially I wrote a bare bones XMLHTTPRequest wrapped in a Promise. I reassured myself that it was ok to ignore the advice to use the modern fetch API because clearly my code would be IE friendly.</p>
+                    <p>Initially I wrote a bare bones XMLHTTPRequest wrapped in a Promise. I reassured myself that it was ok to ignore the advice to use the modern fetch API because clearly my code would be IE friendly.</p>
 
-                        <p>It was not.</p>
+                    <p>It was not.</p>
 
-                        <p>As <a href="https://caniuse.com/?search=promises">caniuse</a> helpfully indicates, anyone hoping to use Promises on IE is out of luck. This leaves three possibilities: wrap in callbacks for legacy support, leave it as a half baked mess that doesn't really do anything well, or use the Fetch API.</p>
+                    <p>As <a href="https://caniuse.com/?search=promises">caniuse</a> helpfully indicates, anyone hoping to use Promises on IE is out of luck. This leaves three possibilities: wrap in callbacks for legacy support, leave it as a half baked mess that doesn't really do anything well, or use the Fetch API.</p>
 
-                        <p>Switching to the Fetch API drastically reduced the lines of code, so this wasn't a tough choice. We can just wrap it in a check to see if 'fetch' is defined for the window and IE users can live with the server side check.</p>
+                    <p>Switching to the Fetch API drastically reduced the lines of code, so this wasn't a tough choice. We can just wrap it in a check to see if 'fetch' is defined for the window and IE users can live with the server side check.</p>
 
-                        <div class="code-box">
-                            <code><pre>
+                    <div class="code-box">
+                      <code><pre>
 <span class="purple-text">function</span> <span class="teal-text">validateUsername</span>(){
     <span class="purple-text">let</span> field = <span class="red-text">event</span>.<span class="red-text">target</span>;
     <span class="purple-text">if</span> (field.<span class="red-text">value</span>.<span class="red-text">length</span> <span style="color:darkgoldenrod">===</span> 0){
@@ -282,19 +282,19 @@
             .<span class="teal-text">catch</span>(() => <span class="red-text">console</span>.<span class="teal-text">log</span>(<span style="color:green;">'problem'</span>));
     }
 }
-                            </pre></code>
-                        </div>
+                      </pre></code>
+                    </div>
 
-                        <p>A few quick notes about this:</p>
+                    <p>A few quick notes about this:</p>
 
-                        <p>First off, fetch() will consider any round trip to the server to be successful, even if the resource wasn't found. So you really should check that the response object status is ok.</p>
+                    <p>First off, fetch() will consider any round trip to the server to be successful, even if the resource wasn't found. So you really should check that the response object status is ok.</p>
 
-                        <p>Fetch also needs the url of the script that will actually handle the request on the server. It seems that, given a relative url, it cannot look above the website root. I haven't yet found a more elegant solution than just leaving this PHP script in a location where fetch() can reach it.</p>
+                    <p>Fetch also needs the url of the script that will actually handle the request on the server. It seems that, given a relative url, it cannot look above the website root. I haven't yet found a more elegant solution than just leaving this PHP script in a location where fetch() can reach it.</p>
 
-                        <p>Finally, PHP needs to echo whatever information JS should get.</p>
+                    <p>Finally, PHP needs to echo whatever information JS should get.</p>
 
-                        <div class="code-box">
-                            <code><pre>
+                    <div class="code-box">
+                      <code><pre>
 <span class="dark-red-text">&lt;?php</span>
     <span class="red-text">$isUser</span> = <span class="teal-text">check_newUsername</span>(<span class="red-text">$_GET</span>[<span style="color:green;">'user'</span>]);
     <span class="purple-text">if</span> (<span class="red-text">$isUser</span>){
@@ -305,19 +305,18 @@
             <span style="color:green;">'message'</span> =&gt;<span style="color:green;">'valid username'</span>));
     }
 <span class="dark-red-text">?&gt;</span>
-                            </pre></code>
+                      </pre></code>
+                    </div>
 
-                        </div>
+                    <p>Return statements won't help anything, the resulting value in the JavaScript script is undefined. I'm thinking of it as printing a line into the JS code.</p>
+                  </section>
+                  <section>
+                    <h2 id="conclusions">Parting thoughts</h2>
 
-                        <p>Return statements won't help anything, the resulting value in the JavaScript script is undefined. I'm thinking of it as printing a line into the JS code.</p>
-                    </section>
-                    <section>
-                        <h2 id="conclusions">Parting thoughts</h2>
+                    <p>Who knew there was so much to think about for a simple login! I didn't even get up to actually submitting anything! The email + one time pin system for stuff exchange was so simple, I think that was up and running in an afternoon. This... has taken a bit more effort and is still rough. </p>
 
-                        <p>Who knew there was so much to think about for a simple login! I didn't even get up to actually submitting anything! The email + one time pin system for stuff exchange was so simple, I think that was up and running in an afternoon. This... has taken a bit more effort and is still rough. </p>
-
-                        <p>What makes this so much worse than the OTP system? Suddenly there is no guarantee that the username is unique, the password needs to be controlled and reasonably hashed, there should be a possibility to display the password in plain text, there needs to be 'nice' error feedback, there must be a password reset capability... oje! But it certainly is an interesting exercise :)</p>
-                    </section>
+                    <p>What makes this so much worse than the OTP system? Suddenly there is no guarantee that the username is unique, the password needs to be controlled and reasonably hashed, there should be a possibility to display the password in plain text, there needs to be 'nice' error feedback, there must be a password reset capability... oje! But it certainly is an interesting exercise :)</p>
+                  </section>
 
                 </article>
             </main>
