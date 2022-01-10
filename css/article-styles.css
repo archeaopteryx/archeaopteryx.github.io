@@ -41,14 +41,12 @@ nav.header-menu {
     width: 250px;
     padding-top: 20px;
     padding-left: 20px;
-    background-color: #F3F3F3;
-    /*border-right: 1px solid grey;
-    border-bottom: 1px solid grey;*/
+    background-color: var(--bg_light);
     align-self: flex-start;
 }
 
 .left-column {
-    background-color: #F3F3F3;
+    background-color: var(--bg_light);
     flex: 1;
 }
 
