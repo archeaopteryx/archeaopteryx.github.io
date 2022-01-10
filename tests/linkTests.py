@@ -23,6 +23,7 @@ def __check_quick_nav(article):
     mismatched = []
     if len(nav_refs) != len(header_ids):
         print("{0} has an unequal number of quickNav links and header ids".format(article.name))
+        print("{0} {1}".format(nav_refs, header_ids))
         return False
     while True:
         try:
