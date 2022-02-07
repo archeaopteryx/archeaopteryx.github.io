@@ -1,13 +1,7 @@
 /*Main content area */
 
-ul.archive-list {
-    padding: 20px 20px 100px 50px;
-    width: 45em;
-    margin-left: 250px;
-}
-
 li.archive-li {
-    font-size: 1.5em;
+    font-size: 1.5rem;
 }
 
 
@@ -22,21 +16,15 @@ footer {
 
 /*end rules for footer */
 
-/* adjust display for snaller screens */
-
-@media only screen and (min-width: 501px) and (max-width: 850px) {
-    ul.archive-list {
-        padding: 20px 0px 50px 0px;
-        margin-left: 30px;
-    }
-
+/* adjust display for smaller screens */
+@media only screen and (min-width: 501px) and (max-width: 768px) {
+  li.archive-li {
+      font-size: 1.25rem;
+  }
 }
 
 @media only screen and (max-width: 500px) {
-    ul.archive-list {
-        padding: 20px 0px 50px 0px;
-        margin-left: 30px;
-        width:90vw;
-    }
-
+  li.archive-li {
+      font-size: 1rem;
+  }
 }

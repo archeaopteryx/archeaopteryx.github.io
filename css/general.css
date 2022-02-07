@@ -4,8 +4,13 @@
     --tagline-size: 1.5em;
     --topbar-bg: rgb(255, 255, 255);
 
+    --archea_brown: saddlebrown;
+    --archea_brown--lite: rgba(139, 69, 19, 0.05);
     --near-seagreen: #287D4D;
+    --archea_green-blue: #27677c;
     --bg_light: #F3F3F3;
+
+    --font_base: 1rem;
 }
 
 * {
@@ -24,6 +29,8 @@ h1 {
 
 h2 {
     font-size: 2em;
+    margin-top: 1.75rem;
+    margin-bottom: 1rem;
 }
 
 h3 {
@@ -31,78 +38,39 @@ h3 {
 }
 
 p {
-    font-size: 1.3em;
+    font-size: 1.3rem;
     line-height: 2.1;
-    margin-top: 1.5em;
+    margin-top: 1rem;
 }
 
-
-header {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+a {
+  color: var(--archea_green-blue);
 }
 
-.upper-bar {
-    display: flex;
-    justify-content: space-between;
+a:focus-visible {
+  outline: 0;
+  box-shadow: 0 0px 4px 4px var(--near-seagreen);
 }
 
-.upper-bar-left {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+a.withArrow:after {
+  content: "\a0\21AA";
 }
 
-.archea-container img{
-    width: 150px;
-    height: auto;
-    margin: 10px;
+/* begin css for main content area */
+
+.content {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
 }
 
-.title {
-    font-size: var(--title-text-size);
-    color: var(--title-text-color);
-    align-self: center;
+section {
+  width: 60vw;
+  max-width: 40.5rem;
 }
 
-.tagline {
-    display: flex;
-    font-size: var(--tagline-size);
-    color: var(--title-text-color);
-    font-style: italic;
-    align-self: flex-start;
-    margin: 25px auto auto 200px;
-}
-
-.menu-bar {
-    background-color: var(--near-seagreen); /*near seagreen */
-    display: flex;
-}
-
-nav.header-menu {
-    margin-left: auto;
-    display: flex;
-    justify-content: space-between;
-    background-color: var(--topbar-bg);
-}
-
-.home, .archive, .about, .rss {
-    font-size: 1.3em;
-    font-weight: 600;
-    color: var(--title-text-color);
-    padding: 2px 25px 2px 25px;
-    background-color: var(--topbar-bg);
-}
-
-.home a, .archive a, .about a, .rss a {
-    text-decoration: none;
-    color: var(--title-text-color);
-}
-
-.rss img {
-    height: 0.9em;
-    width: auto;
+.content h1 {
+  margin: 1rem 0;
 }
 
 /* begin rules for footer */
@@ -117,39 +85,15 @@ footer {
 
 /* adjust display for snaller screens */
 
-@media only screen and (min-width: 501px) and (max-width: 850px) {
-
-    .tagline {
-        display: none;
-    }
-    .archea-container img {
-        width: 100px;
-        height: auto;
-        margin: 5px;
-    }
-}
-
 @media only screen and (max-width: 500px) {
 
-    .upper-bar {
-        display: none;
-    }
-    .home, .archive, .about, .rss {
-        font-size: 1.1em;
-        padding: 5px 10px 5px 10px;
-    }
+  p {
+      font-size: 1rem;
+      line-height: 1.75;
+  }
 
-    #rss-label{
-        display: none;
-    }
-
-    .menu-bar {
-        align-items: flex-end;
-    }
-
-    p {
-        font-size: 1em;
-        line-height: 1.75;
-    }
+  .content {
+    width: 100%;
+  }
 
 }
