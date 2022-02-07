@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../css/general.css">
-        <link rel="stylesheet" href="../css/article-styles.css">
-        <link rel="stylesheet" href="../css/code-styles.css">
-        <link rel="icon" href="../images/archeaopteryx-icon.png">
-        <title>efaPi: Setup</title>
-    </head>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="../css/general.css">
+      <link rel="stylesheet" href="../css/topbar.css">
+      <link rel="stylesheet" href="../css/article-styles.css">
+      <link rel="stylesheet" href="../css/code-styles.css">
+      <link rel="icon" href="../images/archeaopteryx-icon.png">
+      <title>efaPi: Setup</title>
+  </head>
 
-    <body>
-        <a class="skip-main" href="#main">Skip to main content</a>
+  <body>
+    <a class="skip-main" href="#main">Skip to main content</a>
     <header>
-        <div class="upper-bar">
-            <div class="upper-bar-left">
-                <div class="archea-container"><a href="../index.html"><img src="../images/archeaopteryx-1.svg" alt="cartoon drawing of an archaeopteryx working on a laptop" width="150" height="107" /></a></div>
-                <div class="title">Archeaopteryx</div>
+      <div class="upper-bar">
+          <div class="upper-bar-left">
+            <div class="archea-container">
+              <a tabindex="-1" aria-label="link to home page" href="../index.html"></a>
+              <img aria-hidden="true" src="../images/archeaopteryx-1.svg" alt="cartoon drawing of an archaeopteryx working on a laptop" width="150" height="107"/>
             </div>
-            <div class="tagline">Adventures of a novice coder</div>
+            <div class="title"><a href="../index.html">Archeaopteryx</a></div>
+          </div>
         </div>
         <div class="menu-bar">
-            <nav class="header-menu">
-                <div class="home"><a href='../index.html'>Home</a></div>
-                <div class="archive"><a href='../archive.html'>Archive</a></div>
-                <div class="about"><a href='../about.html'>About</a></div>
-                <div class="rss"><a href="https://archeaopteryx.github.io/rss.xml"><span id="rss-label">RSS</span> <img src="../images/rssIcon.svg" alt="RSS icon"> </a></div>
-            </nav>
+          <nav class="header-menu">
+            <label for="hamburger"><div class="hamburger"></div></label>
+            <input type="checkbox" id="hamburger">
+            <div class="nav-items">
+              <div class="nav-item"><a href="../index.html">Home</a></div>
+              <div class="nav-item"><a href="../archive.html">Archive</a></div>
+              <div class="nav-item"><a href="../about.html">About</a></div>
+              <div class="nav-item">
+                <div class="rss">
+                  <a href="https://archeaopteryx.github.io/rss.xml">RSS </a>
+                 </div>
+              </div>
+            </div>
+          </nav>
         </div>
     </header>
 
@@ -299,5 +310,5 @@ $ light-locker --lock-after-screensaver=0 --no-lock-on-suspend
     <footer>
         <small>&copy; Copyright 2020-2022 archeaopteryx.<small>
     </footer>
-    </body>
+  </body>
 </html>
