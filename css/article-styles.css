@@ -89,8 +89,7 @@ li.toc-inner:last-of-type {
 
 article {
     padding: 20px 20px 100px 50px;
-    width: 45em;
-    align-self: center;
+    width: 100%;
 }
 
 
@@ -113,13 +112,12 @@ section {
 .centered-img {
     display: block;
     margin: 15px auto 10px auto;
-    max-width: 100%;
     height: auto;
 }
 
-img  {
-    max-width: 100%;
-    height: 100%;
+picture img {
+  box-shadow: 2px 2px 4px gray;
+  max-width: 100%;
 }
 
 figcaption {
@@ -135,24 +133,14 @@ blockquote {
 
 /* adjust display for snaller screens */
 
-@media only screen and (min-width: 501px) and (max-width: 850px) {
-    article {
-        padding: 20px;
-        width: 80vw;
-    }
+@media only screen and (max-width: 950px) {
     .sidebar {
         display: none;
     }
-}
 
-@media only screen and (max-width: 500px) {
     article {
-        padding: 20px;
-        max-width: 500px;
-        width: 100vw;
-    }
-    .sidebar {
-        display: none;
+        padding: 3rem 1.5rem;
+        width: calc(100vw - 20px);
     }
 
 }

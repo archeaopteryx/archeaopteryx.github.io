@@ -40,6 +40,9 @@ p > code {
     scroll-behavior: smooth;
 }
 
+.code-box code {
+    overflow-x: hidden;
+}
 
 .terminal-box {
     background: rgb(30, 30, 30);
