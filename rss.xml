@@ -7,7 +7,14 @@
         <description>Self-taught programmer blog</description>
         <language>en-us</language>
         <pubDate>Thu, 16 Jul 2020 16:00:00 GMT</pubDate>
-        <lastBuildDate>Mon, 10 Jan 2022 20:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 14 Feb 2022 20:00:00 GMT</lastBuildDate>
+        <item>
+            <title>Finding duplicate PDFs with bash</title>
+            <link>https://archeaopteryx.github.io/html/slice-of-web-history.html</link>
+            <guid>https://archeaopteryx.github.io/html/slice-of-web-history.html</guid>
+            <description>A bit of poking around on a old website used by a research group, and the sites it links to. Just the enjoyment of seeing a bit of the web that continues to have distinct character and is built on stable technology.</description>
+            <pubDate>Mon, 14 Feb 2022 20:00:00 GMT</pubDate>
+        </item>
         <item>
             <title>Finding duplicate PDFs with bash</title>
             <link>https://archeaopteryx.github.io/html/bash_duplicate_checker.html</link>
