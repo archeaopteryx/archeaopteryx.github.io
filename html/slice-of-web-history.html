@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="../css/general.css">
+      <link rel="stylesheet" href="../css/topbar.css">
+      <link rel="stylesheet" href="../css/article-styles.css">
+      <link rel="stylesheet" href="../css/code-styles.css">
+      <link rel="icon" href="../images/archeaopteryx-icon.png">
+      <title>a slice of web history</title>
+  </head>
+  <body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <header>
+      <div class="upper-bar">
+        <div class="upper-bar-left">
+          <div class="archea-container">
+            <a tabindex="-1" aria-label="link to home page" href="../index.html"></a>
+            <img aria-hidden="true" src="../images/archeaopteryx-1.svg" alt="cartoon drawing of an archaeopteryx working on a laptop" width="150" height="107"/>
+          </div>
+          <div class="title"><a href="../index.html">Archeaopteryx</a></div>
+        </div>
+      </div>
+      <div class="menu-bar">
+        <nav class="header-menu">
+          <label for="hamburger"><div class="hamburger"></div></label>
+          <input type="checkbox" id="hamburger">
+          <div class="nav-items">
+            <div class="nav-item"><a href="../index.html">Home</a></div>
+            <div class="nav-item"><a href="../archive.html">Archive</a></div>
+            <div class="nav-item"><a href="../about.html">About</a></div>
+            <div class="nav-item">
+              <div class="rss">
+                <a href="https://archeaopteryx.github.io/rss.xml">RSS </a>
+               </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="page-inner">
+
+      <div class="left-column-wrapper">
+        <aside class='sidebar'>
+          <h2>Contents:</h2>
+          <nav>
+            <ul class='toc-ul'>
+              <li class='toc toc-outer'><a href="#intro">A slice of Web History</a></li>
+              <li class='toc toc-outer'><a href="#zawinkski">A surprising connection</a></li>
+              <li class='toc toc-outer'><a href="#matt">Matt of the Prof. Dr. Site</a></li>
+              <li class='toc toc-outer'><a href="#conclusions">Parting thoughts</a></li>
+            </ul>
+          </nav>
+        </aside>
+        <div class="left-column"></div>
+      </div>
+
+      <main id='main' tabindex="-1">
+
+        <article>
+          <section>
+
+            <h1 id="intro" tabindex="0">A slice of Web History</h1>
+
+            <p>There's something deeply unsatisfying about the modern web. I won't wax poetic about it here, that horse has already been beaten by others. Suffice to say I enjoy stumbling upon older or retro sites.</p>
+
+            <p>My partner recently stumbled upon <a href=" https://davis.wpi.edu/~matt/courses/soms/">this beauty</a> in the course of his work.</p>
+
+            <p>I believe this is a good example of <a href="http://contemporary-home-computing.org/prof-dr-style/">'Prof. Dr. Style'</a>. It's such a beautiful reminder of what the web was before e-commerce and a handful of sites became dominant. It lead me down an absolutely delightful rabbit hole the likes of which I haven't been down in years.</p>
+
+            <p>First, a quick look at the slice of web history that is this page made by Mr. Germano.</p>
+
+            <picture>
+              <source src="../images/slice-of-history/colorMappingSite.webp" type="image/webp">
+              <img src="../images/slice-of-history/colorMappingSite.png" class="centered-img" width="500" alt="screenshot of an old course website produced by a research group in the late 90s">
+            </picture>
+
+            <p> It's pure HTML. The only Javascript is an injection from the Firefox Google Analytics Opt-Out add-on. Apparently the table of contents is packed into a blockquote tag, probably to get the nice indentation?</p>
+
+            <p>Then the meta-tags. They include a GENERATOR tag that I've never seen before: </p>
+
+            <div class="code-box">
+              <pre><code>
+&lt;meta name="GENERATOR" content="Mozilla/4.51[en] (Win95; I) [Netscape]"&gt;
+              </code></pre>
+            </div>
+
+            <p>Seems it's fallen out of style to advertise the platform you used to generate a site. At least, I think that was its purpose? I don't know. There doesn't seem to be much information on the tag. </p>
+
+            <p>The meta-tags also show the charset is iso-8859-1, the default for HTML 4. Don't fix what ain't broken? Or, more likely, the page was written by a Ph.D student or post-doc and never updated after they left. So who was the group leader?</p>
+
+            <p>From the URL we can see that the material is under the courses of a user 'matt'. Either an unusual last name, or a user in the privileged position of having his nickname as his user name.</p>
+
+            <p>We'll come back to Matt later.</p>
+
+          </secton>
+          <section>
+
+            <h2 id="zawinkski" tabindex="0">A surprising connection</h2>
+
+            <p>For now, I was amused to see a link titled 'Java Sucks' at the bottom of the page. This lead to a 404. No shocker, apparently uni Tübingen doesn't leave old pages sit around. Fortunately, the Internet Archives came to the rescue.</p>
+
+            <p>The page was pretty sparse, but it had a few links. Clicking on one of those brought me to Jamie Zawinkski's site. Maybe older web-users or open-source developers would recognize his name. I did not. So I didn't think too much of it when I landed on a rather opinionated piece regarding terrible Java is (was? 20 years ago?). It was just so opinionated, I wanted to see what else was to be found on this guy's site</p>
+
+            <picture>
+              <source src="../images/slice-of-history/jwz_screenshot.webp" type="image/webp">
+              <img src="../images/slice-of-history/jwz_screenshot.png" class="centered-img" width="600" alt="screenshot the home page of J. Zawinkski, Matrix style green hex numbers on a black background">
+            </picture>
+
+            <p>and was utter flabbergasted by <a href="https://www.jwz.org/">his home page</a></p>
+
+            <p>Now, he's not about to win any praise regarding accessibility. But that is certainly eye catching. And apparently has a secret message? At any rate, keyboard users can at least reach his 'about' page.</p>
+
+            <p>Here I learned that he apparently created XScreenSaver. And was one of the first employees of Netscape. And coined the name 'Mozilla'. And pushed for an open-source approach to the development of Firefox. And many other impressive things. Then he decided to buy a night club and pizza joint in San Francisco, which seems to be his top priority these days. </p>
+
+            <p>So, back when the links were all alive, Matt was two clicks away from one of the first developers of Firefox.</p>
+
+            <p>However, I still didn't know much about Matt of the charming Prof. Dr. Sites. So I doubled back to his course list.</p>
+
+          </section>
+          <section>
+
+            <h2 id="matt" tabindex="0">Matt of the Prof. Dr. Site</h2>
+
+            <p>The course list, while certainly dated, has an interesting collection of topics. For now I wanted to find out more about the author, so we'll take another step back in the URL to find Matt himself. He kindly gives us his e-mail, machine name, a link to his home page, and a picture of the view outside his office window circa 1999. His home page brings us to <a href="http://web.cs.wpi.edu/~matt/ ">another beautiful Prof. Dr. page</a> where, in addition to his fax number, we find a list of publications that was last updated in 2007.</p>
+
+            <p>Armed with the knowledge that we're looking at the work of Prof. Matt Ward, I ventured another click to his 'Professional home page'. Here I was disappointed to find a standard corporate style monstrosity of a page for the department of computer science. Where did Matt go?</p>
+
+            <p>The answer came in the form of an 'in memoriam' page on the university site. He died young, almost 10 years ago.</p>
+
+            <p>Maybe there's a former colleague out there who makes sure his pages are kept on the server. Maybe he really was the first 'Matt' in the department. He loved hot peppers, Star Trek and playing the guitar. He was a pioneer in the field of multi-variate visualization, indirectly contributing to the rise of Big Data.</p>
+
+            <p>It felt like the most human bit of the web I've seen in a long time. He had nothing to sell me, didn't care how many views his pages got. He and his students simply had information to share.</p>
+
+          </section>
+          <section>
+            <h2 id="conclusions" tabindex="0">And in the end...</h2>
+
+            <p>HTML made these kinds of sites possible. These were CS researchers, not professional web developers. With a handful of tags they could present their work in a way that was accessible around the world and link it with the work of other people. For the foreseeable future, that handful of tags will keep presenting the work as the authors in the 90s intended.</p>
+
+          </section>
+        </article>
+      </main>
+
+    </div>
+
+    <footer>
+        <small>&copy; Copyright 2020-2022 archeaopteryx.<small>
+    </footer>
+
+  </body>
+</html>
